@@ -19,12 +19,13 @@
 		p:password="">
 	</bean>
 
-	<bean id="personSessionFactory"
+	<bean id="sessionFactory"
   		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
   		<property name="dataSource" ref="dataSource" />
   		<property name="annotatedClasses">
     		<list>
-      			<value> ... </value> <!-- Liste des beans persistent intervenant dans les tests -->
+      			<value>gof.model.Personne</value> <!-- Liste des beans persistent intervenant dans les tests -->
+      			<value>gof.model.Statut</value>
     		</list>
   		</property>
   		<property name="hibernateProperties">
