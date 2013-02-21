@@ -1,6 +1,5 @@
 package gof.services;
 
-public interface PersonneManager
-{
+public interface PersonneManager {
 
 }
