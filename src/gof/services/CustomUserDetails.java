@@ -30,8 +30,8 @@ public class CustomUserDetails implements UserDetailsService
 	/**
 	 * Service permettant l'intéraction avec la couche DAO.
 	 */
-	@Autowired
-	private PersonneManager personManager;
+	//@Autowired
+	//private PersonneManager personneManager;
 
 	/* (non-Javadoc)
 	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
