@@ -11,6 +11,8 @@ public interface PersonneManager
 {
 	Collection<Personne> findAllPersonnes();
 
+	Personne findPersonByCode(String code);
+	
 	Personne findPersonByIdExt(String idext);
 
 	void savePersonne(Personne p);

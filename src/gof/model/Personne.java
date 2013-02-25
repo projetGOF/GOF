@@ -2,6 +2,7 @@ package gof.model;
 
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,6 +13,9 @@ import javax.persistence.ManyToMany;
 public class Personne
 {
 	@Id
+	private String code;
+	
+	@Column(unique=true)
 	private String idext;
 	
 	private String nom;
@@ -22,15 +26,16 @@ public class Personne
 	
 	@ManyToMany
 	@JoinTable(name="personne_statut",
-	joinColumns=@JoinColumn(name="id_personne"),
+	joinColumns=@JoinColumn(name="code_personne"),
 	inverseJoinColumns=@JoinColumn(name="code_statut"))
 	private Collection<Statut> statuts;
 	
 	public Personne(){}
 
-	public Personne(String idext, String nom, String prenom,
+	public Personne(String code, String idext, String nom, String prenom,
 			String telephone, String mail, String password, Collection<Statut> statuts) {
 		super();
+		this.code = code;
 		this.idext = idext;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -40,6 +45,14 @@ public class Personne
 		this.statuts = statuts;
 	}
 	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public String getIdext() {
 		return idext;
 	}

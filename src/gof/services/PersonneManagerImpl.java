@@ -35,4 +35,9 @@ public class PersonneManagerImpl implements PersonneManager
 		personneDao.deletePersonne(p);
 	}
 
+	public Personne findPersonByCode(String code)
+	{
+		return personneDao.findPersonneByCode(code);
+	}
+
 }

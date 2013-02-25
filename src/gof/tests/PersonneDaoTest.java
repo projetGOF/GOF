@@ -29,6 +29,11 @@ public class PersonneDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	}
 	
 	@Test
+	public void findPersonneByCodeTest(){
+		assertEquals("testNom1",personneDao.findPersonneByCode("PER01").getNom());
+	}
+	
+	@Test
 	public void findPersonneByIdExtTest(){
 		assertEquals("testNom1",personneDao.findPersonneByIdExt("1").getNom());
 	}
@@ -36,7 +41,7 @@ public class PersonneDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Test
 	public void savePersonneTest(){
 		
-		Personne personneToSave = new Personne("3","testNom3","testPrenom3","testTel3","testMail3","testPasswd3",new ArrayList<Statut>());
+		Personne personneToSave = new Personne("PER03","3","testNom3","testPrenom3","testTel3","testMail3","testPasswd3",new ArrayList<Statut>());
 		personneDao.savePersonne(personneToSave);
 		assertEquals(personneToSave.getIdext(),personneDao.findPersonneByIdExt("3").getIdext());
 	}
