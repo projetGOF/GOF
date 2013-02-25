@@ -2,7 +2,6 @@ package gof.model;
 
 import java.util.Collection;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,42 +12,34 @@ import javax.persistence.ManyToMany;
 public class Personne
 {
 	@Id
-	@Column(name="code", length=15)
-	private String code;
 	private String idext;
+	
 	private String nom;
 	private String prenom;
 	private String telephone;
 	private String mail;
+	private String password;
 	
 	@ManyToMany
 	@JoinTable(name="personne_statut",
-	joinColumns=@JoinColumn(name="code_personne"),
+	joinColumns=@JoinColumn(name="id_personne"),
 	inverseJoinColumns=@JoinColumn(name="code_statut"))
 	private Collection<Statut> statuts;
 	
 	public Personne(){}
 
-	public Personne(String code, String idext, String nom, String prenom,
-			String telephone, String mail, Collection<Statut> statuts) {
+	public Personne(String idext, String nom, String prenom,
+			String telephone, String mail, String password, Collection<Statut> statuts) {
 		super();
-		this.code = code;
 		this.idext = idext;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.telephone = telephone;
 		this.mail = mail;
+		this.password = password;
 		this.statuts = statuts;
 	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
+	
 	public String getIdext() {
 		return idext;
 	}
@@ -89,6 +80,14 @@ public class Personne
 		this.mail = mail;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	public Collection<Statut> getStatuts() {
 		return statuts;
 	}

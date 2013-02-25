@@ -11,7 +11,7 @@ public interface PersonneDao {
 	
 	Collection<Personne> findAllPersonnes();
 
-	Personne findPersonneByCode(String code);
+	Personne findPersonneByIdExt(String idext);
 
 	void savePersonne(Personne p);
 

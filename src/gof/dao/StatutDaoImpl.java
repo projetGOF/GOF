@@ -1,8 +1,8 @@
 package gof.dao;
 
-import gof.model.Statut;
-
 import java.util.Collection;
+
+import gof.model.Statut;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

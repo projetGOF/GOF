@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gof.model.Personne;
+import gof.model.Statut;
 
 /**
  * Classe permettant la convertion de la classe Personne en UserDetails afin de pouvoir être traitée par le module Spring security
@@ -30,8 +31,8 @@ public class CustomUserDetails implements UserDetailsService
 	/**
 	 * Service permettant l'intéraction avec la couche DAO.
 	 */
-	//@Autowired
-	//private PersonneManager personneManager;
+	@Autowired
+	private PersonneManager personneManager;
 
 	/* (non-Javadoc)
 	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
@@ -40,8 +41,23 @@ public class CustomUserDetails implements UserDetailsService
 	public UserDetails loadUserByUsername(String arg0)
 			throws UsernameNotFoundException
 	{
-		/** TODO **/
-		return null;
+		Personne userToLoad = personneManager.findPersonByIdExt(arg0);
+		
+		if(userToLoad == null)
+			throw new UsernameNotFoundException("The user " + arg0 + " has not been found.");
+		
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+
+		Iterator<Statut> it = userToLoad.getStatuts().iterator();
+		
+		while(it.hasNext())
+		{
+			authorities.add(new GrantedAuthorityImpl(it.next().getCode()));
+		}
+
+		User userConverted = new User(userToLoad.getIdext(), userToLoad.getPassword(),authorities);
+		
+		return userConverted;
 	}
 	
 	/**

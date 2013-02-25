@@ -24,8 +24,8 @@ public class PersonneDaoImpl implements PersonneDao{
 	}
 
 	@Override
-	public Personne findPersonneByCode(String code) {
-		return em.find(Personne.class, code);
+	public Personne findPersonneByIdExt(String idext) {
+		return em.find(Personne.class, idext);
 	}
 
 	@Override

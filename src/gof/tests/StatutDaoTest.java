@@ -34,8 +34,7 @@ public class StatutDaoTest extends AbstractTransactionalJUnit4SpringContextTests
 	}
 	
 	@Test
-	public void saveStatutTest(){
-		
+	public void saveStatutTest(){	
 		Statut statutToSave = new Statut("ROLE_TEST","TEST",new ArrayList<Personne>());
 		statutDao.saveStatut(statutToSave);
 		assertEquals(statutToSave.getCode(),statutDao.findStatut("ROLE_TEST").getCode());
@@ -43,11 +42,12 @@ public class StatutDaoTest extends AbstractTransactionalJUnit4SpringContextTests
 	
 	@Test
 	public void deleteStatutTest(){
-		/*Statut statutToSave = new Statut("ROLE_TEST","TEST",new ArrayList<Personne>());
-		statutDao.saveStatut(statutToSave);
-		assertEquals(4,statutDao.findAllStatut().size());*/
 		
-		statutDao.deleteStatut(statutDao.findStatut("ROLE_ADMIN"));
+		Statut statutToSave = new Statut("ROLE_TEST","TEST",new ArrayList<Personne>());
+		statutDao.saveStatut(statutToSave);
+		assertEquals(4,statutDao.findAllStatut().size());
+		
+		statutDao.deleteStatut(statutDao.findStatut("ROLE_TEST"));
 		assertEquals(3,statutDao.findAllStatut().size());
 	}
 }
