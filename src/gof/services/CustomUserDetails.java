@@ -52,7 +52,7 @@ public class CustomUserDetails implements UserDetailsService
 		
 		while(it.hasNext())
 		{
-			authorities.add(new GrantedAuthorityImpl(it.next().getCode()));
+			authorities.add(new GrantedAuthorityImpl(it.next().toString()));
 		}
 
 		User userConverted = new User(userToLoad.getIdext(), userToLoad.getPassword(),authorities);

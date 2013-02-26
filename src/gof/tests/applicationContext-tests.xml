@@ -25,7 +25,6 @@
   		<property name="annotatedClasses">
     		<list>
       			<value>gof.model.Personne</value> <!-- Liste des beans persistent intervenant dans les tests -->
-      			<value>gof.model.Statut</value>
     		</list>
   		</property>
   		<property name="hibernateProperties">

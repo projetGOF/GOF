@@ -31,6 +31,7 @@ public class PersonneDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Test
 	public void findPersonneByCodeTest(){
 		assertEquals("testNom1",personneDao.findPersonneByCode("PER01").getNom());
+		assertTrue(personneDao.findPersonneByCode("PER01").getStatuts().contains(Statut.ROLE_ADMIN));
 	}
 	
 	@Test

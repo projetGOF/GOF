@@ -2,12 +2,14 @@ package gof.model;
 
 import java.util.Collection;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 @Entity(name="personne")
 public class Personne
@@ -24,10 +26,10 @@ public class Personne
 	private String mail;
 	private String password;
 	
-	@ManyToMany
-	@JoinTable(name="personne_statut",
-	joinColumns=@JoinColumn(name="code_personne"),
-	inverseJoinColumns=@JoinColumn(name="code_statut"))
+	@ElementCollection
+	@CollectionTable(name="personne_statut",
+			joinColumns=@JoinColumn(name="code_personne"))
+	@Enumerated(EnumType.STRING)
 	private Collection<Statut> statuts;
 	
 	public Personne(){}
