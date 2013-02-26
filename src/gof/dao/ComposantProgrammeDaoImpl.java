@@ -4,33 +4,40 @@ import gof.model.ComposantProgramme;
 
 import java.util.Collection;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ComposantProgrammeDaoImpl implements ComposantProgrammeDao{
 
+	@PersistenceContext
+	private EntityManager em;
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<ComposantProgramme> findAllComposantsProgramme() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("SELECT cp FROM composant_programme cp");
+	    return (Collection<ComposantProgramme>) query.getResultList();
 	}
 
 	@Override
 	public ComposantProgramme findComposantProgramme(String code) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(ComposantProgramme.class, code);
 	}
 
 	@Override
 	public void saveComposantProgramme(ComposantProgramme cp) {
-		// TODO Auto-generated method stub
-		
+		em.merge(cp);
+		em.flush();
 	}
 
 	@Override
 	public void deleteComposantProgramme(ComposantProgramme cp) {
-		// TODO Auto-generated method stub
-		
+		em.remove(cp);
+		em.flush();
 	}
 
 }

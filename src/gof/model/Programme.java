@@ -1,132 +1,97 @@
 package gof.model;
 
-import java.util.Date;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
 
 @Entity(name="programme")
-public class Programme {
-
-	@Id
-	@Column(name="code", length=15)
-	private String code;
+public class Programme extends Formation {
 	
-	private String nom;
-	private String parcours;
-	private String identificateur;
-	private String apogee;
-	private String aspectsFormatRecherche;
-	private String capacite;
+	protected String identificateur;
+	protected String aspectsFormatRecherche;
+	protected String ensDelocalisees;
+	protected String ensDelocaliseesHab;
+	protected String infosDiverses;
+	protected String modalitesInscription;
+	protected String modalitesPedagogique;
+	protected String nfs1;
+	protected String nfs2;
+	protected String nfs3;
+	protected String objectifs;
+	protected String politiqueStages;
+	protected String rome1;
+	protected String rome2;
+	protected String rome3;
+	protected String rome4;
+	protected String rome5;
+	protected String specialite1;
+	protected String specialite2;
+	protected String specialite3;
+	protected boolean troncCommun;
+	protected String web;
 	
 	@ManyToOne
-	@JoinColumn(name="code_mention", insertable=false, updatable=false)
-	private Mention mention;
-	
-	private String competences;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dateModification;
-	
-	private String dureeStage;
-	private String ensDelocalisees;
-	private String ensDelocaliseesHab;
-	private String etatRof;
-	private String infosDiverses;
-	private String langue;
-	private String mcc;
-	private String modalitesInscription;
-	private String modalitesPedagogique;
-	private String nbCredits;
-	private String nfs1;
-	private String nfs2;
-	private String nfs3;
-	private String objectifs;
-	private String polotiqueStage;
-	private String preRequis;
-	private String preRequisHab;
-	private String preRequisOblig;
-	private String rome1;
-	private String rome2;
-	private String rome3;
-	private String rome4;
-	private String rome5;
-	private String specialite1;
-	private String specialite2;
-	private String specialite3;
-	private String troncCommun;
-	private String version;
-	private String volCM;
-	private String volTD;
-	private String volTP;
-	private String web;
+	@JoinColumn(name="code_mention")
+	protected Mention mention;
 	
     @ManyToMany
     @JoinTable(name="programme_responsable",
     	joinColumns=@JoinColumn(name="code_programme"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
-	private Collection<Personne> responsables;
+    protected Collection<Personne> responsables;
     
-    @ManyToMany
-    @JoinTable(name="programme_specialite",
+    @OneToMany
+    @JoinTable(name="programme_element_rattache",
     	joinColumns=@JoinColumn(name="code_programme"),
-    	inverseJoinColumns=@JoinColumn(name="code_specialite"))
-	private Collection<Specialite> specialites;
+    	inverseJoinColumns=@JoinColumn(name="code_element"))
+    protected Collection<ElemStruct> elementsRattaches;
     
-    public Programme() {}
+    public Programme()
+    {
+    	super();
+    }
 
-	public Programme(String code, String nom, String parcours,
-			String identificateur, String apogee,
-			String aspectsFormatRecherche, String capacite, Mention mention,
-			String competences, Date dateModification, String dureeStage,
-			String ensDelocalisees, String ensDelocaliseesHab, String etatRof,
-			String infosDiverses, String langue, String mcc,
-			String modalitesInscription, String modalitesPedagogique,
-			String nbCredits, String nfs1, String nfs2, String nfs3,
-			String objectifs, String polotiqueStage, String preRequis,
-			String preRequisHab, String preRequisOblig, String rome1,
+	public Programme(String code, String nom, int nbCredits, boolean publiable,
+			boolean contenuValide, boolean structureValide, int nbErreurs,
+			List<ElemStruct> elementsFils, String apogee, int capacite,
+			String competences, String competencesHab, Date dateModification,
+			int dureeStage, String etatRof, String langue, String mcc,
+			String preRequis, String preRequisHab, String preRequisOblig,
+			String preRequisObligHab, int volCM, int volTD, int volTP,
+			int version, String identificateur, String aspectsFormatRecherche,
+			String ensDelocalisees, String ensDelocaliseesHab,
+			String infosDiverses, String modalitesInscription,
+			String modalitesPedagogique, String nfs1, String nfs2, String nfs3,
+			String objectifs, String politiqueStages, String rome1,
 			String rome2, String rome3, String rome4, String rome5,
 			String specialite1, String specialite2, String specialite3,
-			String troncCommun, String version, String volCM, String volTD,
-			String volTP, String web, Collection<Personne> responsables,
-			Collection<Specialite> specialites) {
-		super();
-		this.code = code;
-		this.nom = nom;
-		this.parcours = parcours;
+			boolean troncCommun, String web, Mention mention,
+			Collection<Personne> responsables,
+			Collection<ElemStruct> elementsRattaches) {
+		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
+				nbErreurs, elementsFils, apogee, capacite, competences,
+				competencesHab, dateModification, dureeStage, etatRof, langue,
+				mcc, preRequis, preRequisHab, preRequisOblig,
+				preRequisObligHab, volCM, volTD, volTP, version);
 		this.identificateur = identificateur;
-		this.apogee = apogee;
 		this.aspectsFormatRecherche = aspectsFormatRecherche;
-		this.capacite = capacite;
-		this.mention = mention;
-		this.competences = competences;
-		this.dateModification = dateModification;
-		this.dureeStage = dureeStage;
 		this.ensDelocalisees = ensDelocalisees;
 		this.ensDelocaliseesHab = ensDelocaliseesHab;
-		this.etatRof = etatRof;
 		this.infosDiverses = infosDiverses;
-		this.langue = langue;
-		this.mcc = mcc;
 		this.modalitesInscription = modalitesInscription;
 		this.modalitesPedagogique = modalitesPedagogique;
-		this.nbCredits = nbCredits;
 		this.nfs1 = nfs1;
 		this.nfs2 = nfs2;
 		this.nfs3 = nfs3;
 		this.objectifs = objectifs;
-		this.polotiqueStage = polotiqueStage;
-		this.preRequis = preRequis;
-		this.preRequisHab = preRequisHab;
-		this.preRequisOblig = preRequisOblig;
+		this.politiqueStages = politiqueStages;
 		this.rome1 = rome1;
 		this.rome2 = rome2;
 		this.rome3 = rome3;
@@ -136,38 +101,13 @@ public class Programme {
 		this.specialite2 = specialite2;
 		this.specialite3 = specialite3;
 		this.troncCommun = troncCommun;
-		this.version = version;
-		this.volCM = volCM;
-		this.volTD = volTD;
-		this.volTP = volTP;
 		this.web = web;
+		this.mention = mention;
 		this.responsables = responsables;
-		this.specialites = specialites;
+		this.elementsRattaches = elementsRattaches;
 	}
 
-	public String getCode() {
-		return code;
-	}
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getParcours() {
-		return parcours;
-	}
-
-	public void setParcours(String parcours) {
-		this.parcours = parcours;
-	}
 
 	public String getIdentificateur() {
 		return identificateur;
@@ -177,60 +117,12 @@ public class Programme {
 		this.identificateur = identificateur;
 	}
 
-	public String getApogee() {
-		return apogee;
-	}
-
-	public void setApogee(String apogee) {
-		this.apogee = apogee;
-	}
-
 	public String getAspectsFormatRecherche() {
 		return aspectsFormatRecherche;
 	}
 
 	public void setAspectsFormatRecherche(String aspectsFormatRecherche) {
 		this.aspectsFormatRecherche = aspectsFormatRecherche;
-	}
-
-	public String getCapacite() {
-		return capacite;
-	}
-
-	public void setCapacite(String capacite) {
-		this.capacite = capacite;
-	}
-
-	public Mention getMention() {
-		return mention;
-	}
-
-	public void setMention(Mention mention) {
-		this.mention = mention;
-	}
-
-	public String getCompetences() {
-		return competences;
-	}
-
-	public void setCompetences(String competences) {
-		this.competences = competences;
-	}
-
-	public Date getDateModification() {
-		return dateModification;
-	}
-
-	public void setDateModification(Date dateModification) {
-		this.dateModification = dateModification;
-	}
-
-	public String getDureeStage() {
-		return dureeStage;
-	}
-
-	public void setDureeStage(String dureeStage) {
-		this.dureeStage = dureeStage;
 	}
 
 	public String getEnsDelocalisees() {
@@ -249,36 +141,12 @@ public class Programme {
 		this.ensDelocaliseesHab = ensDelocaliseesHab;
 	}
 
-	public String getEtatRof() {
-		return etatRof;
-	}
-
-	public void setEtatRof(String etatRof) {
-		this.etatRof = etatRof;
-	}
-
 	public String getInfosDiverses() {
 		return infosDiverses;
 	}
 
 	public void setInfosDiverses(String infosDiverses) {
 		this.infosDiverses = infosDiverses;
-	}
-
-	public String getLangue() {
-		return langue;
-	}
-
-	public void setLangue(String langue) {
-		this.langue = langue;
-	}
-
-	public String getMcc() {
-		return mcc;
-	}
-
-	public void setMcc(String mcc) {
-		this.mcc = mcc;
 	}
 
 	public String getModalitesInscription() {
@@ -295,14 +163,6 @@ public class Programme {
 
 	public void setModalitesPedagogique(String modalitesPedagogique) {
 		this.modalitesPedagogique = modalitesPedagogique;
-	}
-
-	public String getNbCredits() {
-		return nbCredits;
-	}
-
-	public void setNbCredits(String nbCredits) {
-		this.nbCredits = nbCredits;
 	}
 
 	public String getNfs1() {
@@ -337,36 +197,12 @@ public class Programme {
 		this.objectifs = objectifs;
 	}
 
-	public String getPolotiqueStage() {
-		return polotiqueStage;
+	public String getPolitiqueStages() {
+		return politiqueStages;
 	}
 
-	public void setPolotiqueStage(String polotiqueStage) {
-		this.polotiqueStage = polotiqueStage;
-	}
-
-	public String getPreRequis() {
-		return preRequis;
-	}
-
-	public void setPreRequis(String preRequis) {
-		this.preRequis = preRequis;
-	}
-
-	public String getPreRequisHab() {
-		return preRequisHab;
-	}
-
-	public void setPreRequisHab(String preRequisHab) {
-		this.preRequisHab = preRequisHab;
-	}
-
-	public String getPreRequisOblig() {
-		return preRequisOblig;
-	}
-
-	public void setPreRequisOblig(String preRequisOblig) {
-		this.preRequisOblig = preRequisOblig;
+	public void setPolitiqueStages(String politiqueStages) {
+		this.politiqueStages = politiqueStages;
 	}
 
 	public String getRome1() {
@@ -433,44 +269,12 @@ public class Programme {
 		this.specialite3 = specialite3;
 	}
 
-	public String getTroncCommun() {
+	public boolean isTroncCommun() {
 		return troncCommun;
 	}
 
-	public void setTroncCommun(String troncCommun) {
+	public void setTroncCommun(boolean troncCommun) {
 		this.troncCommun = troncCommun;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	public String getVolCM() {
-		return volCM;
-	}
-
-	public void setVolCM(String volCM) {
-		this.volCM = volCM;
-	}
-
-	public String getVolTD() {
-		return volTD;
-	}
-
-	public void setVolTD(String volTD) {
-		this.volTD = volTD;
-	}
-
-	public String getVolTP() {
-		return volTP;
-	}
-
-	public void setVolTP(String volTP) {
-		this.volTP = volTP;
 	}
 
 	public String getWeb() {
@@ -481,6 +285,14 @@ public class Programme {
 		this.web = web;
 	}
 
+	public Mention getMention() {
+		return mention;
+	}
+
+	public void setMention(Mention mention) {
+		this.mention = mention;
+	}
+
 	public Collection<Personne> getResponsables() {
 		return responsables;
 	}
@@ -489,13 +301,14 @@ public class Programme {
 		this.responsables = responsables;
 	}
 
-	public Collection<Specialite> getSpecialites() {
-		return specialites;
+	public Collection<ElemStruct> getElementsRattaches() {
+		return elementsRattaches;
 	}
 
-	public void setSpecialites(Collection<Specialite> specialites) {
-		this.specialites = specialites;
+	public void setElementsRattaches(Collection<ElemStruct> elementsRattaches) {
+		this.elementsRattaches = elementsRattaches;
 	}
-    
-    
+
+	
+
 }

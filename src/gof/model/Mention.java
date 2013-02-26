@@ -88,7 +88,7 @@ public class Mention {
 	private String mesuresPrises;
 	private String modalitesPedagoHab;
 	private String modifications;
-	private String nbCredits;
+	private int nbCredits;
 	private String orgPedago;
 	private String orgPedagoHab;
 	private String partenaires;
@@ -111,7 +111,7 @@ public class Mention {
     
 	private String secteurPro;
 	private String validiteCompetences;
-	private String version;
+	private int version;
 	private String web;
 	
 	private boolean publiable;
@@ -141,13 +141,13 @@ public class Mention {
 			String finalite, String indicateurs, String international,
 			String internationalHab, String mcc, String mccHab,
 			String mesuresPrises, String modalitesPedagoHab,
-			String modifications, String nbCredits, String orgPedago,
+			String modifications, int nbCredits, String orgPedago,
 			String orgPedagoHab, String partenaires, String partenairesHab,
 			String pilotage, String politiqueStages, String posOffreEtablis,
 			String posOffreRegion, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
 			String publicHab, Collection<Domaine> domaines, String secteurPro,
-			String validiteCompetences, String version, String web,
+			String validiteCompetences, int version, String web,
 			boolean publiable, boolean contenuValide, boolean structureValide,
 			int nbErreurs) {
 		super();
@@ -498,10 +498,10 @@ public class Mention {
 	public void setModifications(String modifications) {
 		this.modifications = modifications;
 	}
-	public String getNbCredits() {
+	public int getNbCredits() {
 		return nbCredits;
 	}
-	public void setNbCredits(String nbCredits) {
+	public void setNbCredits(int nbCredits) {
 		this.nbCredits = nbCredits;
 	}
 	public String getOrgPedago() {
@@ -600,10 +600,10 @@ public class Mention {
 	public void setValiditeCompetences(String validiteCompetences) {
 		this.validiteCompetences = validiteCompetences;
 	}
-	public String getVersion() {
+	public int getVersion() {
 		return version;
 	}
-	public void setVersion(String version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 	public String getWeb() {

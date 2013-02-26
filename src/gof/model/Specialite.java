@@ -47,7 +47,7 @@ public class Specialite {
 	private String aspectsFormatRecherche;
 	
 	@ManyToOne
-	@JoinColumn(name="code_mention", insertable = false, updatable = false)
+	@JoinColumn(name="code_mention")
 	private Mention mention;
 	
 	private String competencesHab;
@@ -84,7 +84,7 @@ public class Specialite {
 	private String publique;
 	private String publiqueHab; 
 	private String validiteCompetences;
-	private String version;
+	private int version;
 	
 	private boolean publiable;
 	private boolean contenuValide;
@@ -111,7 +111,7 @@ public class Specialite {
 			String mutualisation, String orgPedago, String orgPedagoHab,
 			String pilotage, String politiqueStages, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
-			String publiqueHab, String validiteCompetences, String version,
+			String publiqueHab, String validiteCompetences, int version,
 			boolean publiable, boolean contenuValide, boolean structureValide,
 			int nbErreurs) {
 		super();
@@ -451,10 +451,10 @@ public class Specialite {
 	public void setValiditeCompetences(String validiteCompetences) {
 		this.validiteCompetences = validiteCompetences;
 	}
-	public String getVersion() {
+	public int getVersion() {
 		return version;
 	}
-	public void setVersion(String version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 	public boolean isPubliable() {
