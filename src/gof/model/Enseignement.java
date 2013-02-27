@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,6 +20,7 @@ public class Enseignement extends Formation implements Mutualisable {
 	protected String contenuHab;
 	protected String discipline;
 	protected String modalitesOrganisation;
+	@Column(nullable=false)
 	protected boolean mutualisable;
 	protected String typeEns;
 	protected int volAutres;

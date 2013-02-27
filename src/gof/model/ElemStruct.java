@@ -19,13 +19,17 @@ public abstract class ElemStruct {
 	@Column(name="code", length=15)
 	protected String code;
 	
+	@Column(nullable=false)
 	protected String nom;
 
 	protected int nbCredits;
-	
+	@Column(nullable=false)
 	protected boolean publiable;
+	@Column(nullable=false)
 	protected boolean contenuValide;
+	@Column(nullable=false)
 	protected boolean structureValide;
+	@Column(nullable=false)
 	protected int nbErreurs;
 	
 	@ManyToMany

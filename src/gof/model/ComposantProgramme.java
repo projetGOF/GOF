@@ -2,11 +2,12 @@ package gof.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity(name="composant_programme")
 public class ComposantProgramme extends ElemStruct implements Mutualisable {
-
+	@Column(nullable=false)
 	protected boolean mutualisable;
 	protected String type;
 	

@@ -26,7 +26,7 @@ public class UECat extends Enseignement {
 			int version, String bibliographie, String capitalisation,
 			String coefficient, String contenu, String contenuHab,
 			String discipline, String modalitesOrganisation,
-			boolean mutualisable, String typeEns, int volAutres, int volGlobal,
+			String typeEns, int volAutres, int volGlobal,
 			int volTravail, Collection<Personne> responsables,
 			boolean miseEnService) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
@@ -35,7 +35,7 @@ public class UECat extends Enseignement {
 				mcc, preRequis, preRequisHab, preRequisOblig,
 				preRequisObligHab, volCM, volTD, volTP, version, bibliographie,
 				capitalisation, coefficient, contenu, contenuHab, discipline,
-				modalitesOrganisation, mutualisable, typeEns, volAutres,
+				modalitesOrganisation, false, typeEns, volAutres,
 				volGlobal, volTravail, responsables);
 		this.miseEnService = miseEnService;
 	}

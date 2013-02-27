@@ -19,7 +19,7 @@ public class Specialite {
 	@Id
 	@Column(name="code", length=15)
 	private String code;
-	
+	@Column(nullable=false)
 	private String nom;
 	private String nomCourt;
 	private String identificateur;
@@ -85,10 +85,13 @@ public class Specialite {
 	private String publiqueHab; 
 	private String validiteCompetences;
 	private int version;
-	
+	@Column(nullable=false)
 	private boolean publiable;
+	@Column(nullable=false)
 	private boolean contenuValide;
+	@Column(nullable=false)
 	private boolean structureValide;
+	@Column(nullable=false)
 	private int nbErreurs;
 	
 	public Specialite() {}

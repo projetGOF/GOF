@@ -2,7 +2,7 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import gof.dao.ComposantProgrammeDao;
 import gof.model.ComposantProgramme;
@@ -26,28 +26,40 @@ public class ComposantProgrammeDaoTest extends AbstractTransactionalJUnit4Spring
 	
 	@Before
 	public void init() {
-//		ElemStruct elemStruct0 = new ElemStruct("CES0", "NOM0", "30", "0", "1", "0", "42", "NULL");
-//		ElemStruct elemStruct1 = new ElemStruct("CES1", "NOM1", "30", "1", "0", "1", "24", "NULL");
+		ComposantProgramme composantProgramme = new ComposantProgramme(
+				"codeCompProg", "nomCompProg", 30, 
+				true, true, true, 
+				0, new ArrayList<ElemStruct>(), false, 
+				"type");
+		
+		composantProgrammeDao.saveComposantProgramme(composantProgramme);
 	}
 	
 	@Test
 	public void findAllComposantsProgrammeTest() {
-//		assertEquals(2,composantProgrammeDao.findAllComposantsProgramme().size());
+		assertEquals(1, composantProgrammeDao.findAllComposantsProgramme().size());
 	}
 
 	@Test
 	public void findComposantProgrammeTest() {
-		
+		assertEquals("nomCompProg", composantProgrammeDao.findComposantProgramme("codeCompProg").getNom());
 	}
 
 	@Test
 	public void saveComposantProgrammeTest() {
-		
+		ComposantProgramme composantProgramme2 = new ComposantProgramme(
+				"codeCompProg2", "nomCompProg2", 30, 
+				true, true, true, 
+				0, new ArrayList<ElemStruct>(), false, 
+				"type");
+		composantProgrammeDao.saveComposantProgramme(composantProgramme2);
+		assertEquals("nomCompProg2", composantProgrammeDao.findComposantProgramme("codeCompProg2").getNom());
 	}
 
 	@Test
 	public void deleteComposantProgrammeTest() {
-		
+		composantProgrammeDao.deleteComposantProgramme(composantProgrammeDao.findComposantProgramme("codeCompProg"));
+		assertEquals(0, composantProgrammeDao.findAllComposantsProgramme().size());
 	}
 	
 }
