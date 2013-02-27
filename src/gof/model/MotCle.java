@@ -8,16 +8,12 @@ import javax.persistence.Id;
 public class MotCle {
 
 	@Id
-	@GeneratedValue
-	private Long id;
 	private String motcle;
 	
-	public Long getId() {
-		return id;
-	}
+	public MotCle() {	}
 	
-	public void setId(Long id) {
-		this.id = id;
+	public MotCle(String motcle) {
+		this.motcle=motcle;
 	}
 	
 	public String getMotcle() {

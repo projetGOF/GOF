@@ -24,8 +24,8 @@ public class MotCleDaoImpl implements MotCleDao {
 	}
 
 	@Override
-	public MotCle findMotCle(long id) {
-		return em.find(MotCle.class, id);
+	public MotCle findMotCle(String motcle) {
+		return em.find(MotCle.class, motcle);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public interface MotCleDao {
 	
 	Collection<MotCle> findAllMotsCles();
 
-	MotCle findMotCle(long id);
+	MotCle findMotCle(String motcle);
 
 	void saveMotCle(MotCle mc);
 
