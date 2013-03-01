@@ -11,26 +11,47 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity(name="personne")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Personne implements Serializable {
+	
 	@Id
+	@XmlAttribute(name="code")
 	private String code;
 	
 	@Column(unique=true)
+	@XmlElement(name="idext")
 	private String idext;
 	
+	@XmlElement(name="nom")
 	private String nom;
+	
+	@XmlElement(name="prenom")
 	private String prenom;
+	
+	@XmlElement(name="telephone")
 	private String telephone;
+	
+	@XmlElement(name="mail")
 	private String mail;
+	
+	@XmlTransient
 	private String password;
 	
 	@ElementCollection
 	@CollectionTable(name="personne_statut",
 			joinColumns=@JoinColumn(name="code_personne"))
 	@Enumerated(EnumType.STRING)
+	@XmlTransient
 	private Collection<Statut> statuts;
 	
 	public Personne(){}
