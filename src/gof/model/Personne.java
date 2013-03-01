@@ -1,5 +1,6 @@
 package gof.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CollectionTable;
@@ -11,9 +12,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
+@SuppressWarnings("serial")
 @Entity(name="personne")
-public class Personne
-{
+public class Personne implements Serializable {
 	@Id
 	private String code;
 	

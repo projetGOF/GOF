@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+@SuppressWarnings("serial")
 @Entity(name="enseignement")
 public class Enseignement extends Formation implements Mutualisable {
 

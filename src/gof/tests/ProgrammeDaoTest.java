@@ -69,7 +69,7 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 										0);	
 		
 		Programme programme = new Programme(	"CODEPRO1", "nompro", 30, true, 
-												true, true, 0, 
+												true, true, 0,
 												new ArrayList<ElemStruct>(), "apogee", 10, 
 												"competences", "competencesHab", new Date(), 
 												10, "etatRof", "langue", "mcc", 
@@ -85,34 +85,19 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 												true, "web", 
 												mention, 
 												new  ArrayList<Personne>(), new  ArrayList<ElemStruct>());
-		ArrayList<Programme> programmes = new ArrayList<Programme>();
-		programmes.add(programme);
 		
-		mentionDao.saveMention(mention);
+		mentionDao.saveMention(mention);	
+		programmeDao.saveProgramme(programme);
 		
+		programme = programmeDao.findProgramme("CODEPRO1");
+		mention = mentionDao.findMention("code");
+		
+		programme.setMention(mentionDao.findMention("code"));
+		mention.getProgrammes().add(programmeDao.findProgramme("CODEPRO1"));
+		
+		mentionDao.saveMention(mention);	
 		programmeDao.saveProgramme(programme);
 	}
-	
-	
-
-	
-//	Programme(String code, String nom, int nbCredits, boolean publiable,
-//			boolean contenuValide, boolean structureValide, int nbErreurs,
-//			List<ElemStruct> elementsFils, String apogee, int capacite,
-//			String competences, String competencesHab, Date dateModification,
-//			int dureeStage, String etatRof, String langue, String mcc,
-//			String preRequis, String preRequisHab, String preRequisOblig,
-//			String preRequisObligHab, int volCM, int volTD, int volTP,
-//			int version, String identificateur, String aspectsFormatRecherche,
-//			String ensDelocalisees, String ensDelocaliseesHab,
-//			String infosDiverses, String modalitesInscription,
-//			String modalitesPedagogique, String nfs1, String nfs2, String nfs3,
-//			String objectifs, String politiqueStages, String rome1,
-//			String rome2, String rome3, String rome4, String rome5,
-//			String specialite1, String specialite2, String specialite3,
-//			boolean troncCommun, String web, Mention mention,
-//			Collection<Personne> responsables,
-//			Collection<ElemStruct> elementsRattaches)
 	
 	@Test
 	public void findAllProgrammesTest(){
@@ -126,29 +111,13 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 
 	@Test
 	public void saveProgrammeTest(){
-		Programme programme2 = new Programme(	"CODEPRO2", "nompro2", 30, true, 
-				true, true, 0, 
-				new ArrayList<ElemStruct>(), "apogee", 10, 
-				"competences", "competencesHab", new Date(), 
-				10, "etatRof", "langue", "mcc", 
-				"preRequis", "preRequisHab", "preRequisOblig", 
-				"preRequisObligHab", 10, 10, 10, 
-				10, "identificateur", "aspectsFormatRecherche", 
-				"ensDelocalisees", "ensDelocaliseesHab", 
-				"infosDiverses", "modalitesInscription", 
-				"modalitesPedagogique", "nfs1", "nfs2", "nfs3", 
-				"objectifs", "politiqueStages", "rome1", 
-				"rome2", "rome3", "rome4", "rome5", 
-				"specialite1", "specialite2", "specialite3", 
-				true, "web", 
-				mentionDao.findMention("code"), 
-				new  ArrayList<Personne>(), new  ArrayList<ElemStruct>());
-		programmeDao.saveProgramme(programme2);
-		assertEquals(programme2.getNom(), programmeDao.findProgramme("CODEPRO2").getNom());
+		assertEquals("code", programmeDao.findProgramme("CODEPRO1").getMention().getCode());
+		assertEquals(1, mentionDao.findMention("code").getProgrammes().size());
 	}
 
 	@Test
 	public void deleteProgrammeTest(){
+		mentionDao.findMention("code").getProgrammes().remove(programmeDao.findProgramme("CODEPRO1"));
 		programmeDao.deleteProgramme(programmeDao.findProgramme("CODEPRO1"));
 		assertEquals(0, programmeDao.findAllProgrammes().size());
 	}

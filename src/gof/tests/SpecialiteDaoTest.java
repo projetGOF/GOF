@@ -37,7 +37,7 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 	
 	@Before
 	public void init() {
-		Mention mention = new Mention(	"code", "nomMent", TypeDiplome.LICENCE, 
+		Mention mention = new Mention("code", "nomMent", TypeDiplome.LICENCE, 
 				new ArrayList<MotCle>(), "droits", 
 				new ArrayList<Personne>(), 
 				new ArrayList<Specialite>(), 
@@ -67,15 +67,17 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 				true, true, true, 
 				0);
 		
+		mentionDao.saveMention(mention);
+		
 		Specialite specialite = new Specialite(
 				"codespe", "nomspe", "nomCourt", 
-				"identificateur", new ArrayList<Personne>(), 
+				"identificateur", null, new ArrayList<Personne>(), 
 				new ArrayList<Programme>(), "aideInsPro", 
 				"aideInsProHab", "aideOrientation", 
 				"aideOrientationHab", "aideReussite", 
 				"aideReussiteHab", "aspectsFormatContinue", 
 				"aspectsFormatPro", "aspectsFormatRecherche", 
-				mention, "competencesHab", "conditionsAdmission", 
+				"competencesHab", "conditionsAdmission", 
 				"conditionsAdmissionHab", "connaissances", 
 				"connaissancesHab", "contenusEnseignement", 
 				new Date(), "debouches", "debouchesHab", 
@@ -89,8 +91,17 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 				"publiqueHab", "validiteCompetences", 0, 
 				true, true, true, 
 				0);
-		mentionDao.saveMention(mention);
+		
 		specialiteDao.saveSpecialite(specialite);
+		
+		mention = mentionDao.findMention("code");
+		mention.getSpecialites().add(specialite);
+		mentionDao.saveMention(mention);
+		
+		specialite = specialiteDao.findSpecialite("codespe");
+		specialite.setMention(mentionDao.findMention("code"));
+		specialiteDao.saveSpecialite(specialite);
+		
 	}	
 	
 	@Test
@@ -105,35 +116,13 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 
 	@Test
 	public void saveSpecialiteTest(){
-		Specialite specialite2 = new Specialite(
-				"codespe2", "nomspe2", "nomCourt", 
-				"identificateur", new ArrayList<Personne>(), 
-				new ArrayList<Programme>(), "aideInsPro", 
-				"aideInsProHab", "aideOrientation", 
-				"aideOrientationHab", "aideReussite", 
-				"aideReussiteHab", "aspectsFormatContinue", 
-				"aspectsFormatPro", "aspectsFormatRecherche", 
-				mentionDao.findMention("code"), "competencesHab", "conditionsAdmission", 
-				"conditionsAdmissionHab", "connaissances", 
-				"connaissancesHab", "contenusEnseignement", 
-				new Date(), "debouches", "debouchesHab", 
-				"equipePedago", "etatRof", "finalite", 
-				"indicateurs", "international", "internationalHab", 
-				"liensAutresCertif", "mcc", "mccHab", 
-				"mesuresPrises", "modalitesPedagoHab", 
-				"mutualisation", "orgPedago", "orgPedagoHab", 
-				"pilotage", "politiqueStages", "poursuiteEtudes", 
-				"poursuiteEtudesHab", "previsions", "publique", 
-				"publiqueHab", "validiteCompetences", 0, 
-				true, true, true, 
-				0);
-		specialiteDao.saveSpecialite(specialite2);
-		
-		assertEquals(specialite2.getNom(), specialiteDao.findSpecialite("codespe2").getNom());
+		assertEquals("code", specialiteDao.findSpecialite("codespe").getMention().getCode());
+		assertEquals(1, mentionDao.findMention("code").getSpecialites().size());
 	}
 
 	@Test
 	public void deleteSpecialiteTest(){
+		mentionDao.findMention("code").getSpecialites().remove(specialiteDao.findSpecialite("codespe"));
 		specialiteDao.deleteSpecialite(specialiteDao.findSpecialite("codespe"));
 		assertEquals(0, specialiteDao.findAllSpecialites().size());
 	}

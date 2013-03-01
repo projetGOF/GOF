@@ -1,12 +1,15 @@
 package gof.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+@SuppressWarnings("serial")
 @Entity(name="composant_programme")
-public class ComposantProgramme extends ElemStruct implements Mutualisable {
+public class ComposantProgramme extends ElemStruct implements Mutualisable, Serializable {
+	
 	@Column(nullable=false)
 	protected boolean mutualisable;
 	protected String type;

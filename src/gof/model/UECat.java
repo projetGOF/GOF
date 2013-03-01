@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
+@SuppressWarnings("serial")
 @Entity(name="uecat")
 public class UECat extends Enseignement {
 

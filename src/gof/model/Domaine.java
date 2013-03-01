@@ -1,11 +1,14 @@
 package gof.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@SuppressWarnings("serial")
 @Entity(name="domaine")
-public class Domaine {
+public class Domaine implements Serializable{
 
 	@Id
 	@Column(name="code", length=15)

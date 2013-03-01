@@ -1,5 +1,6 @@
 package gof.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Collection;
 
@@ -13,8 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@SuppressWarnings("serial")
 @Entity(name="specialite")
-public class Specialite {
+public class Specialite implements Serializable {
 
 	@Id
 	@Column(name="code", length=15)
@@ -23,6 +25,10 @@ public class Specialite {
 	private String nom;
 	private String nomCourt;
 	private String identificateur;
+
+	@ManyToOne
+	@JoinColumn(name="code_mention")
+	private Mention mention;
 	
     @ManyToMany
     @JoinTable(name="specialite_responsable",
@@ -34,7 +40,7 @@ public class Specialite {
     @JoinTable(name="specialite_programme",
     	joinColumns=@JoinColumn(name="code_specialite"),
     	inverseJoinColumns=@JoinColumn(name="code_programme"))
-	private Collection<Programme> programmes;	
+	private Collection<Programme> programmes;
     
 	private String aideInsPro;
 	private String aideInsProHab;
@@ -45,11 +51,6 @@ public class Specialite {
 	private String aspectsFormatContinue;
 	private String aspectsFormatPro;
 	private String aspectsFormatRecherche;
-	
-	@ManyToOne
-	@JoinColumn(name="code_mention")
-	private Mention mention;
-	
 	private String competencesHab;
 	private String conditionsAdmission;
 	private String conditionsAdmissionHab;
@@ -85,6 +86,7 @@ public class Specialite {
 	private String publiqueHab; 
 	private String validiteCompetences;
 	private int version;
+	
 	@Column(nullable=false)
 	private boolean publiable;
 	@Column(nullable=false)
@@ -97,13 +99,13 @@ public class Specialite {
 	public Specialite() {}
 	
 	public Specialite(String code, String nom, String nomCourt,
-			String identificateur, Collection<Personne> responsables,
+			String identificateur, Mention mention, Collection<Personne> responsables,
 			Collection<Programme> programmes, String aideInsPro,
 			String aideInsProHab, String aideOrientation,
 			String aideOrientationHab, String aideReussite,
 			String aideReussiteHab, String aspectsFormatContinue,
 			String aspectsFormatPro, String aspectsFormatRecherche,
-			Mention mention, String competencesHab, String conditionsAdmission,
+			String competencesHab, String conditionsAdmission,
 			String conditionsAdmissionHab, String connaissances,
 			String connaissancesHab, String contenusEnseignement,
 			Date dateModification, String debouches, String debouchesHab,
@@ -133,7 +135,6 @@ public class Specialite {
 		this.aspectsFormatContinue = aspectsFormatContinue;
 		this.aspectsFormatPro = aspectsFormatPro;
 		this.aspectsFormatRecherche = aspectsFormatRecherche;
-		this.mention = mention;
 		this.competencesHab = competencesHab;
 		this.conditionsAdmission = conditionsAdmission;
 		this.conditionsAdmissionHab = conditionsAdmissionHab;
@@ -170,6 +171,7 @@ public class Specialite {
 		this.contenuValide = contenuValide;
 		this.structureValide = structureValide;
 		this.nbErreurs = nbErreurs;
+		this.mention = mention;
 	}
 
 	public String getCode() {

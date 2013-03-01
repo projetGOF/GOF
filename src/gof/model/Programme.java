@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -11,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+@SuppressWarnings("serial")
 @Entity(name="programme")
 public class Programme extends Formation {
 	
@@ -38,8 +40,11 @@ public class Programme extends Formation {
 	protected String web;
 	
 	@ManyToOne
-	@JoinColumn(name="code_mention")
+	@JoinColumn(name="code_mention", insertable=false, updatable=false)
 	protected Mention mention;
+	
+	@ManyToMany(mappedBy="programmes")
+	protected Collection<Specialite> specialites;
 	
     @ManyToMany
     @JoinTable(name="programme_responsable",
@@ -47,10 +52,7 @@ public class Programme extends Formation {
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
     protected Collection<Personne> responsables;
     
-    @OneToMany
-    @JoinTable(name="programme_element_rattache",
-    	joinColumns=@JoinColumn(name="code_programme"),
-    	inverseJoinColumns=@JoinColumn(name="code_element"))
+    @OneToMany(mappedBy="programme",cascade=CascadeType.ALL)
     protected Collection<ElemStruct> elementsRattaches;
     
     public Programme()
@@ -72,7 +74,8 @@ public class Programme extends Formation {
 			String objectifs, String politiqueStages, String rome1,
 			String rome2, String rome3, String rome4, String rome5,
 			String specialite1, String specialite2, String specialite3,
-			boolean troncCommun, String web, Mention mention,
+			boolean troncCommun, String web,
+			Mention mention,
 			Collection<Personne> responsables,
 			Collection<ElemStruct> elementsRattaches) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
@@ -102,11 +105,10 @@ public class Programme extends Formation {
 		this.specialite3 = specialite3;
 		this.troncCommun = troncCommun;
 		this.web = web;
-		this.mention = mention;
 		this.responsables = responsables;
 		this.elementsRattaches = elementsRattaches;
+		this.mention = mention;
 	}
-
 
 
 	public String getIdentificateur() {
@@ -307,6 +309,14 @@ public class Programme extends Formation {
 
 	public void setElementsRattaches(Collection<ElemStruct> elementsRattaches) {
 		this.elementsRattaches = elementsRattaches;
+	}
+
+	public Collection<Specialite> getSpecialites() {
+		return specialites;
+	}
+
+	public void setSpecialites(Collection<Specialite> specialites) {
+		this.specialites = specialites;
 	}
 
 	

@@ -1,7 +1,9 @@
 package gof.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,8 +14,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+@SuppressWarnings("serial")
 @Entity(name = "mention")
-public class Mention {
+public class Mention implements Serializable {
 
 	@Id
 	@Column(name="code", length=15)
@@ -39,12 +42,10 @@ public class Mention {
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
 	private Collection<Personne> responsables;
     
-	@OneToMany
-	@JoinColumn(name="code_mention")
+    @OneToMany(mappedBy="mention",cascade=CascadeType.ALL)
 	private Collection<Specialite> specialites;
 	
-	@OneToMany
-	@JoinColumn(name="code_mention")
+	@OneToMany(mappedBy="mention",cascade=CascadeType.ALL)
 	private Collection<Programme> programmes;
 	
     @ManyToMany

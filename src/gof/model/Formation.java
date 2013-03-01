@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@SuppressWarnings("serial")
 @Entity(name="formation")
 public abstract class Formation extends ElemStruct {
 

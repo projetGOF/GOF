@@ -1,5 +1,6 @@
 package gof.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,10 +11,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
+@SuppressWarnings("serial")
 @Entity(name="element")
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class ElemStruct {
+public abstract class ElemStruct implements Serializable {
 
 	@Id
 	@Column(name="code", length=15)
@@ -31,6 +34,10 @@ public abstract class ElemStruct {
 	protected boolean structureValide;
 	@Column(nullable=false)
 	protected int nbErreurs;
+	
+	@ManyToOne
+	@JoinColumn(name="code_programme", insertable=false, updatable=false)
+	private Programme programme;
 	
 	@ManyToMany
     @JoinTable(name="element_fils",
@@ -116,5 +123,13 @@ public abstract class ElemStruct {
 
 	public void setElementsFils(List<ElemStruct> elementsFils) {
 		this.elementsFils = elementsFils;
+	}
+
+	public Programme getProgramme() {
+		return programme;
+	}
+
+	public void setProgramme(Programme programme) {
+		this.programme = programme;
 	}
 }

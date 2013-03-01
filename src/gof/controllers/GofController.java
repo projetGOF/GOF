@@ -9,9 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class GofController
 {
+	
 	@RequestMapping("/accueil.htm")
 	public ModelAndView home()
-	{
+	{	
 		return new ModelAndView("home");
 	}
 	
