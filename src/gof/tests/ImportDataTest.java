@@ -1,10 +1,16 @@
 package gof.tests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
+import gof.model.Composante;
+import gof.model.Domaine;
 import gof.model.Personne;
+import gof.services.ComposanteManager;
+import gof.services.DomaineManager;
 import gof.services.PersonneManager;
 
 import org.junit.BeforeClass;
@@ -12,17 +18,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import gof.data.ImportXML;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/gof/tests/applicationContext-import.xml"})
-public class ImportDataTest extends AbstractTransactionalJUnit4SpringContextTests{
+public class ImportDataTest {
 	
 	@Autowired
 	private PersonneManager personneManager;
+	@Autowired
+	private DomaineManager domaineManager;
+	@Autowired
+	private ComposanteManager composanteManager;
 	private static ImportXML importXml;
 	
 	@BeforeClass
@@ -35,5 +44,22 @@ public class ImportDataTest extends AbstractTransactionalJUnit4SpringContextTest
 		List<Personne> personnes = (List<Personne>) importXml.getPersonnes();
 		for(int i=0;i<personnes.size();i++)
 			personneManager.savePersonne(personnes.get(i));
+		assertEquals(personnes.size(),personneManager.findAllPersonnes().size());
+	}
+	
+	@Test
+	public void importDomaines() throws JAXBException{
+		List<Domaine> domaines = (List<Domaine>) importXml.getDomaines();
+		for(int i=0;i<domaines.size();i++)
+			domaineManager.saveDomaine(domaines.get(i));
+		assertEquals(domaines.size(),domaineManager.findAllDomaines().size());
+	}
+
+	@Test
+	public void importComposantes() throws JAXBException{
+		List<Composante> composantes = (List<Composante>) importXml.getComposantes();
+		for(int i=0;i<composantes.size();i++)
+			composanteManager.saveComposante(composantes.get(i));
+		assertEquals(composantes.size(),composanteManager.findAllComposantes().size());
 	}
 }

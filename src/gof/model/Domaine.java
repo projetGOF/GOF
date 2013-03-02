@@ -5,14 +5,21 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 @SuppressWarnings("serial")
 @Entity(name="domaine")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Domaine implements Serializable{
 
 	@Id
 	@Column(name="code", length=15)
+	@XmlAttribute(name="code")
 	private String code;
+	@XmlElement(name="nom")
 	private String nom;
 	
 	public Domaine() {}
