@@ -8,7 +8,6 @@ import gof.dao.ComposantProgrammeDao;
 import gof.model.ComposantProgramme;
 import gof.model.ElemStruct;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,17 +23,6 @@ public class ComposantProgrammeDaoTest extends AbstractTransactionalJUnit4Spring
 	@Autowired
 	private ComposantProgrammeDao composantProgrammeDao;
 	
-	@Before
-	public void init() {
-		ComposantProgramme composantProgramme = new ComposantProgramme(
-				"codeCompProg", "nomCompProg", 30, 
-				true, true, true, 
-				0, new ArrayList<ElemStruct>(), false, 
-				"type");
-		
-		composantProgrammeDao.saveComposantProgramme(composantProgramme);
-	}
-	
 	@Test
 	public void findAllComposantsProgrammeTest() {
 		assertEquals(1, composantProgrammeDao.findAllComposantsProgramme().size());
@@ -42,23 +30,23 @@ public class ComposantProgrammeDaoTest extends AbstractTransactionalJUnit4Spring
 
 	@Test
 	public void findComposantProgrammeTest() {
-		assertEquals("nomCompProg", composantProgrammeDao.findComposantProgramme("codeCompProg").getNom());
+		assertEquals("SEMESTRE 01", composantProgrammeDao.findComposantProgramme("SEM01").getNom());
 	}
 
 	@Test
 	public void saveComposantProgrammeTest() {
-		ComposantProgramme composantProgramme2 = new ComposantProgramme(
-				"codeCompProg2", "nomCompProg2", 30, 
+		ComposantProgramme composantProgramme = new ComposantProgramme(
+				"ANNEE01", "ANNEE 01", 30, 
 				true, true, true, 
 				0, new ArrayList<ElemStruct>(), false, 
-				"type");
-		composantProgrammeDao.saveComposantProgramme(composantProgramme2);
-		assertEquals("nomCompProg2", composantProgrammeDao.findComposantProgramme("codeCompProg2").getNom());
+				"ANNEE");
+		composantProgrammeDao.saveComposantProgramme(composantProgramme);
+		assertEquals("ANNEE 01", composantProgrammeDao.findComposantProgramme("ANNEE01").getNom());
 	}
 
 	@Test
 	public void deleteComposantProgrammeTest() {
-		composantProgrammeDao.deleteComposantProgramme(composantProgrammeDao.findComposantProgramme("codeCompProg"));
+		composantProgrammeDao.deleteComposantProgramme(composantProgrammeDao.findComposantProgramme("SEM01"));
 		assertEquals(0, composantProgrammeDao.findAllComposantsProgramme().size());
 	}
 	

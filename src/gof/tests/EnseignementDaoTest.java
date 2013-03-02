@@ -10,7 +10,6 @@ import gof.model.ElemStruct;
 import gof.model.Enseignement;
 import gof.model.Personne;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,46 +23,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Autowired
-	private EnseignementDao enseignementDao;
-	
-	@Before
-	public void init() {
-		
-		Enseignement enseignement = new Enseignement(
-				"codeEns", "nomENS", 30, 
-				true, true, true, 
-				0, new ArrayList<ElemStruct>(), "apogee", 
-				10, "competences", "competencesHab", 
-				new Date(), 6, "etatRof", 
-				"langue", "mcc", "preRequis", "preRequisHab", 
-				"preRequisOblig", "preRequisObligHab", 10, 
-				10, 11, 0, "bibliographie", 
-				"capitalisation", "coefficient", "contenu", 
-				"contenuHab", "discipline", "modalitesOrganisation", 
-				false, "typeEns", 10, 20, 
-				42, new ArrayList<Personne>());
-		
-		enseignementDao.saveEnseignement(enseignement);
-		
-		
-		
-	}
-	
+	private EnseignementDao enseignementDao;	
 	
 	@Test
 	public void findAllEnseignementsTest(){
-		assertEquals(1, enseignementDao.findAllEnseignements().size());
+		assertEquals(2, enseignementDao.findAllEnseignements().size()); // L'enseignement + l'UECat = 2
 	}
 
 	@Test
 	public void findEnseignementTest(){
-		assertEquals("nomENS", enseignementDao.findEnseignement("codeEns").getNom());
+		assertEquals("ENSEIGNEMENT 01", enseignementDao.findEnseignement("ENS01").getNom());
 	}
 
 	@Test
 	public void saveEnseignementTest(){
-		Enseignement enseignement2 = new Enseignement(
-				"codeEns2", "nomENS2", 30, 
+		Enseignement enseignement = new Enseignement(
+				"ENS02", "ENSEIGNEMENT 02", 30, 
 				true, true, true, 
 				0, new ArrayList<ElemStruct>(), "apogee", 
 				10, "competences", "competencesHab", 
@@ -75,13 +50,13 @@ public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContex
 				"contenuHab", "discipline", "modalitesOrganisation", 
 				false, "typeEns", 10, 20, 
 				42, new ArrayList<Personne>());
-		enseignementDao.saveEnseignement(enseignement2);
-		assertEquals("nomENS2", enseignementDao.findEnseignement("codeEns2").getNom());
+		enseignementDao.saveEnseignement(enseignement);
+		assertEquals("ENSEIGNEMENT 02", enseignementDao.findEnseignement("ENS02").getNom());
 	}
 
 	@Test
 	public void deleteEnseignementTest(){
-		enseignementDao.deleteEnseignement(enseignementDao.findEnseignement("codeEns"));
-		assertEquals(0, enseignementDao.findAllEnseignements().size());
+		enseignementDao.deleteEnseignement(enseignementDao.findEnseignement("ENS01"));
+		assertEquals(1, enseignementDao.findAllEnseignements().size());
 	}
 }

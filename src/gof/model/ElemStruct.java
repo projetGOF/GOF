@@ -11,7 +11,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 @SuppressWarnings("serial")
 @Entity(name="element")
@@ -34,10 +33,6 @@ public abstract class ElemStruct implements Serializable {
 	protected boolean structureValide;
 	@Column(nullable=false)
 	protected int nbErreurs;
-	
-	@ManyToOne
-	@JoinColumn(name="code_programme", insertable=false, updatable=false)
-	private Programme programme;
 	
 	@ManyToMany
     @JoinTable(name="element_fils",
@@ -123,13 +118,5 @@ public abstract class ElemStruct implements Serializable {
 
 	public void setElementsFils(List<ElemStruct> elementsFils) {
 		this.elementsFils = elementsFils;
-	}
-
-	public Programme getProgramme() {
-		return programme;
-	}
-
-	public void setProgramme(Programme programme) {
-		this.programme = programme;
 	}
 }

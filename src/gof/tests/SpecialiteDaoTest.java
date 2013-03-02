@@ -7,16 +7,11 @@ import java.util.Date;
 
 import gof.dao.MentionDao;
 import gof.dao.SpecialiteDao;
-import gof.model.Composante;
-import gof.model.Domaine;
-import gof.model.Mention;
-import gof.model.MotCle;
+
 import gof.model.Personne;
 import gof.model.Programme;
 import gof.model.Specialite;
-import gof.model.TypeDiplome;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,43 +30,21 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 	@Autowired
 	private MentionDao mentionDao;
 	
-	@Before
-	public void init() {
-		Mention mention = new Mention("code", "nomMent", TypeDiplome.LICENCE, 
-				new ArrayList<MotCle>(), "droits", 
-				new ArrayList<Personne>(), 
-				new ArrayList<Specialite>(), 
-				new ArrayList<Programme>(), 
-				new ArrayList<Composante>(), "adaptation", 
-				"adaptationHab", "adosPro", "adosRecherche", 
-				"aideInsPro", "aideInsProHab", "aideOrientation", 
-				"aideOrientationHab", "aideReussite", 
-				"aideReussiteHab", "articuAutresFormat", 
-				"autoEvaluation", "codeDossier", "cohabilitation", 
-				"competences", "competencesHab", 
-				"conditionsAdmission", "conditionsAdmissionHab", 
-				"connaissances", "connaissancesHab", 
-				"contenusEnseignement", "contexte", "contexteHab", 
-				"dateModification", "debouches", "debouchesHab", 
-				"denominationNationale", "equipePedago", "etatRof", 
-				"finalite", "indicateurs", "international", 
-				"internationalHab", "mcc", "mccHab", 
-				"mesuresPrises", "modalitesPedagoHab", 
-				"modifications", 0, "orgPedago", 
-				"orgPedagoHab", "partenaires", "partenairesHab", 
-				"pilotage", "politiqueStages", 
-				"posOffreEtablis", "posOffreRegion", "poursuiteEtudes", 
-				"poursuiteEtudesHab", "previsions", "publique", 
-				"publicHab", new ArrayList<Domaine>(), "secteurPro", 
-				"validiteCompetences", 0, "web", 
-				true, true, true, 
-				0);
-		
-		mentionDao.saveMention(mention);
-		
+	@Test
+	public void findAllSpecialitesTest(){
+		assertEquals(1, specialiteDao.findAllSpecialites().size());
+	}
+
+	@Test
+	public void findSpecialiteTest(){
+		assertEquals("SPECIALITE 01", specialiteDao.findSpecialite("SPE01").getNom());
+	}
+
+	@Test
+	public void saveSpecialiteTest(){
 		Specialite specialite = new Specialite(
-				"codespe", "nomspe", "nomCourt", 
-				"identificateur", null, new ArrayList<Personne>(), 
+				"SPE02", "SPECIALITE 02", "nomCourt", 
+				"identificateur", new ArrayList<Personne>(), 
 				new ArrayList<Programme>(), "aideInsPro", 
 				"aideInsProHab", "aideOrientation", 
 				"aideOrientationHab", "aideReussite", 
@@ -94,36 +67,15 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 		
 		specialiteDao.saveSpecialite(specialite);
 		
-		mention = mentionDao.findMention("code");
-		mention.getSpecialites().add(specialite);
-		mentionDao.saveMention(mention);
+		mentionDao.findMention("MENT01").getSpecialites().add(specialite);
 		
-		specialite = specialiteDao.findSpecialite("codespe");
-		specialite.setMention(mentionDao.findMention("code"));
-		specialiteDao.saveSpecialite(specialite);
-		
-	}	
-	
-	@Test
-	public void findAllSpecialitesTest(){
-		assertEquals(1, specialiteDao.findAllSpecialites().size());
-	}
-
-	@Test
-	public void findSpecialiteTest(){
-		assertEquals("nomspe", specialiteDao.findSpecialite("codespe").getNom());
-	}
-
-	@Test
-	public void saveSpecialiteTest(){
-		assertEquals("code", specialiteDao.findSpecialite("codespe").getMention().getCode());
-		assertEquals(1, mentionDao.findMention("code").getSpecialites().size());
+		assertEquals("SPECIALITE 02", specialiteDao.findSpecialite("SPE02").getNom());
+		assertEquals(2, mentionDao.findMention("MENT01").getSpecialites().size());
 	}
 
 	@Test
 	public void deleteSpecialiteTest(){
-		mentionDao.findMention("code").getSpecialites().remove(specialiteDao.findSpecialite("codespe"));
-		specialiteDao.deleteSpecialite(specialiteDao.findSpecialite("codespe"));
+		specialiteDao.deleteSpecialite(specialiteDao.findSpecialite("SPE01"));
 		assertEquals(0, specialiteDao.findAllSpecialites().size());
 	}
 }

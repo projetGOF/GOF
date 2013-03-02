@@ -12,10 +12,7 @@ public class UECat extends Enseignement {
 
 	protected boolean miseEnService;
 	
-	public UECat()
-	{
-		super();
-	}
+	public UECat() {}
 	
 	public UECat(String code, String nom, int nbCredits, boolean publiable,
 			boolean contenuValide, boolean structureValide, int nbErreurs,
@@ -36,14 +33,14 @@ public class UECat extends Enseignement {
 				mcc, preRequis, preRequisHab, preRequisOblig,
 				preRequisObligHab, volCM, volTD, volTP, version, bibliographie,
 				capitalisation, coefficient, contenu, contenuHab, discipline,
-				modalitesOrganisation, false, typeEns, volAutres,
+				modalitesOrganisation, true, typeEns, volAutres,
 				volGlobal, volTravail, responsables);
 		this.miseEnService = miseEnService;
 	}
 
 	@Override
 	public boolean getMutualisable() {
-		return false;
+		return true;
 	}
 
 	@Override

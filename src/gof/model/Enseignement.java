@@ -34,10 +34,7 @@ public class Enseignement extends Formation implements Mutualisable {
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
     protected Collection<Personne> responsables;
 	
-	public Enseignement()
-	{
-		super();
-	}
+	public Enseignement() {}
 
 	public Enseignement(String code, String nom, int nbCredits,
 			boolean publiable, boolean contenuValide, boolean structureValide,

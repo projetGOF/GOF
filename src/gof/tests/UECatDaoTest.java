@@ -10,7 +10,6 @@ import gof.model.ElemStruct;
 import gof.model.Personne;
 import gof.model.UECat;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,28 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UECatDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Autowired
-	private UECatDao uECatDao;
-	
-	
-	
-	@Before
-	public void init() {
-		UECat ueCat = new UECat(	"codeUE", "nomUE", 30, true, 
-									true, true, 0, 
-									new ArrayList<ElemStruct>(), "apogee", 10, 
-									"competences", "competencesHab", new Date(), 
-									10, "etatRof", "langue", "mcc", 
-									"preRequis", "preRequisHab", "preRequisOblig", 
-									"preRequisObligHab", 10, 10, 10, 
-									0, "bibliographie", "capitalisation", 
-									"coefficient", "contenu", "contenuHab", 
-									"discipline", "modalitesOrganisation", 
-									"typeEns", 10, 20, 
-									42, new ArrayList<Personne>(), 
-									true);
-		uECatDao.saveUECat(ueCat);
-	}
-		
+	private UECatDao uECatDao;		
 	
 	@Test
 	public void findAllUECatsTest(){
@@ -54,13 +32,13 @@ public class UECatDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 
 	@Test
 	public void findUECatTest(){
-		assertEquals("nomUE",uECatDao.findUECat("codeUE").getNom());
+		assertEquals("UECAT 01",uECatDao.findUECat("UE01").getNom());
 	}
 
 	@Test
 	public void saveUECatTest(){
 		UECat uECatToSave = new UECat(
-				"codeUE", "nomUE", 30, true, 
+				"UE02", "UECAT 02", 30, true, 
 				true, true, 0, 
 				new ArrayList<ElemStruct>(), "apogee", 10, 
 				"competences", "competencesHab", new Date(), 
@@ -74,12 +52,12 @@ public class UECatDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 				42, new ArrayList<Personne>(), 
 				true);
 		uECatDao.saveUECat(uECatToSave);
-		assertEquals(uECatToSave.getNom(), uECatDao.findUECat("codeUE").getNom());
+		assertEquals("UECAT 02", uECatDao.findUECat("UE02").getNom());
 	}
 
 	@Test
 	public void deleteUECatTest(){
-		uECatDao.deleteUECat(uECatDao.findUECat("codeUE"));
+		uECatDao.deleteUECat(uECatDao.findUECat("UE01"));
 		assertEquals(0,uECatDao.findAllUECats().size());
 	}
 }

@@ -3,7 +3,6 @@ package gof.model;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -29,9 +28,7 @@ public class Mention implements Serializable {
 	private TypeDiplome typeDiplome;
 	
     @OneToMany
-    @JoinTable(name="mention_motcle",
-    	joinColumns=@JoinColumn(name="code_mention"),
-    	inverseJoinColumns=@JoinColumn(name="motcle"))
+    @JoinColumn(name="code_mention")
 	private Collection<MotCle> motsCles;
     
 	private String droits;
@@ -42,10 +39,12 @@ public class Mention implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
 	private Collection<Personne> responsables;
     
-    @OneToMany(mappedBy="mention",cascade=CascadeType.ALL)
+    @OneToMany
+    @JoinColumn(name="code_mention")
 	private Collection<Specialite> specialites;
 	
-	@OneToMany(mappedBy="mention",cascade=CascadeType.ALL)
+    @OneToMany
+    @JoinColumn(name="code_mention")
 	private Collection<Programme> programmes;
 	
     @ManyToMany
@@ -789,8 +788,6 @@ public class Mention implements Serializable {
 	public void setNbErreurs(int nbErreurs) {
 		this.nbErreurs = nbErreurs;
 	}
-	
-	
-	
 
+	
 }

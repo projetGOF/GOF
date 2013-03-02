@@ -3,6 +3,7 @@ package gof.tests;
 import static org.junit.Assert.*;
 
 import gof.dao.DomaineDao;
+import gof.dao.MentionDao;
 import gof.model.Domaine;
 
 import org.junit.Test;
@@ -19,6 +20,9 @@ public class DomaineDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 
 	@Autowired
 	private DomaineDao domaineDao;
+	
+	@Autowired
+	private MentionDao mentionDao;
 	
 	@Test
 	public void findAllDomainesTest(){
@@ -39,6 +43,7 @@ public class DomaineDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 
 	@Test
 	public void deleteDomaineTest(){
+		mentionDao.findMention("MENT01").getDomaines().remove(domaineDao.findDomaine("DOM1"));
 		domaineDao.deleteDomaine(domaineDao.findDomaine("DOM1"));
 		assertEquals(1,domaineDao.findAllDomaines().size());
 	}

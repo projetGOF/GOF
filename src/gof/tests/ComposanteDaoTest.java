@@ -3,6 +3,7 @@ package gof.tests;
 import static org.junit.Assert.*;
 
 import gof.dao.ComposanteDao;
+import gof.dao.MentionDao;
 import gof.model.Composante;
 
 import org.junit.Test;
@@ -19,6 +20,9 @@ public class ComposanteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 	
 	@Autowired
 	private ComposanteDao composanteDao;
+	
+	@Autowired
+	private MentionDao mentionDao;
 	
 	@Test
 	public void findAllComposantesTest(){
@@ -39,6 +43,7 @@ public class ComposanteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 
 	@Test
 	public void deleteComposanteTest(){
+		mentionDao.findMention("MENT01").getComposantes().remove(composanteDao.findComposante("COMPO01"));
 		composanteDao.deleteComposante(composanteDao.findComposante("COMPO01"));
 		assertEquals(1,composanteDao.findAllComposantes().size());
 	}
