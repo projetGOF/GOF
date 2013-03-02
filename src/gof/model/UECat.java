@@ -5,12 +5,19 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity(name="uecat")
+@XmlRootElement(name="uecat")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class UECat extends Enseignement {
 
-	protected boolean miseEnService;
+	@XmlTransient
+	protected boolean miseEnService;			//il faut un adapter string to boolean
 	
 	public UECat() {}
 	

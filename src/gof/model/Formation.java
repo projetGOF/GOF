@@ -6,30 +6,66 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity(name="formation")
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Formation extends ElemStruct {
 
+	@XmlElement(name="apogee")
 	protected String apogee;
+	
+	@XmlElement(name="capacite")
 	protected int capacite;
+	
+	@XmlElement(name="competences")
 	protected String competences;
+	
+	@XmlElement(name="competences_hab")
 	protected String competencesHab;
 	
 	@Temporal(TemporalType.DATE)
-	protected Date dateModification;
+	@XmlTransient
+	protected Date dateModification;			//il me faut un adaptateur pour convertir string en date
 	
+	@XmlElement(name="duree_stage")
 	protected int dureeStage;
+	
+	@XmlElement(name="etat_rof")
 	protected String etatRof;
+	
+	@XmlElement(name="langue")
 	protected String langue;
+	
+	@XmlElement(name="mcc")
 	protected String mcc;
+	
+	@XmlElement(name="pre_requis")
 	protected String preRequis;
+	
+	@XmlTransient
 	protected String preRequisHab;
+	
+	@XmlElement(name="pre_requis_oblig")
 	protected String preRequisOblig;
+	
+	@XmlElement(name="pre_requis_oblig_hab")
 	protected String preRequisObligHab;
+	
+	@XmlElement(name="vol_cm")
 	protected int volCM;
+	
+	@XmlElement(name="vol_td")
 	protected int volTD;
+	
+	@XmlElement(name="vol_tp")
 	protected int volTP;
+	
+	@XmlElement(name="version")
 	protected int version;
 	
 	public Formation()

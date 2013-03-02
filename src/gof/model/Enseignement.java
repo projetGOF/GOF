@@ -9,30 +9,59 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity(name="enseignement")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Enseignement extends Formation implements Mutualisable {
 
+	@XmlElement(name="bibliographie")
 	protected String bibliographie;
+	
+	@XmlElement(name="capitalisation")
 	protected String capitalisation;
+	
+	@XmlElement(name="coefficient")
 	protected String coefficient;
+	
+	@XmlElement(name="contenu")
 	protected String contenu;
+	
+	@XmlElement(name="contenu_hab")
 	protected String contenuHab;
+	
+	@XmlElement(name="discipline")
 	protected String discipline;
+	
+	@XmlElement(name="modalites_organisation")
 	protected String modalitesOrganisation;
-	@Column(nullable=false)
-	protected boolean mutualisable;
+	
+	@Column(nullable=false, columnDefinition="tinyint(1) default 0")
+	@XmlTransient
+	protected boolean mutualisable;					//il faut un adapteur pour le convertir de string à boolean
+	
+	@XmlElement(name="type_ens")
 	protected String typeEns;
+	
+	@XmlElement(name="vol_autres")
 	protected int volAutres;
+	
+	@XmlElement(name="vol_global")
 	protected int volGlobal;
+	
+	@XmlElement(name="vol_travail")
 	protected int volTravail;
 	
 	@ManyToMany
     @JoinTable(name="enseignement_responsable",
     	joinColumns=@JoinColumn(name="code_enseignement"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
-    protected Collection<Personne> responsables;
+	@XmlTransient
+    protected Collection<Personne> responsables;	//il faut le faire
 	
 	public Enseignement() {}
 
