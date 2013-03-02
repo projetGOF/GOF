@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 import gof.model.Composante;
+import gof.model.Diplome;
 import gof.model.Domaine;
 import gof.model.Personne;
 import gof.model.UECat;
@@ -30,12 +31,20 @@ public class DiplomesWrapper {
 	
 	@XmlPath("extra/domaines/domaine")
 	private List<Domaine> domaines;
+	
+	@XmlPath("extra/xx-type-diplome")
+	private List<Diplome> diplomes;
+	
+	@XmlPath("extra/x-autres/xx-type-diplome")
+	private List<Diplome> diplomesAutres;
 			
 	public DiplomesWrapper(){
 		this.personnes = new ArrayList<Personne>();
 		this.catalogues = new ArrayList<UECat>();
 		this.composantes = new ArrayList<Composante>();
 		this.domaines = new ArrayList<Domaine>();
+		this.diplomes = new ArrayList<Diplome>();
+		this.diplomesAutres = new ArrayList<Diplome>();
 	}
 	public List<Personne> getPersonnes(){
 		return this.personnes;
@@ -60,5 +69,17 @@ public class DiplomesWrapper {
 	}
 	public void setDomaines(List<Domaine> domaines) {
 		this.domaines = domaines;
+	}
+	public List<Diplome> getDiplomes() {
+		return diplomes;
+	}
+	public void setDiplomes(List<Diplome> diplomes) {
+		this.diplomes = diplomes;
+	}
+	public List<Diplome> getDiplomesAutres() {
+		return diplomesAutres;
+	}
+	public void setDiplomesAutres(List<Diplome> diplomesAutres) {
+		this.diplomesAutres = diplomesAutres;
 	}
 }

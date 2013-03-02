@@ -1,6 +1,7 @@
 package gof.data;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -10,10 +11,10 @@ import javax.xml.bind.Unmarshaller;
 import gof.data.DiplomesWrapper;
 
 import gof.model.Composante;
+import gof.model.Diplome;
 import gof.model.Domaine;
 import gof.model.Personne;
 import gof.model.UECat;
-
 
 public class ImportXML implements Import {
 	
@@ -43,5 +44,12 @@ public class ImportXML implements Import {
 
 	public List<Domaine> getDomaines() {
 		return diplomes.getDomaines();
+	}
+	
+	public List<Diplome> getDiplomes() {
+		List<Diplome> allDiplomes = new ArrayList<Diplome>();
+		allDiplomes.addAll(diplomes.getDiplomes());
+		allDiplomes.addAll(diplomes.getDiplomesAutres());
+		return allDiplomes;
 	}
 }

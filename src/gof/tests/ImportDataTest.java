@@ -7,10 +7,12 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 
 import gof.model.Composante;
+import gof.model.Diplome;
 import gof.model.Domaine;
 import gof.model.Personne;
 import gof.model.UECat;
 import gof.services.ComposanteManager;
+import gof.services.DiplomeManager;
 import gof.services.DomaineManager;
 import gof.services.PersonneManager;
 import gof.services.UECatManager;
@@ -36,6 +38,8 @@ public class ImportDataTest {
 	private ComposanteManager composanteManager;
 	@Autowired
 	private UECatManager uecatManager;
+	@Autowired
+	private DiplomeManager diplomeManager;
 	
 	private static ImportXML importXml;
 	
@@ -74,5 +78,13 @@ public class ImportDataTest {
 		for(int i=0;i<catalogues.size();i++)
 			uecatManager.saveUECat(catalogues.get(i));
 		assertEquals(catalogues.size(),uecatManager.findAllUECats().size());
+	}
+	
+	@Test
+	public void importDiplomes() throws JAXBException{
+		List<Diplome> diplomes = (List<Diplome>) importXml.getDiplomes();
+		for(int i=0;i<diplomes.size();i++)
+			diplomeManager.saveDiplome(diplomes.get(i));
+		assertEquals(diplomes.size(),diplomeManager.findAllDiplomes().size());
 	}
 }
