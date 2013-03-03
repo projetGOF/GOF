@@ -16,6 +16,17 @@ public class InfoDiplome {
 	@XmlElement(name="secteur")
 	private String secteur;
 	
+	public InfoDiplome(){
+		
+	}
+	
+	public InfoDiplome(String nom, String web, String secteur) {
+		super();
+		this.nom = nom;
+		this.web = web;
+		this.secteur = secteur;
+	}	
+	
 	public String getNom() {
 		return nom;
 	}

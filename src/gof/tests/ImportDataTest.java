@@ -13,9 +13,12 @@ import gof.model.Personne;
 import gof.model.UECat;
 import gof.services.ComposanteManager;
 import gof.services.DiplomeManager;
+import gof.services.DomaineComposanteManager;
 import gof.services.DomaineManager;
 import gof.services.PersonneManager;
 import gof.services.UECatManager;
+
+import gof.model.DomaineComposante;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,6 +26,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import gof.data.XLP;
 
 import gof.data.ImportXML;
 
@@ -40,6 +45,8 @@ public class ImportDataTest {
 	private UECatManager uecatManager;
 	@Autowired
 	private DiplomeManager diplomeManager;
+	@Autowired
+	private DomaineComposanteManager domaineComposanteManager;
 	
 	private static ImportXML importXml;
 	
@@ -87,4 +94,17 @@ public class ImportDataTest {
 			diplomeManager.saveDiplome(diplomes.get(i));
 		assertEquals(diplomes.size(),diplomeManager.findAllDiplomes().size());
 	}
+	
+	@Test
+	public void importXLPS() throws JAXBException{
+		List<XLP> xlps = (List<XLP>) importXml.getXLPS();
+		for(int i=0;i<xlps.size();i++){
+			DomaineComposante domaineComposante = new DomaineComposante(
+					domaineManager.findDomaine(xlps.get(i).getRefDomaine()),
+					composanteManager.findComposante(xlps.get(i).getRefComposante()),
+					xlps.get(i).getXdn(),
+					xlps.get(i).getXsp());
+			domaineComposanteManager.saveDomaineComposante(domaineComposante);
+		}		
+	}	
 }

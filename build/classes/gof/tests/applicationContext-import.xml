@@ -39,6 +39,7 @@
 	<!--
 	<context:property-placeholder location="classpath:jdbc.properties" />
 	-->
+	<context:component-scan base-package="gof.data" />
 	<context:component-scan base-package="gof.services" />
 	<context:component-scan base-package="gof.tests" />
 	<context:component-scan base-package="gof.controllers" />

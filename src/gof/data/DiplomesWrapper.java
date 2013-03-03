@@ -10,6 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.eclipse.persistence.oxm.annotations.XmlPath;
 
+import gof.data.XLP;
+
 import gof.model.Composante;
 import gof.model.Diplome;
 import gof.model.Domaine;
@@ -34,9 +36,15 @@ public class DiplomesWrapper {
 	
 	@XmlPath("extra/xx-type-diplome")
 	private List<Diplome> diplomes;
-	
+		
 	@XmlPath("extra/x-autres/xx-type-diplome")
 	private List<Diplome> diplomesAutres;
+	
+	@XmlPath("extra/XLPS/XLP")
+	private List<XLP> xlps;
+	
+	//@XmlPath("diplome/enseignement")
+	//private List<Enseignement> enseignements;
 			
 	public DiplomesWrapper(){
 		this.personnes = new ArrayList<Personne>();
@@ -45,7 +53,10 @@ public class DiplomesWrapper {
 		this.domaines = new ArrayList<Domaine>();
 		this.diplomes = new ArrayList<Diplome>();
 		this.diplomesAutres = new ArrayList<Diplome>();
+		this.xlps = new ArrayList<XLP>();
+		//this.enseignements = new ArrayList<Enseignement>();
 	}
+	
 	public List<Personne> getPersonnes(){
 		return this.personnes;
 	}
@@ -82,4 +93,17 @@ public class DiplomesWrapper {
 	public void setDiplomesAutres(List<Diplome> diplomesAutres) {
 		this.diplomesAutres = diplomesAutres;
 	}
+	public List<XLP> getXLPS() {
+		return xlps;
+	}
+	public void setXLPS(List<XLP> xlps) {
+		this.xlps = xlps;
+	}
+	/*
+	public List<Enseignement> getEnseignements() {
+		return enseignements;
+	}
+	public void setEnseignements(List<Enseignement> enseignements) {
+		this.enseignements = enseignements;
+	}*/
 }

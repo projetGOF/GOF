@@ -54,6 +54,26 @@ public class Diplome {
 	@CollectionTable(name="diplome_info",joinColumns=@JoinColumn(name="code_diplome"))
 	@XmlElement(name="x-diplome")
 	private List<InfoDiplome> info;
+
+	public Diplome(){
+		
+	}
+	
+	public Diplome(String code, String type, String identificateur, String nom,
+			String nomCourt, String publiable, String acronyme, String rang,
+			TypeDiplome typeDiplome, List<InfoDiplome> info) {
+		super();
+		this.code = code;
+		this.type = type;
+		this.identificateur = identificateur;
+		this.nom = nom;
+		this.nomCourt = nomCourt;
+		this.publiable = publiable;
+		this.acronyme = acronyme;
+		this.rang = rang;
+		this.typeDiplome = typeDiplome;
+		this.info = info;
+	}
 		
 	public String getCode() {
 		return code;
