@@ -14,12 +14,24 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 		<title><fmt:message key="login.title"/></title>
-		
+		<spring:url value="/resources/css/home.css" var="homecss" /> 	
+		<link rel="stylesheet" href="${homecss}" type="text/css" />
 		</head>
 		<body onload="document.f.j_username.focus();">
-			<div class="content">
+			<div id="header">
+<!-- 				<p>header</p> -->
+			</div>	
+			<div id="nav">
+				<div id="nav-left">
+					
+				</div><!-- fin <div id="nav-left"> -->
+				<div id="nav-right">
+					
+				</div><!-- fin <div id="nav-right"> -->	
+			</div><!-- fin <div id="nav"> -->
+			<div id="body">
+				<p><fmt:message key="home.message"/></p>
 				<h1><fmt:message key="login.invite"/></h1>
-			
 				<c:if test="${not empty error}">
 					<div class="login-failure">
 						<fmt:message key="login.failure"/><br /> <fmt:message key="login.cause"/>
@@ -42,7 +54,14 @@
 			            </div>
 			        </div>
 			    </form>
-			</div>
+				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
+			</div><!-- fin <div id="body"> -->
+			<div id="footer">
+				<center class="smaller">
+					Aix-Marseille Université - 58, bd charles livon - 13284 marseille cedex 07 - france tél : 33 (0) 4 91 39 65 00 - fax : 33 (0) 4 91 31 31 36 |
+					<a href="http://www.univ-amu.fr/mentions-legales">Mentions légales</a>
+				</center>
+			</div><!-- fin <div id="footer"> -->
 		</body>
 	</html>
 </jsp:root>
