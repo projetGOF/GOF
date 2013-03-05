@@ -1,10 +1,14 @@
 package gof.model;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -45,6 +49,12 @@ public class UECat extends ElemStruct {
 	protected int volTP;
 	protected int volTravail;
 	
+	@ManyToMany
+    @JoinTable(name="programme_responsable",
+    	joinColumns=@JoinColumn(name="code_programme"),
+    	inverseJoinColumns=@JoinColumn(name="code_responsable"))
+    protected Collection<Personne> responsables;
+	
 	public UECat() {}
 
 	public UECat(String code, String nom, int nbCredits, boolean publiable,
@@ -57,7 +67,7 @@ public class UECat extends ElemStruct {
 			String mccHab, boolean miseEnService, String modalitesOrganisation,
 			String preRequis, String preRequisOblig, String preRequisObligHab,
 			int version, int volAutres, int volCM, int volGlobal, int volTD,
-			int volTP, int volTravail) {
+			int volTP, int volTravail, Collection<Personne> responsables) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
 				nbErreurs, elementsFils);
 		this.apogee = apogee;
@@ -88,6 +98,7 @@ public class UECat extends ElemStruct {
 		this.volTD = volTD;
 		this.volTP = volTP;
 		this.volTravail = volTravail;
+		this.responsables = responsables;
 	}
 
 	public String getApogee() {
@@ -312,6 +323,14 @@ public class UECat extends ElemStruct {
 
 	public void setVolTravail(int volTravail) {
 		this.volTravail = volTravail;
+	}
+
+	public Collection<Personne> getResponsables() {
+		return responsables;
+	}
+
+	public void setResponsables(Collection<Personne> responsables) {
+		this.responsables = responsables;
 	}
 
 	
