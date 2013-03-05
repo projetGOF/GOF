@@ -41,8 +41,6 @@ public class ImportDataTest {
 	private ComposanteManager composanteManager;
 	@Autowired
 	private UECatManager uecatManager;
-	/**@Autowired
-	private DiplomeManager diplomeManager;*/
 	@Autowired
 	private DomaineComposanteManager domaineComposanteManager;
 	
@@ -50,7 +48,7 @@ public class ImportDataTest {
 	
 	@BeforeClass
 	public static void debutTest() throws JAXBException{
-		importXml = new ImportXML("C:\\Users\\denis\\Documents\\Luminy_2012\\Semestre_I\\Projet\\GOF\\offre.xml");
+		importXml = new ImportXML("/home/Alex/Téléchargements/offre.xml");
 	}
 		
 	@Test

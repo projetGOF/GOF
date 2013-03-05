@@ -36,8 +36,6 @@ public class ImportXML implements Import {
 	private ComposanteManager composanteManager;
 	@Autowired
 	private UECatManager uecatManager;
-	//@Autowired
-	//private DiplomeManager diplomeManager;
 	
 	public ImportXML(	String path) throws JAXBException{
 		file = new File(path);

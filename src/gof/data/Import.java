@@ -15,6 +15,5 @@ public interface Import {
 	public List<UECat> getCatalogues();
 	public List<Composante> getComposantes();
 	public List<Domaine> getDomaines();
-	//public List<Diplome> getDiplomes();
 	public List<XLP> getXLPS();
 }

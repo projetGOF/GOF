@@ -23,6 +23,7 @@ public class Mention implements Serializable {
 	
 	@Column(nullable=false)
 	private String nom;
+	private String nomCourt;
 	
 	@Enumerated(EnumType.STRING)
 	private TypeDiplome typeDiplome;
@@ -83,6 +84,7 @@ public class Mention implements Serializable {
 	private String equipePedago;
 	private String etatRof;
 	private String finalite;
+	private String identificateur;
 	private String indicateurs;
 	private String international;
 	private String internationalHab;
@@ -127,9 +129,9 @@ public class Mention implements Serializable {
 	
 	public Mention() {}
 
-	public Mention(String code, String nom, TypeDiplome typeDiplome,
-			Collection<MotCle> motsCles, String droits,
-			Collection<Personne> responsables,
+	public Mention(String code, String nom, String nomCourt,
+			TypeDiplome typeDiplome, Collection<MotCle> motsCles,
+			String droits, Collection<Personne> responsables,
 			Collection<Specialite> specialites,
 			Collection<Programme> programmes,
 			Collection<Composante> composantes, String adaptation,
@@ -144,9 +146,9 @@ public class Mention implements Serializable {
 			String contenusEnseignement, String contexte, String contexteHab,
 			String dateModification, String debouches, String debouchesHab,
 			String denominationNationale, String equipePedago, String etatRof,
-			String finalite, String indicateurs, String international,
-			String internationalHab, String mcc, String mccHab,
-			String mesuresPrises, String modalitesPedagoHab,
+			String finalite, String identificateur, String indicateurs,
+			String international, String internationalHab, String mcc,
+			String mccHab, String mesuresPrises, String modalitesPedagoHab,
 			String modifications, int nbCredits, String orgPedago,
 			String orgPedagoHab, String partenaires, String partenairesHab,
 			String pilotage, String politiqueStages, String posOffreEtablis,
@@ -159,6 +161,7 @@ public class Mention implements Serializable {
 		super();
 		this.code = code;
 		this.nom = nom;
+		this.nomCourt = nomCourt;
 		this.typeDiplome = typeDiplome;
 		this.motsCles = motsCles;
 		this.droits = droits;
@@ -196,6 +199,7 @@ public class Mention implements Serializable {
 		this.equipePedago = equipePedago;
 		this.etatRof = etatRof;
 		this.finalite = finalite;
+		this.identificateur = identificateur;
 		this.indicateurs = indicateurs;
 		this.international = international;
 		this.internationalHab = internationalHab;
@@ -243,6 +247,14 @@ public class Mention implements Serializable {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public String getNomCourt() {
+		return nomCourt;
+	}
+
+	public void setNomCourt(String nomCourt) {
+		this.nomCourt = nomCourt;
 	}
 
 	public TypeDiplome getTypeDiplome() {
@@ -541,6 +553,14 @@ public class Mention implements Serializable {
 		this.finalite = finalite;
 	}
 
+	public String getIdentificateur() {
+		return identificateur;
+	}
+
+	public void setIdentificateur(String identificateur) {
+		this.identificateur = identificateur;
+	}
+
 	public String getIndicateurs() {
 		return indicateurs;
 	}
@@ -789,5 +809,5 @@ public class Mention implements Serializable {
 		this.nbErreurs = nbErreurs;
 	}
 
-	
+
 }
