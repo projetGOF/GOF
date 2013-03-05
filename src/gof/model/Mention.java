@@ -32,7 +32,7 @@ public class Mention implements Serializable {
     @JoinColumn(name="code_mention")
 	private Collection<MotCle> motsCles;
     
-	private String droits;
+	private int droits;
 	
     @ManyToMany
     @JoinTable(name="mention_responsable",
@@ -131,7 +131,7 @@ public class Mention implements Serializable {
 
 	public Mention(String code, String nom, String nomCourt,
 			TypeDiplome typeDiplome, Collection<MotCle> motsCles,
-			String droits, Collection<Personne> responsables,
+			int droits, Collection<Personne> responsables,
 			Collection<Specialite> specialites,
 			Collection<Programme> programmes,
 			Collection<Composante> composantes, String adaptation,
@@ -273,11 +273,11 @@ public class Mention implements Serializable {
 		this.motsCles = motsCles;
 	}
 
-	public String getDroits() {
+	public int getDroits() {
 		return droits;
 	}
 
-	public void setDroits(String droits) {
+	public void setDroits(int droits) {
 		this.droits = droits;
 	}
 

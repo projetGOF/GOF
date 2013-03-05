@@ -8,12 +8,8 @@
 		<!-- Fournisseur de persistence -->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-		<!-- Classes persistence -->
-		<class>gof.model.Personne</class>
-		<class>gof.model.Statut</class>
-
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.connection.useUnicode" value="true"/>
