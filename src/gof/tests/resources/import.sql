@@ -28,8 +28,7 @@ INSERT INTO specialite (code, nom, publiable, contenuValide, structureValide, nb
 
 -- Insertion d'un programme
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('PROG01', 'PROGRAMME 01', 1, 1, 1, 0, 42);
-INSERT INTO formation (code, capacite, dureeStage, version, volCM, volTD, volTP) VALUES ('PROG01', 50, 6, 1, 33, 33, 33);
-INSERT INTO programme (code, troncCommun, code_mention) VALUES ('PROG01', 1, 'MENT01');
+INSERT INTO programme (code, capacite, dureeStage, troncCommun, version, volCM, volTD, volTP, code_mention) VALUES ('PROG01', 30, 6, 1, 1, 33, 33, 33, 'MENT01');
 
 -- Insertion d'un composant programme
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('SEM01', 'SEMESTRE 01', 1, 1, 1, 0, 42);
@@ -37,13 +36,9 @@ INSERT INTO composant_programme (code, type, mutualisable) VALUES ('SEM01', 'SEM
 
 -- Insertion d'un enseignement
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('ENS01', 'ENSEIGNEMENT 01', 1, 1, 1, 0, 42);
-INSERT INTO formation (code, capacite, dureeStage, version, volCM, volTD, volTP) VALUES ('ENS01', 50, 6, 1, 33, 33, 33);
-INSERT INTO enseignement (code, mutualisable, volAutres, volGlobal, volTravail) VALUES ('ENS01', 1, 33, 33, 33);
+INSERT INTO enseignement (code, capacite, dureeStage, mutualisable, version, volAutres, volCM, volGlobal, volTD, volTP, volTravail) VALUES ('ENS01', 30, 6, 1, 1, 33, 33, 33, 33, 33, 33);
 
 --Insertion d'une UECat
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('UE01', 'UECAT 01', 1, 1, 1, 0, 42);
-INSERT INTO formation (code, capacite, dureeStage, version, volCM, volTD, volTP) VALUES ('UE01', 50, 6, 1, 33, 33, 33);
-INSERT INTO enseignement (code, mutualisable, volAutres, volGlobal, volTravail) VALUES ('UE01', 1, 33, 33, 33);
-INSERT INTO uecat (code, miseEnService) VALUES ('UE01', 1);
-
+INSERT INTO uecat (code, capacite, dureeStage, version, volAutres, volCM, volGlobal, volTD, volTP, volTravail, miseEnService) VALUES ('UE01', 30, 6, 1, 33, 33, 33, 33, 33, 33, 1);
 

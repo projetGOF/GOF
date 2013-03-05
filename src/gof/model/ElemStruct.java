@@ -11,51 +11,33 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity(name="element")
 @Inheritance(strategy=InheritanceType.JOINED)
-@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class ElemStruct implements Serializable {
 
 	@Id
 	@Column(name="code", length=15)
-	@XmlAttribute(name="code")
 	protected String code;
 	
 	@Column(nullable=false)
-	@XmlElement(name="nom")
 	protected String nom;
-	
-	@XmlElement(name="nb_credits")
+	@Column(nullable=false)
 	protected int nbCredits;
-	
-	@Column(nullable=false, columnDefinition="tinyint(1) default 0")
-	@XmlTransient
+	@Column(nullable=false)
 	protected boolean publiable;
-	
-	@Column(nullable=false, columnDefinition="tinyint(1) default 0")
-	@XmlTransient
+	@Column(nullable=false)
 	protected boolean contenuValide;
-	
-	@Column(nullable=false, columnDefinition="tinyint(1) default 0")
-	@XmlTransient
+	@Column(nullable=false)
 	protected boolean structureValide;
-	
-	@Column(nullable=false, columnDefinition="int(11) default 0")
-	@XmlTransient
+	@Column(nullable=false)
 	protected int nbErreurs;
 	
 	@ManyToMany
     @JoinTable(name="element_fils",
     	joinColumns=@JoinColumn(name="code_pere"),
     	inverseJoinColumns=@JoinColumn(name="code_fils"))
-	@XmlTransient
 	private List<ElemStruct> elementsFils;
 	
 	public ElemStruct() {}

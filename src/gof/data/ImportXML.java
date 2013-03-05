@@ -1,7 +1,6 @@
 package gof.data;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -14,12 +13,10 @@ import gof.data.XLP;
 import gof.data.DiplomesWrapper;
 
 import gof.model.Composante;
-import gof.model.Diplome;
 import gof.model.Domaine;
 import gof.model.Personne;
 import gof.model.UECat;
 import gof.services.ComposanteManager;
-import gof.services.DiplomeManager;
 import gof.services.DomaineManager;
 import gof.services.PersonneManager;
 import gof.services.UECatManager;
@@ -39,8 +36,8 @@ public class ImportXML implements Import {
 	private ComposanteManager composanteManager;
 	@Autowired
 	private UECatManager uecatManager;
-	@Autowired
-	private DiplomeManager diplomeManager;
+	//@Autowired
+	//private DiplomeManager diplomeManager;
 	
 	public ImportXML(	String path) throws JAXBException{
 		file = new File(path);
@@ -77,14 +74,14 @@ public class ImportXML implements Import {
 		}
 	}
 	
-	public void importerDiplomes(){
+	/**public void importerDiplomes(){
 		List<Diplome> allDiplomes = new ArrayList<Diplome>();
 		allDiplomes.addAll(diplomes.getDiplomes());
 		allDiplomes.addAll(diplomes.getDiplomesAutres());
 		for(int i=0; i<allDiplomes.size(); i++){
 			diplomeManager.saveDiplome(allDiplomes.get(i));
 		}
-	}
+	}*/
 	
 	
 	public void importerXLPS(){
@@ -117,12 +114,12 @@ public class ImportXML implements Import {
 		return diplomes.getDomaines();
 	}
 	
-	public List<Diplome> getDiplomes() {
+	/**public List<Diplome> getDiplomes() {
 		List<Diplome> allDiplomes = new ArrayList<Diplome>();
 		allDiplomes.addAll(diplomes.getDiplomes());
 		allDiplomes.addAll(diplomes.getDiplomesAutres());
 		return allDiplomes;
-	}
+	}*/
 	
 	public List<XLP> getXLPS() {		
 		return diplomes.getXLPS();
@@ -133,7 +130,7 @@ public class ImportXML implements Import {
 		importerCatalogues();
 		importerComposantes();
 		importerDomaines();
-		importerDiplomes();
+		//importerDiplomes();
 		importerXLPS();
 	}
 }

@@ -4,21 +4,35 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @SuppressWarnings("serial")
 @Entity(name="programme")
-public class Programme extends Formation {
+public class Programme extends ElemStruct {
 	
 	protected String identificateur;
+	protected String apogee;
 	protected String aspectsFormatRecherche;
+	protected int capacite;
+	protected String competences;
+	
+	@Temporal(TemporalType.DATE)
+	protected Date dateModification;
+	
+	protected int dureeStage;
 	protected String ensDelocalisees;
 	protected String ensDelocaliseesHab;
+	protected String etatRof;
 	protected String infosDiverses;
+	protected String langue;
+	protected String mcc;
 	protected String modalitesInscription;
 	protected String modalitesPedagogique;
 	protected String nfs1;
@@ -26,6 +40,10 @@ public class Programme extends Formation {
 	protected String nfs3;
 	protected String objectifs;
 	protected String politiqueStages;
+	protected String preRequis;
+	protected String preRequisHab;
+	protected String preRequisOblig;
+	protected String preRequisObligHab;
 	protected String rome1;
 	protected String rome2;
 	protected String rome3;
@@ -34,7 +52,12 @@ public class Programme extends Formation {
 	protected String specialite1;
 	protected String specialite2;
 	protected String specialite3;
+	@Column(nullable=false)
 	protected boolean troncCommun;
+	protected int version;
+	protected int volCM;
+	protected int volTD;
+	protected int volTP;
 	protected String web;
 	
     @ManyToMany
@@ -45,36 +68,46 @@ public class Programme extends Formation {
     
     @OneToMany
     @JoinColumn(name="code_programme_rattache")
-    protected Collection<ElemStruct> elementsRattaches;
+    protected Collection<ComposantProgramme> composantsProgrammeRattaches;
+    
+    @OneToMany
+    @JoinColumn(name="code_programme_rattache")
+    protected Collection<Enseignement> enseignementsRattaches;
     
     public Programme() {}
 
 	public Programme(String code, String nom, int nbCredits, boolean publiable,
 			boolean contenuValide, boolean structureValide, int nbErreurs,
-			List<ElemStruct> elementsFils, String apogee, int capacite,
-			String competences, String competencesHab, Date dateModification,
-			int dureeStage, String etatRof, String langue, String mcc,
-			String preRequis, String preRequisHab, String preRequisOblig,
-			String preRequisObligHab, int volCM, int volTD, int volTP,
-			int version, String identificateur, String aspectsFormatRecherche,
-			String ensDelocalisees, String ensDelocaliseesHab,
-			String infosDiverses, String modalitesInscription,
-			String modalitesPedagogique, String nfs1, String nfs2, String nfs3,
-			String objectifs, String politiqueStages, String rome1,
+			List<ElemStruct> elementsFils, String identificateur,
+			String apogee, String aspectsFormatRecherche, int capacite,
+			String competences, Date dateModification, int dureeStage,
+			String ensDelocalisees, String ensDelocaliseesHab, String etatRof,
+			String infosDiverses, String langue, String mcc,
+			String modalitesInscription, String modalitesPedagogique,
+			String nfs1, String nfs2, String nfs3, String objectifs,
+			String politiqueStages, String preRequis, String preRequisHab,
+			String preRequisOblig, String preRequisObligHab, String rome1,
 			String rome2, String rome3, String rome4, String rome5,
 			String specialite1, String specialite2, String specialite3,
-			boolean troncCommun, String web, Collection<Personne> responsables,
-			Collection<ElemStruct> elementsRattaches) {
+			boolean troncCommun, int version, int volCM, int volTD, int volTP,
+			String web, Collection<Personne> responsables,
+			Collection<ComposantProgramme> composantsProgrammeRattaches,
+			Collection<Enseignement> enseignementsRattaches) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
-				nbErreurs, elementsFils, apogee, capacite, competences,
-				competencesHab, dateModification, dureeStage, etatRof, langue,
-				mcc, preRequis, preRequisHab, preRequisOblig,
-				preRequisObligHab, volCM, volTD, volTP, version);
+				nbErreurs, elementsFils);
 		this.identificateur = identificateur;
+		this.apogee = apogee;
 		this.aspectsFormatRecherche = aspectsFormatRecherche;
+		this.capacite = capacite;
+		this.competences = competences;
+		this.dateModification = dateModification;
+		this.dureeStage = dureeStage;
 		this.ensDelocalisees = ensDelocalisees;
 		this.ensDelocaliseesHab = ensDelocaliseesHab;
+		this.etatRof = etatRof;
 		this.infosDiverses = infosDiverses;
+		this.langue = langue;
+		this.mcc = mcc;
 		this.modalitesInscription = modalitesInscription;
 		this.modalitesPedagogique = modalitesPedagogique;
 		this.nfs1 = nfs1;
@@ -82,6 +115,10 @@ public class Programme extends Formation {
 		this.nfs3 = nfs3;
 		this.objectifs = objectifs;
 		this.politiqueStages = politiqueStages;
+		this.preRequis = preRequis;
+		this.preRequisHab = preRequisHab;
+		this.preRequisOblig = preRequisOblig;
+		this.preRequisObligHab = preRequisObligHab;
 		this.rome1 = rome1;
 		this.rome2 = rome2;
 		this.rome3 = rome3;
@@ -91,9 +128,14 @@ public class Programme extends Formation {
 		this.specialite2 = specialite2;
 		this.specialite3 = specialite3;
 		this.troncCommun = troncCommun;
+		this.version = version;
+		this.volCM = volCM;
+		this.volTD = volTD;
+		this.volTP = volTP;
 		this.web = web;
 		this.responsables = responsables;
-		this.elementsRattaches = elementsRattaches;
+		this.composantsProgrammeRattaches = composantsProgrammeRattaches;
+		this.enseignementsRattaches = enseignementsRattaches;
 	}
 
 	public String getIdentificateur() {
@@ -104,12 +146,52 @@ public class Programme extends Formation {
 		this.identificateur = identificateur;
 	}
 
+	public String getApogee() {
+		return apogee;
+	}
+
+	public void setApogee(String apogee) {
+		this.apogee = apogee;
+	}
+
 	public String getAspectsFormatRecherche() {
 		return aspectsFormatRecherche;
 	}
 
 	public void setAspectsFormatRecherche(String aspectsFormatRecherche) {
 		this.aspectsFormatRecherche = aspectsFormatRecherche;
+	}
+
+	public int getCapacite() {
+		return capacite;
+	}
+
+	public void setCapacite(int capacite) {
+		this.capacite = capacite;
+	}
+
+	public String getCompetences() {
+		return competences;
+	}
+
+	public void setCompetences(String competences) {
+		this.competences = competences;
+	}
+
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
+	}
+
+	public int getDureeStage() {
+		return dureeStage;
+	}
+
+	public void setDureeStage(int dureeStage) {
+		this.dureeStage = dureeStage;
 	}
 
 	public String getEnsDelocalisees() {
@@ -128,12 +210,36 @@ public class Programme extends Formation {
 		this.ensDelocaliseesHab = ensDelocaliseesHab;
 	}
 
+	public String getEtatRof() {
+		return etatRof;
+	}
+
+	public void setEtatRof(String etatRof) {
+		this.etatRof = etatRof;
+	}
+
 	public String getInfosDiverses() {
 		return infosDiverses;
 	}
 
 	public void setInfosDiverses(String infosDiverses) {
 		this.infosDiverses = infosDiverses;
+	}
+
+	public String getLangue() {
+		return langue;
+	}
+
+	public void setLangue(String langue) {
+		this.langue = langue;
+	}
+
+	public String getMcc() {
+		return mcc;
+	}
+
+	public void setMcc(String mcc) {
+		this.mcc = mcc;
 	}
 
 	public String getModalitesInscription() {
@@ -190,6 +296,38 @@ public class Programme extends Formation {
 
 	public void setPolitiqueStages(String politiqueStages) {
 		this.politiqueStages = politiqueStages;
+	}
+
+	public String getPreRequis() {
+		return preRequis;
+	}
+
+	public void setPreRequis(String preRequis) {
+		this.preRequis = preRequis;
+	}
+
+	public String getPreRequisHab() {
+		return preRequisHab;
+	}
+
+	public void setPreRequisHab(String preRequisHab) {
+		this.preRequisHab = preRequisHab;
+	}
+
+	public String getPreRequisOblig() {
+		return preRequisOblig;
+	}
+
+	public void setPreRequisOblig(String preRequisOblig) {
+		this.preRequisOblig = preRequisOblig;
+	}
+
+	public String getPreRequisObligHab() {
+		return preRequisObligHab;
+	}
+
+	public void setPreRequisObligHab(String preRequisObligHab) {
+		this.preRequisObligHab = preRequisObligHab;
 	}
 
 	public String getRome1() {
@@ -264,6 +402,38 @@ public class Programme extends Formation {
 		this.troncCommun = troncCommun;
 	}
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public int getVolCM() {
+		return volCM;
+	}
+
+	public void setVolCM(int volCM) {
+		this.volCM = volCM;
+	}
+
+	public int getVolTD() {
+		return volTD;
+	}
+
+	public void setVolTD(int volTD) {
+		this.volTD = volTD;
+	}
+
+	public int getVolTP() {
+		return volTP;
+	}
+
+	public void setVolTP(int volTP) {
+		this.volTP = volTP;
+	}
+
 	public String getWeb() {
 		return web;
 	}
@@ -280,12 +450,23 @@ public class Programme extends Formation {
 		this.responsables = responsables;
 	}
 
-	public Collection<ElemStruct> getElementsRattaches() {
-		return elementsRattaches;
+	public Collection<ComposantProgramme> getComposantsProgrammeRattaches() {
+		return composantsProgrammeRattaches;
 	}
 
-	public void setElementsRattaches(Collection<ElemStruct> elementsRattaches) {
-		this.elementsRattaches = elementsRattaches;
+	public void setComposantsProgrammeRattaches(
+			Collection<ComposantProgramme> composantsProgrammeRattaches) {
+		this.composantsProgrammeRattaches = composantsProgrammeRattaches;
 	}
 
+	public Collection<Enseignement> getEnseignementsRattaches() {
+		return enseignementsRattaches;
+	}
+
+	public void setEnseignementsRattaches(
+			Collection<Enseignement> enseignementsRattaches) {
+		this.enseignementsRattaches = enseignementsRattaches;
+	}
+
+	
 }

@@ -2,12 +2,7 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
-import java.util.Date;
 import gof.dao.UECatDao;
-import gof.model.ElemStruct;
-import gof.model.Personne;
 import gof.model.UECat;
 
 import org.junit.Test;
@@ -37,21 +32,29 @@ public class UECatDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 
 	@Test
 	public void saveUECatTest(){
-		UECat uECatToSave = new UECat(
-				"UE02", "UECAT 02", 30, true, 
-				true, true, 0, 
-				new ArrayList<ElemStruct>(), "apogee", 10, 
-				"competences", "competencesHab", new Date(), 
-				10, "etatRof", "langue", "mcc", 
-				"preRequis", "preRequisHab", "preRequisOblig", 
-				"preRequisObligHab", 10, 10, 10, 
-				0, "bibliographie", "capitalisation", 
-				"coefficient", "contenu", "contenuHab", 
-				"discipline", "modalitesOrganisation", 
-				"typeEns", 10, 20, 
-				42, new ArrayList<Personne>(), 
-				true);
-		uECatDao.saveUECat(uECatToSave);
+		UECat uECat = new UECat();
+		
+		uECat.setCode("UE02");
+		uECat.setNom("UECAT 02");
+		
+		uECat.setContenuValide(true);
+		uECat.setStructureValide(true);
+		uECat.setNbCredits(0);
+		uECat.setNbErreurs(0);
+		uECat.setPubliable(true);
+		
+		uECat.setCapacite(0);
+		uECat.setDureeStage(0);
+		uECat.setVolAutres(0);
+		uECat.setVolCM(0);
+		uECat.setVolGlobal(0);
+		uECat.setVolTD(0);
+		uECat.setVolTP(0);
+		uECat.setVolTravail(0);
+		uECat.setVersion(0);
+		uECat.setMiseEnService(true);
+		
+		uECatDao.saveUECat(uECat);
 		assertEquals("UECAT 02", uECatDao.findUECat("UE02").getNom());
 	}
 

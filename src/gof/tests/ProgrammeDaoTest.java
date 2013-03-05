@@ -2,14 +2,9 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import gof.dao.MentionDao;
 import gof.dao.ProgrammeDao;
 
-import gof.model.ElemStruct;
-import gof.model.Personne;
 import gof.model.Programme;
 
 import org.junit.Test;
@@ -42,22 +37,23 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 
 	@Test
 	public void saveProgrammeTest(){		
-		Programme programme = new Programme(	"PROG02", "PROGRAMME 02", 30, true, 
-				true, true, 0,
-				new ArrayList<ElemStruct>(), "apogee", 10, 
-				"competences", "competencesHab", new Date(), 
-				10, "etatRof", "langue", "mcc", 
-				"preRequis", "preRequisHab", "preRequisOblig", 
-				"preRequisObligHab", 10, 10, 10, 
-				10, "identificateur", "aspectsFormatRecherche", 
-				"ensDelocalisees", "ensDelocaliseesHab", 
-				"infosDiverses", "modalitesInscription", 
-				"modalitesPedagogique", "nfs1", "nfs2", "nfs3", 
-				"objectifs", "politiqueStages", "rome1", 
-				"rome2", "rome3", "rome4", "rome5", 
-				"specialite1", "specialite2", "specialite3", 
-				true, "web", 
-				new  ArrayList<Personne>(), new  ArrayList<ElemStruct>());
+		Programme programme = new Programme();
+
+		programme.setCode("PROG02");
+		programme.setNom("PROGRAMME 02");		
+		programme.setContenuValide(true);
+		programme.setStructureValide(true);
+		programme.setNbCredits(0);
+		programme.setNbErreurs(0);
+		programme.setPubliable(true);
+		
+		programme.setCapacite(0);
+		programme.setDureeStage(0);
+		programme.setTroncCommun(true);
+		programme.setVersion(0);
+		programme.setVolCM(0);
+		programme.setVolTD(0);
+		programme.setVolTP(0);
 		
 		programmeDao.saveProgramme(programme);
 		

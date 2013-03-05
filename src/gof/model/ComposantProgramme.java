@@ -1,6 +1,5 @@
 package gof.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,16 +7,13 @@ import javax.persistence.Entity;
 
 @SuppressWarnings("serial")
 @Entity(name="composant_programme")
-public class ComposantProgramme extends ElemStruct implements Mutualisable, Serializable {
+public class ComposantProgramme extends ElemStruct {
 	
 	@Column(nullable=false)
 	protected boolean mutualisable;
 	protected String type;
 	
-	public ComposantProgramme()
-	{
-		super();
-	}
+	public ComposantProgramme() {}
 
 	public ComposantProgramme(String code, String nom, int nbCredits,
 			boolean publiable, boolean contenuValide, boolean structureValide,
@@ -27,16 +23,6 @@ public class ComposantProgramme extends ElemStruct implements Mutualisable, Seri
 				nbErreurs, elementsFils);
 		this.mutualisable = mutualisable;
 		this.type = type;
-	}
-
-	@Override
-	public boolean getMutualisable() {
-		return this.mutualisable;
-	}
-
-	@Override
-	public void setMutualisable(boolean mutualisable) {
-		this.mutualisable = mutualisable;
 	}
 
 	public String getType() {

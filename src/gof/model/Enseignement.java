@@ -9,95 +9,110 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @SuppressWarnings("serial")
 @Entity(name="enseignement")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class Enseignement extends Formation implements Mutualisable {
+public class Enseignement extends ElemStruct {
 
-	@XmlElement(name="bibliographie")
+	protected String apogee;
 	protected String bibliographie;
-	
-	@XmlElement(name="capitalisation")
+	protected int capacite;
 	protected String capitalisation;
-	
-	@XmlElement(name="coefficient")
 	protected String coefficient;
-	
-	@XmlElement(name="contenu")
+	protected String competences;
+	protected String competencesHab;
 	protected String contenu;
-	
-	@XmlElement(name="contenu_hab")
 	protected String contenuHab;
 	
-	@XmlElement(name="discipline")
-	protected String discipline;
+	@Temporal(TemporalType.DATE)
+	protected Date dateModification;
 	
-	@XmlElement(name="modalites_organisation")
+	protected String discipline;
+	protected int dureeStage;
+	protected String etatRof;
+	protected String langue;
+	protected String mcc;
+	protected String mccHab;
 	protected String modalitesOrganisation;
 	
-	@Column(nullable=false, columnDefinition="tinyint(1) default 0")
-	@XmlTransient
-	protected boolean mutualisable;					//il faut un adapteur pour le convertir de string à boolean
+	@Column(nullable=false)
+	protected boolean mutualisable;
 	
-	@XmlElement(name="type_ens")
+	protected String preRequis;
+	protected String preRequisOblig;
+	protected String preRequisObligHab;
 	protected String typeEns;
-	
-	@XmlElement(name="vol_autres")
+	protected int version;
 	protected int volAutres;
-	
-	@XmlElement(name="vol_global")
+	protected int volCM;
 	protected int volGlobal;
-	
-	@XmlElement(name="vol_travail")
+	protected int volTD;
+	protected int volTP;
 	protected int volTravail;
 	
 	@ManyToMany
     @JoinTable(name="enseignement_responsable",
     	joinColumns=@JoinColumn(name="code_enseignement"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
-	@XmlTransient
-    protected Collection<Personne> responsables;	//il faut le faire
+    protected Collection<Personne> responsables;
 	
 	public Enseignement() {}
 
 	public Enseignement(String code, String nom, int nbCredits,
 			boolean publiable, boolean contenuValide, boolean structureValide,
 			int nbErreurs, List<ElemStruct> elementsFils, String apogee,
-			int capacite, String competences, String competencesHab,
-			Date dateModification, int dureeStage, String etatRof,
-			String langue, String mcc, String preRequis, String preRequisHab,
-			String preRequisOblig, String preRequisObligHab, int volCM,
-			int volTD, int volTP, int version, String bibliographie,
-			String capitalisation, String coefficient, String contenu,
-			String contenuHab, String discipline, String modalitesOrganisation,
-			boolean mutualisable, String typeEns, int volAutres, int volGlobal,
+			String bibliographie, int capacite, String capitalisation,
+			String coefficient, String competences, String competencesHab,
+			String contenu, String contenuHab, Date dateModification,
+			String discipline, int dureeStage, String etatRof, String langue,
+			String mcc, String mccHab, String modalitesOrganisation,
+			boolean mutualisable, String preRequis, String preRequisOblig,
+			String preRequisObligHab, String typeEns, int version,
+			int volAutres, int volCM, int volGlobal, int volTD, int volTP,
 			int volTravail, Collection<Personne> responsables) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
-				nbErreurs, elementsFils, apogee, capacite, competences,
-				competencesHab, dateModification, dureeStage, etatRof, langue,
-				mcc, preRequis, preRequisHab, preRequisOblig,
-				preRequisObligHab, volCM, volTD, volTP, version);
+				nbErreurs, elementsFils);
+		this.apogee = apogee;
 		this.bibliographie = bibliographie;
+		this.capacite = capacite;
 		this.capitalisation = capitalisation;
 		this.coefficient = coefficient;
+		this.competences = competences;
+		this.competencesHab = competencesHab;
 		this.contenu = contenu;
 		this.contenuHab = contenuHab;
+		this.dateModification = dateModification;
 		this.discipline = discipline;
+		this.dureeStage = dureeStage;
+		this.etatRof = etatRof;
+		this.langue = langue;
+		this.mcc = mcc;
+		this.mccHab = mccHab;
 		this.modalitesOrganisation = modalitesOrganisation;
 		this.mutualisable = mutualisable;
+		this.preRequis = preRequis;
+		this.preRequisOblig = preRequisOblig;
+		this.preRequisObligHab = preRequisObligHab;
 		this.typeEns = typeEns;
+		this.version = version;
 		this.volAutres = volAutres;
+		this.volCM = volCM;
 		this.volGlobal = volGlobal;
+		this.volTD = volTD;
+		this.volTP = volTP;
 		this.volTravail = volTravail;
 		this.responsables = responsables;
 	}
 
+	public String getApogee() {
+		return apogee;
+	}
 
+	public void setApogee(String apogee) {
+		this.apogee = apogee;
+	}
 
 	public String getBibliographie() {
 		return bibliographie;
@@ -105,6 +120,14 @@ public class Enseignement extends Formation implements Mutualisable {
 
 	public void setBibliographie(String bibliographie) {
 		this.bibliographie = bibliographie;
+	}
+
+	public int getCapacite() {
+		return capacite;
+	}
+
+	public void setCapacite(int capacite) {
+		this.capacite = capacite;
 	}
 
 	public String getCapitalisation() {
@@ -123,6 +146,22 @@ public class Enseignement extends Formation implements Mutualisable {
 		this.coefficient = coefficient;
 	}
 
+	public String getCompetences() {
+		return competences;
+	}
+
+	public void setCompetences(String competences) {
+		this.competences = competences;
+	}
+
+	public String getCompetencesHab() {
+		return competencesHab;
+	}
+
+	public void setCompetencesHab(String competencesHab) {
+		this.competencesHab = competencesHab;
+	}
+
 	public String getContenu() {
 		return contenu;
 	}
@@ -139,12 +178,60 @@ public class Enseignement extends Formation implements Mutualisable {
 		this.contenuHab = contenuHab;
 	}
 
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
+	}
+
 	public String getDiscipline() {
 		return discipline;
 	}
 
 	public void setDiscipline(String discipline) {
 		this.discipline = discipline;
+	}
+
+	public int getDureeStage() {
+		return dureeStage;
+	}
+
+	public void setDureeStage(int dureeStage) {
+		this.dureeStage = dureeStage;
+	}
+
+	public String getEtatRof() {
+		return etatRof;
+	}
+
+	public void setEtatRof(String etatRof) {
+		this.etatRof = etatRof;
+	}
+
+	public String getLangue() {
+		return langue;
+	}
+
+	public void setLangue(String langue) {
+		this.langue = langue;
+	}
+
+	public String getMcc() {
+		return mcc;
+	}
+
+	public void setMcc(String mcc) {
+		this.mcc = mcc;
+	}
+
+	public String getMccHab() {
+		return mccHab;
+	}
+
+	public void setMccHab(String mccHab) {
+		this.mccHab = mccHab;
 	}
 
 	public String getModalitesOrganisation() {
@@ -159,12 +246,48 @@ public class Enseignement extends Formation implements Mutualisable {
 		return mutualisable;
 	}
 
+	public void setMutualisable(boolean mutualisable) {
+		this.mutualisable = mutualisable;
+	}
+
+	public String getPreRequis() {
+		return preRequis;
+	}
+
+	public void setPreRequis(String preRequis) {
+		this.preRequis = preRequis;
+	}
+
+	public String getPreRequisOblig() {
+		return preRequisOblig;
+	}
+
+	public void setPreRequisOblig(String preRequisOblig) {
+		this.preRequisOblig = preRequisOblig;
+	}
+
+	public String getPreRequisObligHab() {
+		return preRequisObligHab;
+	}
+
+	public void setPreRequisObligHab(String preRequisObligHab) {
+		this.preRequisObligHab = preRequisObligHab;
+	}
+
 	public String getTypeEns() {
 		return typeEns;
 	}
 
 	public void setTypeEns(String typeEns) {
 		this.typeEns = typeEns;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public int getVolAutres() {
@@ -175,12 +298,36 @@ public class Enseignement extends Formation implements Mutualisable {
 		this.volAutres = volAutres;
 	}
 
+	public int getVolCM() {
+		return volCM;
+	}
+
+	public void setVolCM(int volCM) {
+		this.volCM = volCM;
+	}
+
 	public int getVolGlobal() {
 		return volGlobal;
 	}
 
 	public void setVolGlobal(int volGlobal) {
 		this.volGlobal = volGlobal;
+	}
+
+	public int getVolTD() {
+		return volTD;
+	}
+
+	public void setVolTD(int volTD) {
+		this.volTD = volTD;
+	}
+
+	public int getVolTP() {
+		return volTP;
+	}
+
+	public void setVolTP(int volTP) {
+		this.volTP = volTP;
 	}
 
 	public int getVolTravail() {
@@ -199,14 +346,5 @@ public class Enseignement extends Formation implements Mutualisable {
 		this.responsables = responsables;
 	}
 	
-	@Override
-	public boolean getMutualisable() {
-		return this.mutualisable;
-	}
-
-	@Override
-	public void setMutualisable(boolean mutualisable)
-	{
-		this.mutualisable = mutualisable;
-	}
+	
 }

@@ -2,13 +2,9 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import gof.dao.EnseignementDao;
-import gof.model.ElemStruct;
+
 import gof.model.Enseignement;
-import gof.model.Personne;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +23,7 @@ public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContex
 	
 	@Test
 	public void findAllEnseignementsTest(){
-		assertEquals(2, enseignementDao.findAllEnseignements().size()); // L'enseignement + l'UECat = 2
+		assertEquals(1, enseignementDao.findAllEnseignements().size());
 	}
 
 	@Test
@@ -37,19 +33,28 @@ public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContex
 
 	@Test
 	public void saveEnseignementTest(){
-		Enseignement enseignement = new Enseignement(
-				"ENS02", "ENSEIGNEMENT 02", 30, 
-				true, true, true, 
-				0, new ArrayList<ElemStruct>(), "apogee", 
-				10, "competences", "competencesHab", 
-				new Date(), 6, "etatRof", 
-				"langue", "mcc", "preRequis", "preRequisHab", 
-				"preRequisOblig", "preRequisObligHab", 10, 
-				10, 11, 0, "bibliographie", 
-				"capitalisation", "coefficient", "contenu", 
-				"contenuHab", "discipline", "modalitesOrganisation", 
-				false, "typeEns", 10, 20, 
-				42, new ArrayList<Personne>());
+		Enseignement enseignement = new Enseignement();
+		
+		enseignement.setCode("ENS02");
+		enseignement.setNom("ENSEIGNEMENT 02");
+		
+		enseignement.setContenuValide(true);
+		enseignement.setStructureValide(true);
+		enseignement.setNbCredits(0);
+		enseignement.setNbErreurs(0);
+		enseignement.setPubliable(true);
+		
+		enseignement.setCapacite(0);
+		enseignement.setDureeStage(0);
+		enseignement.setVolAutres(0);
+		enseignement.setVolCM(0);
+		enseignement.setVolGlobal(0);
+		enseignement.setVolTD(0);
+		enseignement.setVolTP(0);
+		enseignement.setVolTravail(0);
+		enseignement.setVersion(0);
+		enseignement.setMutualisable(true);
+		
 		enseignementDao.saveEnseignement(enseignement);
 		assertEquals("ENSEIGNEMENT 02", enseignementDao.findEnseignement("ENS02").getNom());
 	}
@@ -57,6 +62,6 @@ public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContex
 	@Test
 	public void deleteEnseignementTest(){
 		enseignementDao.deleteEnseignement(enseignementDao.findEnseignement("ENS01"));
-		assertEquals(1, enseignementDao.findAllEnseignements().size());
+		assertEquals(0, enseignementDao.findAllEnseignements().size());
 	}
 }
