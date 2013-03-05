@@ -26,7 +26,7 @@ public class Mention implements Serializable {
 	private String nomCourt;
 	
 	@Enumerated(EnumType.STRING)
-	private TypeDiplome typeDiplome;
+	private TypeMention typeMention;
 	
     @OneToMany
     @JoinColumn(name="code_mention")
@@ -115,6 +115,7 @@ public class Mention implements Serializable {
 	private Collection<Domaine> domaines;
     
 	private String secteurPro;
+	private String typeDiplome;
 	private String validiteCompetences;
 	private int version;
 	private String web;
@@ -130,8 +131,8 @@ public class Mention implements Serializable {
 	public Mention() {}
 
 	public Mention(String code, String nom, String nomCourt,
-			TypeDiplome typeDiplome, Collection<MotCle> motsCles,
-			int droits, Collection<Personne> responsables,
+			TypeMention typeMention, Collection<MotCle> motsCles, int droits,
+			Collection<Personne> responsables,
 			Collection<Specialite> specialites,
 			Collection<Programme> programmes,
 			Collection<Composante> composantes, String adaptation,
@@ -155,14 +156,14 @@ public class Mention implements Serializable {
 			String posOffreRegion, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
 			String publicHab, Collection<Domaine> domaines, String secteurPro,
-			String validiteCompetences, int version, String web,
-			boolean publiable, boolean contenuValide, boolean structureValide,
-			int nbErreurs) {
+			String typeDiplome, String validiteCompetences, int version,
+			String web, boolean publiable, boolean contenuValide,
+			boolean structureValide, int nbErreurs) {
 		super();
 		this.code = code;
 		this.nom = nom;
 		this.nomCourt = nomCourt;
-		this.typeDiplome = typeDiplome;
+		this.typeMention = typeMention;
 		this.motsCles = motsCles;
 		this.droits = droits;
 		this.responsables = responsables;
@@ -224,6 +225,7 @@ public class Mention implements Serializable {
 		this.publicHab = publicHab;
 		this.domaines = domaines;
 		this.secteurPro = secteurPro;
+		this.typeDiplome = typeDiplome;
 		this.validiteCompetences = validiteCompetences;
 		this.version = version;
 		this.web = web;
@@ -257,12 +259,12 @@ public class Mention implements Serializable {
 		this.nomCourt = nomCourt;
 	}
 
-	public TypeDiplome getTypeDiplome() {
-		return typeDiplome;
+	public TypeMention getTypeMention() {
+		return typeMention;
 	}
 
-	public void setTypeDiplome(TypeDiplome typeDiplome) {
-		this.typeDiplome = typeDiplome;
+	public void setTypeMention(TypeMention typeMention) {
+		this.typeMention = typeMention;
 	}
 
 	public Collection<MotCle> getMotsCles() {
@@ -751,6 +753,14 @@ public class Mention implements Serializable {
 
 	public void setSecteurPro(String secteurPro) {
 		this.secteurPro = secteurPro;
+	}
+
+	public String getTypeDiplome() {
+		return typeDiplome;
+	}
+
+	public void setTypeDiplome(String typeDiplome) {
+		this.typeDiplome = typeDiplome;
 	}
 
 	public String getValiditeCompetences() {

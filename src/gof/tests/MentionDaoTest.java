@@ -35,7 +35,8 @@ public class MentionDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		Mention mention = new Mention();
 
 		mention.setCode("MENT02");
-		mention.setNom("MASTER 2 INFO");		
+		mention.setNom("MASTER 2 INFO");
+		mention.setDroits(123);
 		mention.setContenuValide(true);
 		mention.setStructureValide(true);
 		mention.setNbCredits(0);
