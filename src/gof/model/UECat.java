@@ -50,8 +50,8 @@ public class UECat extends ElemStruct {
 	protected int volTravail;
 	
 	@ManyToMany
-    @JoinTable(name="programme_responsable",
-    	joinColumns=@JoinColumn(name="code_programme"),
+    @JoinTable(name="uecat_responsable",
+    	joinColumns=@JoinColumn(name="code_uecat"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
     protected Collection<Personne> responsables;
 	
