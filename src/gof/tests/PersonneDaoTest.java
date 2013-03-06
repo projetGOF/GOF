@@ -2,8 +2,6 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import gof.dao.PersonneDao;
 import gof.model.Personne;
 import gof.model.Statut;
@@ -42,9 +40,13 @@ public class PersonneDaoTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Test
 	public void savePersonneTest(){
 		
-		Personne personneToSave = new Personne("PER03","3","testNom3","testPrenom3","testTel3","testMail3","testPasswd3",new ArrayList<Statut>());
-		personneDao.savePersonne(personneToSave);
-		assertEquals(personneToSave.getIdext(),personneDao.findPersonneByIdExt("3").getIdext());
+		Personne personne = new Personne();
+		
+		personne.setCode("PER03");
+		personne.setIdext("3");
+		
+		personneDao.savePersonne(personne);
+		assertEquals(personne.getIdext(),personneDao.findPersonneByIdExt("3").getIdext());
 	}
 	
 	@Test

@@ -11,6 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
 
 @SuppressWarnings("serial")
 @Entity(name="element")
@@ -35,6 +36,7 @@ public abstract class ElemStruct implements Serializable {
 	protected int nbErreurs;
 	
 	@ManyToMany
+	@OrderColumn(name = "rang")
     @JoinTable(name="element_fils",
     	joinColumns=@JoinColumn(name="code_pere"),
     	inverseJoinColumns=@JoinColumn(name="code_fils"))

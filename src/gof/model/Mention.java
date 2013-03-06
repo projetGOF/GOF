@@ -1,7 +1,7 @@
 package gof.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +32,7 @@ public class Mention implements Serializable {
     @JoinTable(name="mention_motcle",
     	joinColumns=@JoinColumn(name="code_mention"),
     	inverseJoinColumns=@JoinColumn(name="motcle"))
-	private Collection<MotCle> motsCles;
+	private Set<MotCle> motsCles;
     
 	private int droits;
 	
@@ -40,21 +40,21 @@ public class Mention implements Serializable {
     @JoinTable(name="mention_responsable",
     	joinColumns=@JoinColumn(name="code_mention"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
-	private Collection<Personne> responsables;
+	private Set<Personne> responsables;
     
     @OneToMany
     @JoinColumn(name="code_mention")
-	private Collection<Specialite> specialites;
+	private Set<Specialite> specialites;
 	
     @OneToMany
     @JoinColumn(name="code_mention")
-	private Collection<Programme> programmes;
+	private Set<Programme> programmes;
 	
     @ManyToMany
     @JoinTable(name="mention_composante",
     	joinColumns=@JoinColumn(name="code_mention"),
     	inverseJoinColumns=@JoinColumn(name="code_composante"))
-	private Collection<Composante> composantes;
+	private Set<Composante> composantes;
     
 	private String adaptation;
 	private String adaptationHab;
@@ -114,7 +114,7 @@ public class Mention implements Serializable {
     @JoinTable(name="mention_domaine",
     	joinColumns=@JoinColumn(name="code_mention"),
     	inverseJoinColumns=@JoinColumn(name="code_domaine"))
-	private Collection<Domaine> domaines;
+	private Set<Domaine> domaines;
     
 	private String secteurPro;
 	private String typeDiplome;
@@ -133,11 +133,11 @@ public class Mention implements Serializable {
 	public Mention() {}
 
 	public Mention(String code, String nom, String nomCourt,
-			TypeMention typeMention, Collection<MotCle> motsCles, int droits,
-			Collection<Personne> responsables,
-			Collection<Specialite> specialites,
-			Collection<Programme> programmes,
-			Collection<Composante> composantes, String adaptation,
+			TypeMention typeMention, Set<MotCle> motsCles, int droits,
+			Set<Personne> responsables,
+			Set<Specialite> specialites,
+			Set<Programme> programmes,
+			Set<Composante> composantes, String adaptation,
 			String adaptationHab, String adosPro, String adosRecherche,
 			String aideInsPro, String aideInsProHab, String aideOrientation,
 			String aideOrientationHab, String aideReussite,
@@ -157,7 +157,7 @@ public class Mention implements Serializable {
 			String pilotage, String politiqueStages, String posOffreEtablis,
 			String posOffreRegion, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
-			String publicHab, Collection<Domaine> domaines, String secteurPro,
+			String publicHab, Set<Domaine> domaines, String secteurPro,
 			String typeDiplome, String validiteCompetences, int version,
 			String web, boolean publiable, boolean contenuValide,
 			boolean structureValide, int nbErreurs) {
@@ -269,11 +269,11 @@ public class Mention implements Serializable {
 		this.typeMention = typeMention;
 	}
 
-	public Collection<MotCle> getMotsCles() {
+	public Set<MotCle> getMotsCles() {
 		return motsCles;
 	}
 
-	public void setMotsCles(Collection<MotCle> motsCles) {
+	public void setMotsCles(Set<MotCle> motsCles) {
 		this.motsCles = motsCles;
 	}
 
@@ -285,35 +285,35 @@ public class Mention implements Serializable {
 		this.droits = droits;
 	}
 
-	public Collection<Personne> getResponsables() {
+	public Set<Personne> getResponsables() {
 		return responsables;
 	}
 
-	public void setResponsables(Collection<Personne> responsables) {
+	public void setResponsables(Set<Personne> responsables) {
 		this.responsables = responsables;
 	}
 
-	public Collection<Specialite> getSpecialites() {
+	public Set<Specialite> getSpecialites() {
 		return specialites;
 	}
 
-	public void setSpecialites(Collection<Specialite> specialites) {
+	public void setSpecialites(Set<Specialite> specialites) {
 		this.specialites = specialites;
 	}
 
-	public Collection<Programme> getProgrammes() {
+	public Set<Programme> getProgrammes() {
 		return programmes;
 	}
 
-	public void setProgrammes(Collection<Programme> programmes) {
+	public void setProgrammes(Set<Programme> programmes) {
 		this.programmes = programmes;
 	}
 
-	public Collection<Composante> getComposantes() {
+	public Set<Composante> getComposantes() {
 		return composantes;
 	}
 
-	public void setComposantes(Collection<Composante> composantes) {
+	public void setComposantes(Set<Composante> composantes) {
 		this.composantes = composantes;
 	}
 
@@ -741,11 +741,11 @@ public class Mention implements Serializable {
 		this.publicHab = publicHab;
 	}
 
-	public Collection<Domaine> getDomaines() {
+	public Set<Domaine> getDomaines() {
 		return domaines;
 	}
 
-	public void setDomaines(Collection<Domaine> domaines) {
+	public void setDomaines(Set<Domaine> domaines) {
 		this.domaines = domaines;
 	}
 

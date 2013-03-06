@@ -2,14 +2,9 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import gof.dao.MentionDao;
 import gof.dao.SpecialiteDao;
 
-import gof.model.Personne;
-import gof.model.Programme;
 import gof.model.Specialite;
 
 import org.junit.Test;
@@ -42,28 +37,15 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 
 	@Test
 	public void saveSpecialiteTest(){
-		Specialite specialite = new Specialite(
-				"SPE02", "SPECIALITE 02", "nomCourt", 
-				"identificateur", new ArrayList<Personne>(), 
-				new ArrayList<Programme>(), "aideInsPro", 
-				"aideInsProHab", "aideOrientation", 
-				"aideOrientationHab", "aideReussite", 
-				"aideReussiteHab", "aspectsFormatContinue", 
-				"aspectsFormatPro", "aspectsFormatRecherche", 
-				"competencesHab", "conditionsAdmission", 
-				"conditionsAdmissionHab", "connaissances", 
-				"connaissancesHab", "contenusEnseignement", 
-				new Date(), "debouches", "debouchesHab", 
-				"equipePedago", "etatRof", "finalite", 
-				"indicateurs", "international", "internationalHab", 
-				"liensAutresCertif", "mcc", "mccHab", 
-				"mesuresPrises", "modalitesPedagoHab", 
-				"mutualisation", "orgPedago", "orgPedagoHab", 
-				"pilotage", "politiqueStages", "poursuiteEtudes", 
-				"poursuiteEtudesHab", "previsions", "publique", 
-				"publiqueHab", "validiteCompetences", 0, 
-				true, true, true, 
-				0);
+		Specialite specialite = new Specialite();
+		
+		specialite.setCode("SPE02");
+		specialite.setNom("SPECIALITE 02");
+		specialite.setContenuValide(true);
+		specialite.setStructureValide(true);
+		specialite.setNbErreurs(0);
+		specialite.setPubliable(true);
+		specialite.setVersion(0);
 		
 		specialiteDao.saveSpecialite(specialite);
 		

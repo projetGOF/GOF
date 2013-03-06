@@ -2,7 +2,7 @@ package gof.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,13 +29,13 @@ public class Specialite implements Serializable {
     @JoinTable(name="specialite_responsable",
     	joinColumns=@JoinColumn(name="code_specialite"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
-	private Collection<Personne> responsables;
+	private Set<Personne> responsables;
     
     @ManyToMany
     @JoinTable(name="specialite_programme",
     	joinColumns=@JoinColumn(name="code_specialite"),
     	inverseJoinColumns=@JoinColumn(name="code_programme"))
-	private Collection<Programme> programmes;
+	private Set<Programme> programmes;
     
 	private String aideInsPro;
 	private String aideInsProHab;
@@ -94,8 +94,8 @@ public class Specialite implements Serializable {
 	public Specialite() {}
 
 	public Specialite(String code, String nom, String nomCourt,
-			String identificateur, Collection<Personne> responsables,
-			Collection<Programme> programmes, String aideInsPro,
+			String identificateur, Set<Personne> responsables,
+			Set<Programme> programmes, String aideInsPro,
 			String aideInsProHab, String aideOrientation,
 			String aideOrientationHab, String aideReussite,
 			String aideReussiteHab, String aspectsFormatContinue,
@@ -200,19 +200,19 @@ public class Specialite implements Serializable {
 		this.identificateur = identificateur;
 	}
 
-	public Collection<Personne> getResponsables() {
+	public Set<Personne> getResponsables() {
 		return responsables;
 	}
 
-	public void setResponsables(Collection<Personne> responsables) {
+	public void setResponsables(Set<Personne> responsables) {
 		this.responsables = responsables;
 	}
 
-	public Collection<Programme> getProgrammes() {
+	public Set<Programme> getProgrammes() {
 		return programmes;
 	}
 
-	public void setProgrammes(Collection<Programme> programmes) {
+	public void setProgrammes(Set<Programme> programmes) {
 		this.programmes = programmes;
 	}
 

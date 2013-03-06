@@ -1,6 +1,6 @@
 package gof.model;
 
-import java.util.Collection;
+import java.util.Set;
 import java.util.Date;
 import java.util.List;
 
@@ -64,15 +64,15 @@ public class Programme extends ElemStruct {
     @JoinTable(name="programme_responsable",
     	joinColumns=@JoinColumn(name="code_programme"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
-    protected Collection<Personne> responsables;
+    protected Set<Personne> responsables;
     
     @OneToMany
     @JoinColumn(name="code_programme_rattache")
-    protected Collection<ComposantProgramme> composantsProgrammeRattaches;
+    protected Set<ComposantProgramme> composantsProgrammeRattaches;
     
     @OneToMany
     @JoinColumn(name="code_programme_rattache")
-    protected Collection<Enseignement> enseignementsRattaches;
+    protected Set<Enseignement> enseignementsRattaches;
     
     public Programme() {}
 
@@ -90,9 +90,9 @@ public class Programme extends ElemStruct {
 			String rome2, String rome3, String rome4, String rome5,
 			String specialite1, String specialite2, String specialite3,
 			boolean troncCommun, int version, int volCM, int volTD, int volTP,
-			String web, Collection<Personne> responsables,
-			Collection<ComposantProgramme> composantsProgrammeRattaches,
-			Collection<Enseignement> enseignementsRattaches) {
+			String web, Set<Personne> responsables,
+			Set<ComposantProgramme> composantsProgrammeRattaches,
+			Set<Enseignement> enseignementsRattaches) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
 				nbErreurs, elementsFils);
 		this.identificateur = identificateur;
@@ -442,29 +442,29 @@ public class Programme extends ElemStruct {
 		this.web = web;
 	}
 
-	public Collection<Personne> getResponsables() {
+	public Set<Personne> getResponsables() {
 		return responsables;
 	}
 
-	public void setResponsables(Collection<Personne> responsables) {
+	public void setResponsables(Set<Personne> responsables) {
 		this.responsables = responsables;
 	}
 
-	public Collection<ComposantProgramme> getComposantsProgrammeRattaches() {
+	public Set<ComposantProgramme> getComposantsProgrammeRattaches() {
 		return composantsProgrammeRattaches;
 	}
 
 	public void setComposantsProgrammeRattaches(
-			Collection<ComposantProgramme> composantsProgrammeRattaches) {
+			Set<ComposantProgramme> composantsProgrammeRattaches) {
 		this.composantsProgrammeRattaches = composantsProgrammeRattaches;
 	}
 
-	public Collection<Enseignement> getEnseignementsRattaches() {
+	public Set<Enseignement> getEnseignementsRattaches() {
 		return enseignementsRattaches;
 	}
 
 	public void setEnseignementsRattaches(
-			Collection<Enseignement> enseignementsRattaches) {
+			Set<Enseignement> enseignementsRattaches) {
 		this.enseignementsRattaches = enseignementsRattaches;
 	}
 

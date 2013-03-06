@@ -1,6 +1,6 @@
 package gof.model;
 
-import java.util.Collection;
+import java.util.Set;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class Enseignement extends ElemStruct {
     @JoinTable(name="enseignement_responsable",
     	joinColumns=@JoinColumn(name="code_enseignement"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
-    protected Collection<Personne> responsables;
+    protected Set<Personne> responsables;
 	
 	public Enseignement() {}
 
@@ -71,7 +71,7 @@ public class Enseignement extends ElemStruct {
 			boolean mutualisable, String preRequis, String preRequisOblig,
 			String preRequisObligHab, String typeEns, int version,
 			int volAutres, int volCM, int volGlobal, int volTD, int volTP,
-			int volTravail, Collection<Personne> responsables) {
+			int volTravail, Set<Personne> responsables) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
 				nbErreurs, elementsFils);
 		this.apogee = apogee;
@@ -338,11 +338,11 @@ public class Enseignement extends ElemStruct {
 		this.volTravail = volTravail;
 	}
 
-	public Collection<Personne> getResponsables() {
+	public Set<Personne> getResponsables() {
 		return responsables;
 	}
 
-	public void setResponsables(Collection<Personne> responsables) {
+	public void setResponsables(Set<Personne> responsables) {
 		this.responsables = responsables;
 	}
 	

@@ -1,7 +1,7 @@
 package gof.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -11,53 +11,33 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @SuppressWarnings("serial")
 @Entity(name="personne")
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Personne implements Serializable {
 	
 	@Id
-	@XmlAttribute(name="code")
 	private String code;
 	
 	@Column(unique=true)
-	@XmlElement(name="idext")
 	private String idext;
-	
-	@XmlElement(name="nom")
+
 	private String nom;
-	
-	@XmlElement(name="prenom")
 	private String prenom;
-	
-	@XmlElement(name="telephone")
 	private String telephone;
-	
-	@XmlElement(name="mail")
 	private String mail;
-	
-	@XmlTransient
 	private String password;
 	
 	@ElementCollection
 	@CollectionTable(name="personne_statut",
 			joinColumns=@JoinColumn(name="code_personne"))
 	@Enumerated(EnumType.STRING)
-	@XmlTransient
-	private Collection<Statut> statuts;
+	private Set<Statut> statuts;
 	
 	public Personne(){}
 
 	public Personne(String code, String idext, String nom, String prenom,
-			String telephone, String mail, String password, Collection<Statut> statuts) {
+			String telephone, String mail, String password, Set<Statut> statuts) {
 		super();
 		this.code = code;
 		this.idext = idext;
@@ -125,11 +105,11 @@ public class Personne implements Serializable {
 		this.password = password;
 	}
 	
-	public Collection<Statut> getStatuts() {
+	public Set<Statut> getStatuts() {
 		return statuts;
 	}
 
-	public void setStatuts(Collection<Statut> statuts) {
+	public void setStatuts(Set<Statut> statuts) {
 		this.statuts = statuts;
 	}
 

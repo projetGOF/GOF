@@ -1,6 +1,6 @@
 package gof.model;
 
-import java.util.Collection;
+import java.util.Set;
 import java.util.Date;
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class UECat extends ElemStruct {
     @JoinTable(name="uecat_responsable",
     	joinColumns=@JoinColumn(name="code_uecat"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
-    protected Collection<Personne> responsables;
+    protected Set<Personne> responsables;
 	
 	public UECat() {}
 
@@ -67,7 +67,7 @@ public class UECat extends ElemStruct {
 			String mccHab, boolean miseEnService, String modalitesOrganisation,
 			String preRequis, String preRequisOblig, String preRequisObligHab,
 			int version, int volAutres, int volCM, int volGlobal, int volTD,
-			int volTP, int volTravail, Collection<Personne> responsables) {
+			int volTP, int volTravail, Set<Personne> responsables) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
 				nbErreurs, elementsFils);
 		this.apogee = apogee;
@@ -325,11 +325,11 @@ public class UECat extends ElemStruct {
 		this.volTravail = volTravail;
 	}
 
-	public Collection<Personne> getResponsables() {
+	public Set<Personne> getResponsables() {
 		return responsables;
 	}
 
-	public void setResponsables(Collection<Personne> responsables) {
+	public void setResponsables(Set<Personne> responsables) {
 		this.responsables = responsables;
 	}
 
