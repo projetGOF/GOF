@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.UniqueConstraint;
 
 @SuppressWarnings("serial")
 @Entity(name="personne")
@@ -30,8 +31,10 @@ public class Personne implements Serializable {
 	
 	@ElementCollection
 	@CollectionTable(name="personne_statut",
-			joinColumns=@JoinColumn(name="code_personne"))
+			joinColumns=@JoinColumn(name="code_personne"),
+			uniqueConstraints= @UniqueConstraint(columnNames={"code_personne","statut"}))
 	@Enumerated(EnumType.STRING)
+	@Column(name="statut")
 	private Set<Statut> statuts;
 	
 	public Personne(){}
