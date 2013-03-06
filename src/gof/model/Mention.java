@@ -28,8 +28,10 @@ public class Mention implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TypeMention typeMention;
 	
-    @OneToMany
-    @JoinColumn(name="code_mention")
+    @ManyToMany
+    @JoinTable(name="mention_motcle",
+    	joinColumns=@JoinColumn(name="code_mention"),
+    	inverseJoinColumns=@JoinColumn(name="motcle"))
 	private Collection<MotCle> motsCles;
     
 	private int droits;

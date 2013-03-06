@@ -2,6 +2,7 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
+import gof.dao.MentionDao;
 import gof.dao.MotCleDao;
 import gof.model.MotCle;
 
@@ -19,6 +20,9 @@ public class MotCleDaoTest extends AbstractTransactionalJUnit4SpringContextTests
 
 	@Autowired
 	private MotCleDao motCleDao;
+	
+	@Autowired
+	private MentionDao mentionDao;
 	
 	@Test
 	public void findAllMotsClesTest(){
@@ -39,6 +43,7 @@ public class MotCleDaoTest extends AbstractTransactionalJUnit4SpringContextTests
 
 	@Test
 	public void deleteMotCleTest(){
+		mentionDao.findMention("MENT01").getMotsCles().remove(motCleDao.findMotCle("MOTCLE1"));
 		motCleDao.deleteMotCle(motCleDao.findMotCle("MOTCLE1"));
 		assertEquals(1,motCleDao.findAllMotsCles().size());
 	}

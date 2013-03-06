@@ -13,8 +13,11 @@ INSERT INTO domaine VALUES('DOM2','NOM2');
 
 INSERT INTO mention (code, nom, typeMention, droits, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES('MENT01', 'MASTER 1 INFO', 'MASTER', 666, 1, 1, 1, 0, 42, 1);
 
-INSERT INTO motcle VALUES('MOTCLE1', 'MENT01');
-INSERT INTO motcle VALUES('MOTCLE2', 'MENT01');
+INSERT INTO motcle VALUES('MOTCLE1');
+INSERT INTO motcle VALUES('MOTCLE2');
+
+INSERT INTO mention_motcle VALUES('MENT01', 'MOTCLE1');
+INSERT INTO mention_motcle VALUES('MENT01', 'MOTCLE2');
 
 INSERT INTO mention_composante VALUES ('MENT01', 'COMPO01');
 INSERT INTO mention_composante VALUES ('MENT01', 'COMPO02');
