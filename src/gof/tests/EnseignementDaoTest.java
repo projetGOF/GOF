@@ -44,6 +44,7 @@ public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContex
 		enseignement.setNbErreurs(0);
 		enseignement.setPubliable(true);
 		
+		enseignement.setLangue(0);
 		enseignement.setCapacite(0);
 		enseignement.setDureeStage(0);
 		enseignement.setVolAutres(0);

@@ -18,31 +18,46 @@ import javax.persistence.TemporalType;
 public class Programme extends ElemStruct {
 	
 	protected String identificateur;
+	@Column(length = 2000)
 	protected String apogee;
+	@Column(length = 2000)
 	protected String aspectsFormatRecherche;
 	protected int capacite;
+	@Column(length = 2000)
 	protected String competences;
 	
 	@Temporal(TemporalType.DATE)
 	protected Date dateModification;
 	
 	protected int dureeStage;
+	@Column(length = 2000)
 	protected String ensDelocalisees;
+	@Column(length = 2000)
 	protected String ensDelocaliseesHab;
 	protected String etatRof;
+	@Column(length = 2000)
 	protected String infosDiverses;
-	protected String langue;
+	protected int langue;
+	@Column(length = 2000)
 	protected String mcc;
+	@Column(length = 2000)
 	protected String modalitesInscription;
+	@Column(length = 2000)
 	protected String modalitesPedagogique;
 	protected String nfs1;
 	protected String nfs2;
 	protected String nfs3;
+	@Column(length = 2000)
 	protected String objectifs;
+	@Column(length = 2000)
 	protected String politiqueStages;
+	@Column(length = 2000)
 	protected String preRequis;
+	@Column(length = 2000)
 	protected String preRequisHab;
+	@Column(length = 2000)
 	protected String preRequisOblig;
+	@Column(length = 2000)
 	protected String preRequisObligHab;
 	protected String rome1;
 	protected String rome2;
@@ -82,7 +97,7 @@ public class Programme extends ElemStruct {
 			String apogee, String aspectsFormatRecherche, int capacite,
 			String competences, Date dateModification, int dureeStage,
 			String ensDelocalisees, String ensDelocaliseesHab, String etatRof,
-			String infosDiverses, String langue, String mcc,
+			String infosDiverses, int langue, String mcc,
 			String modalitesInscription, String modalitesPedagogique,
 			String nfs1, String nfs2, String nfs3, String objectifs,
 			String politiqueStages, String preRequis, String preRequisHab,
@@ -226,11 +241,11 @@ public class Programme extends ElemStruct {
 		this.infosDiverses = infosDiverses;
 	}
 
-	public String getLangue() {
+	public int getLangue() {
 		return langue;
 	}
 
-	public void setLangue(String langue) {
+	public void setLangue(int langue) {
 		this.langue = langue;
 	}
 

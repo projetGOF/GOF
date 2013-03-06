@@ -54,6 +54,7 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 		programme.setVolCM(0);
 		programme.setVolTD(0);
 		programme.setVolTP(0);
+		programme.setLangue(0);
 		
 		programmeDao.saveProgramme(programme);
 		

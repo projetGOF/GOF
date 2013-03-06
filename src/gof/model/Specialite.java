@@ -37,48 +37,85 @@ public class Specialite implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_programme"))
 	private Set<Programme> programmes;
     
+    @Column(length = 2000)
 	private String aideInsPro;
+    @Column(length = 2000)
 	private String aideInsProHab;
+    @Column(length = 2000)
 	private String aideOrientation;
+    @Column(length = 2000)
 	private String aideOrientationHab;
+    @Column(length = 2000)
 	private String aideReussite;
+    @Column(length = 2000)
 	private String aideReussiteHab;
+    @Column(length = 2000)
 	private String aspectsFormatContinue;
+    @Column(length = 2000)
 	private String aspectsFormatPro;
+    @Column(length = 2000)
 	private String aspectsFormatRecherche;
+    @Column(length = 2000)
 	private String competencesHab;
+    @Column(length = 2000)
 	private String conditionsAdmission;
+    @Column(length = 2000)
 	private String conditionsAdmissionHab;
+    @Column(length = 2000)
 	private String connaissances;
+    @Column(length = 2000)
 	private String connaissancesHab;
+    @Column(length = 2000)
 	private String contenusEnseignement;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateModification;
 	
+	@Column(length = 2000)
 	private String debouches;
+	@Column(length = 2000)
 	private String debouchesHab;
+	@Column(length = 2000)
 	private String equipePedago;
 	private String etatRof;
+	@Column(length = 2000)
 	private String finalite;
 	private String indicateurs;
+	@Column(length = 2000)
 	private String international;
+	@Column(length = 2000)
 	private String internationalHab;
+	@Column(length = 2000)
 	private String liensAutresCertif;
+	@Column(length = 2000)
 	private String mcc;
+	@Column(length = 2000)
 	private String mccHab;
+	@Column(length = 2000)
 	private String mesuresPrises;
+	@Column(length = 2000)
 	private String modalitesPedagoHab;
+	@Column(length = 2000)
 	private String mutualisation;
+	@Column(length = 2000)
 	private String orgPedago;
+	@Column(length = 2000)
 	private String orgPedagoHab;
+	@Column(length = 2000)
 	private String pilotage;
+	@Column(length = 2000)
 	private String politiqueStages;
+	@Column(length = 2000)
 	private String poursuiteEtudes;
+	@Column(length = 2000)
 	private String poursuiteEtudesHab;
+	@Column(length = 2000)
 	private String previsions;
+	@Column(length = 2000)
 	private String publique;
+	@Column(length = 2000)
 	private String publiqueHab; 
+	@Column(length = 2000)
 	private String validiteCompetences;
 	private int version;
 	

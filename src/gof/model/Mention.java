@@ -1,6 +1,7 @@
 package gof.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @SuppressWarnings("serial")
 @Entity(name = "mention")
@@ -56,58 +59,105 @@ public class Mention implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_composante"))
 	private Set<Composante> composantes;
     
+    @Column(length = 2000)
 	private String adaptation;
+    @Column(length = 2000)
 	private String adaptationHab;
+	@Column(length = 2000)
 	private String adosPro;
+	@Column(length = 2000)
 	private String adosRecherche;
+	@Column(length = 2000)
 	private String aideInsPro;
+	@Column(length = 2000)
 	private String aideInsProHab;
+	@Column(length = 2000)
 	private String aideOrientation;
+	@Column(length = 2000)
 	private String aideOrientationHab;
+	@Column(length = 2000)
 	private String aideReussite;
+	@Column(length = 2000)
 	private String aideReussiteHab;
+	@Column(length = 2000)
 	private String articuAutresFormat;
+	@Column(length = 2000)
 	private String autoEvaluation;
 	private String codeDossier;
+	@Column(length = 2000)
 	private String cohabilitation;
+	@Column(length = 2000)
 	private String competences;
+	@Column(length = 2000)
 	private String competencesHab;
+	@Column(length = 2000)
 	private String conditionsAdmission;
+	@Column(length = 2000)
 	private String conditionsAdmissionHab;
+	@Column(length = 2000)
 	private String connaissances;
+	@Column(length = 2000)
 	private String connaissancesHab;
+	@Column(length = 2000)
 	private String contenusEnseignement;
+	@Column(length = 2000)
 	private String contexte;
+	@Column(length = 2000)
 	private String contexteHab;
-	private String dateModification;
+	@Temporal(TemporalType.DATE)
+	protected Date dateModification;
+	@Column(length = 2000)
 	private String debouches;
+	@Column(length = 2000)
 	private String debouchesHab;
+	@Column(length = 2000)
 	private String denominationNationale;
+	@Column(length = 2000)
 	private String equipePedago;
 	private String etatRof;
 	private String finalite;
 	private String identificateur;
 	private String indicateurs;
+	@Column(length = 2000)
 	private String international;
+	@Column(length = 2000)
 	private String internationalHab;
+	@Column(length = 2000)
 	private String mcc;
+	@Column(length = 2000)
 	private String mccHab;
+	@Column(length = 2000)
 	private String mesuresPrises;
+	@Column(length = 2000)
 	private String modalitesPedagoHab;
+	@Column(length = 2000)
 	private String modifications;
 	private int nbCredits;
+	@Column(length = 2000)
 	private String orgPedago;
+	@Column(length = 2000)
 	private String orgPedagoHab;
+	@Column(length = 2000)
 	private String partenaires;
+	@Column(length = 2000)
 	private String partenairesHab;
+	@Column(length = 2000)
 	private String pilotage;
+	@Column(length = 2000)
 	private String politiqueStages;
+	@Column(length = 2000)
 	private String posOffreEtablis;
+	@Column(length = 2000)
 	private String posOffreRegion;
+	@Column(length = 2000)
 	private String poursuiteEtudes;
+	@Column(length = 2000)
 	private String poursuiteEtudesHab;
+	@Column(length = 2000)
 	private String previsions;
+	@Column(length = 2000)
 	private String publique;
+	@Column(length = 2000)
 	private String publicHab;
 	
     @ManyToMany
@@ -147,7 +197,7 @@ public class Mention implements Serializable {
 			String conditionsAdmission, String conditionsAdmissionHab,
 			String connaissances, String connaissancesHab,
 			String contenusEnseignement, String contexte, String contexteHab,
-			String dateModification, String debouches, String debouchesHab,
+			Date dateModification, String debouches, String debouchesHab,
 			String denominationNationale, String equipePedago, String etatRof,
 			String finalite, String identificateur, String indicateurs,
 			String international, String internationalHab, String mcc,
@@ -501,11 +551,11 @@ public class Mention implements Serializable {
 		this.contexteHab = contexteHab;
 	}
 
-	public String getDateModification() {
+	public Date getDateModification() {
 		return dateModification;
 	}
 
-	public void setDateModification(String dateModification) {
+	public void setDateModification(Date dateModification) {
 		this.dateModification = dateModification;
 	}
 

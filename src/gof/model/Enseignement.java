@@ -16,32 +16,47 @@ import javax.persistence.TemporalType;
 @Entity(name="enseignement")
 public class Enseignement extends ElemStruct {
 
+	@Column(length = 2000)
 	protected String apogee;
+	@Column(length = 2000)
 	protected String bibliographie;
 	protected int capacite;
+	@Column(length = 2000)
 	protected String capitalisation;
+	@Column(length = 2000)
 	protected String coefficient;
+	@Column(length = 2000)
 	protected String competences;
+	@Column(length = 2000)
 	protected String competencesHab;
+	@Column(length = 2000)
 	protected String contenu;
+	@Column(length = 2000)
 	protected String contenuHab;
 	
 	@Temporal(TemporalType.DATE)
 	protected Date dateModification;
 	
+	@Column(length = 2000)
 	protected String discipline;
 	protected int dureeStage;
 	protected String etatRof;
-	protected String langue;
+	protected int langue;
+	@Column(length = 2000)
 	protected String mcc;
+	@Column(length = 2000)
 	protected String mccHab;
+	@Column(length = 2000)
 	protected String modalitesOrganisation;
 	
 	@Column(nullable=false)
 	protected boolean mutualisable;
 	
+	@Column(length = 2000)
 	protected String preRequis;
+	@Column(length = 2000)
 	protected String preRequisOblig;
+	@Column(length = 2000)
 	protected String preRequisObligHab;
 	protected String typeEns;
 	protected int version;
@@ -66,7 +81,7 @@ public class Enseignement extends ElemStruct {
 			String bibliographie, int capacite, String capitalisation,
 			String coefficient, String competences, String competencesHab,
 			String contenu, String contenuHab, Date dateModification,
-			String discipline, int dureeStage, String etatRof, String langue,
+			String discipline, int dureeStage, String etatRof, int langue,
 			String mcc, String mccHab, String modalitesOrganisation,
 			boolean mutualisable, String preRequis, String preRequisOblig,
 			String preRequisObligHab, String typeEns, int version,
@@ -210,11 +225,11 @@ public class Enseignement extends ElemStruct {
 		this.etatRof = etatRof;
 	}
 
-	public String getLangue() {
+	public int getLangue() {
 		return langue;
 	}
 
-	public void setLangue(String langue) {
+	public void setLangue(int langue) {
 		this.langue = langue;
 	}
 
