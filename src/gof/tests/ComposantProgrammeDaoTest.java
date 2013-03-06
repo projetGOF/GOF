@@ -2,11 +2,9 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import gof.dao.ComposantProgrammeDao;
 import gof.model.ComposantProgramme;
-import gof.model.ElemStruct;
+import gof.model.TypeComposantProgramme;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,11 +33,18 @@ public class ComposantProgrammeDaoTest extends AbstractTransactionalJUnit4Spring
 
 	@Test
 	public void saveComposantProgrammeTest() {
-		ComposantProgramme composantProgramme = new ComposantProgramme(
-				"ANNEE01", "ANNEE 01", 30, 
-				true, true, true, 
-				0, new ArrayList<ElemStruct>(), false, 
-				"ANNEE");
+		ComposantProgramme composantProgramme = new ComposantProgramme();
+		
+		composantProgramme.setCode("ANNEE01");
+		composantProgramme.setNom("ANNEE 01");
+		composantProgramme.setType(TypeComposantProgramme.ANNEE);
+		composantProgramme.setPubliable(true);
+		composantProgramme.setContenuValide(true);
+		composantProgramme.setStructureValide(true);
+		composantProgramme.setNbCredits(0);
+		composantProgramme.setNbErreurs(0);
+		composantProgramme.setPubliable(true);
+		
 		composantProgrammeDao.saveComposantProgramme(composantProgramme);
 		assertEquals("ANNEE 01", composantProgrammeDao.findComposantProgramme("ANNEE01").getNom());
 	}

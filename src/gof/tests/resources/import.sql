@@ -35,7 +35,7 @@ INSERT INTO programme (code, capacite, dureeStage, troncCommun, version, volCM, 
 
 -- Insertion d'un composant programme
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('SEM01', 'SEMESTRE 01', 1, 1, 1, 0, 42);
-INSERT INTO composant_programme (code, type, mutualisable) VALUES ('SEM01', 'SEMESTRE', 1);
+INSERT INTO composant_programme (code, type, mutualisable, numero) VALUES ('SEM01', 'SEMESTRE', 1, 1);
 
 -- Insertion d'un enseignement
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('ENS01', 'ENSEIGNEMENT 01', 1, 1, 1, 0, 42);
