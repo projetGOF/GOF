@@ -166,8 +166,10 @@ public class Mention implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_domaine"))
 	private Set<Domaine> domaines;
     
+    @Column(length = 2000)
 	private String secteurPro;
 	private String typeDiplome;
+	@Column(length = 2000)
 	private String validiteCompetences;
 	private int version;
 	private String web;
