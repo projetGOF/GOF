@@ -49,15 +49,15 @@
 				</map>
 				<center>
 					<p>[ 
-						<a href="dut.htm">D.U.T.</a> | 
-						<a href="licences.htm">Licences</a> | 
-						<a href="licences-pro.htm">Licences Pro.</a> | 
-						<a href="domaines.htm">Masters</a> | 
-						<a href="diplomes-ingenieur.htm">Dipl. d'ingénieur</a> | 
-						<a href="de-medecine.htm">Dipl. d'état en Médecine</a> | 
-						<a href="de-pharmacie.htm">Dipl. d'état en Pharmacie</a> | 
-						<a href="de-odontologie.htm">Dipl. d'état en Odontologie</a> | 
-						<a href="magisteres.htm">Magistères</a> ]
+						<a href="domainesdut.htm">D.U.T.</a> | 
+						<a href="domainesLICENCE.htm">Licences</a> | 
+						<a href="domainesLICENCEPRO.htm">Licences Pro.</a> | 
+						<a href="domainesMASTER.htm">Masters</a> | 
+						<a href="domainesdiplomes-ingenieur.htm">Dipl. d'ingénieur</a> | 
+						<a href="domainesde-medecine.htm">Dipl. d'état en Médecine</a> | 
+						<a href="domainesde-pharmacie.htm">Dipl. d'état en Pharmacie</a> | 
+						<a href="domainesde-odontologie.htm">Dipl. d'état en Odontologie</a> | 
+						<a href="domainesmagisteres.htm">Magistères</a> ]
 					</p>
 				</center>
 			</div><!-- fin <div id="body"> -->

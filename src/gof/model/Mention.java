@@ -59,105 +59,105 @@ public class Mention implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_composante"))
 	private Set<Composante> composantes;
     
-    @Column(length = 8000)
+    @Column(length = 2000)
 	private String adaptation;
-    @Column(length = 8000)
+    @Column(length = 2000)
 	private String adaptationHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String adosPro;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String adosRecherche;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String aideInsPro;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String aideInsProHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String aideOrientation;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String aideOrientationHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String aideReussite;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String aideReussiteHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String articuAutresFormat;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String autoEvaluation;
 	private String codeDossier;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String cohabilitation;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String competences;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String competencesHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String conditionsAdmission;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String conditionsAdmissionHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String connaissances;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String connaissancesHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String contenusEnseignement;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String contexte;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String contexteHab;
 	@Temporal(TemporalType.DATE)
 	protected Date dateModification;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String debouches;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String debouchesHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String denominationNationale;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String equipePedago;
 	private String etatRof;
 	private String finalite;
 	private String identificateur;
 	private String indicateurs;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String international;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String internationalHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String mcc;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String mccHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String mesuresPrises;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String modalitesPedagoHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String modifications;
 	private int nbCredits;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String orgPedago;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String orgPedagoHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String partenaires;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String partenairesHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String pilotage;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String politiqueStages;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String posOffreEtablis;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String posOffreRegion;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String poursuiteEtudes;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String poursuiteEtudesHab;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String previsions;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String publique;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String publicHab;
 	
     @ManyToMany
@@ -166,10 +166,10 @@ public class Mention implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_domaine"))
 	private Set<Domaine> domaines;
     
-    @Column(length = 8000)
+    @Column(length = 2000)
 	private String secteurPro;
 	private String typeDiplome;
-	@Column(length = 8000)
+	@Column(length = 2000)
 	private String validiteCompetences;
 	private int version;
 	private String web;

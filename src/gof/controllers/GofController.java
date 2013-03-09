@@ -54,21 +54,36 @@ public class GofController
 		return new ModelAndView("accessDenied");
 	}
 	
-	@RequestMapping("/domaines.htm")
-	public ModelAndView domaines()
+	@RequestMapping("/domaines{diplome}.htm")
+	public ModelAndView domaines(@PathVariable String diplome)
 	{
+		System.out.println(diplome);
+		
 		Map<String, Object> domaineModel = new HashMap<String, Object>();
-		domaineModel.put("domaines", this.domaineManager.findAllDomaines());
+		TypeMention type = TypeMention.valueOf(diplome);
+		domaineModel.put("type", diplome);
+		domaineModel.put("domaines", this.domaineManager.findAllDomainesByTypeMention(type));
 		return new ModelAndView("domaines", "model", domaineModel);
 	}
 	
 	@RequestMapping("/domainesDetail{domaine}.htm")
 	public ModelAndView domainesDetail(@PathVariable String domaine)
 	{
+		
 		System.out.println(domaine);
 
         Map<String, Object> domaineDetailModel = new HashMap<String, Object>();
         domaineDetailModel.put("mentions", this.mentionManager.findAllMentionsByDomaine(domaine));
         return new ModelAndView("domainesDetail", "model", domaineDetailModel);
+	}
+	
+	@RequestMapping("/mention{mention}.htm")
+	public ModelAndView mention(@PathVariable String mention)
+	{
+		System.out.println(mention);
+
+        Map<String, Object> mentionDetailModel = new HashMap<String, Object>();
+        mentionDetailModel.put("mention", this.mentionManager.findMention(mention));
+        return new ModelAndView("mention", "model", mentionDetailModel);
 	}
 }

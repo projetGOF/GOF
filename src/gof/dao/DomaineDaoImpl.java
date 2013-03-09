@@ -1,6 +1,7 @@
 package gof.dao;
 
 import gof.model.Domaine;
+import gof.model.TypeMention;
 
 import java.util.Collection;
 
@@ -19,6 +20,13 @@ public class DomaineDaoImpl implements DomaineDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Domaine> findAllDomaines() {
+		Query query = em.createQuery("SELECT d FROM domaine d");
+	    return (Collection<Domaine>) query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Domaine> findAllDomainesByTypeMention(TypeMention type) {
 		Query query = em.createQuery("SELECT d FROM domaine d");
 	    return (Collection<Domaine>) query.getResultList();
 	}

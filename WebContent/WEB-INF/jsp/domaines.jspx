@@ -33,7 +33,7 @@
 				</div><!-- fin <div id="nav-right"> -->	
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
-				<p><fmt:message key="domaine.message"/></p>
+				<p>Catalogue des <c:out value="${model.type}" /></p>
 				<p><a href="accueil.htm"><fmt:message key="domaine.home"/></a></p>
 				<p><a href="identification.htm"><fmt:message key="domaine.login"/></a></p>
 				

@@ -33,27 +33,26 @@
 				</div><!-- fin <div id="nav-right"> -->	
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
-				<p>Catalogue des </p>
+				<p><fmt:message key="domaine.message"/></p>
 				<p><a href="accueil.htm"><fmt:message key="domaine.home"/></a></p>
 				<p><a href="identification.htm"><fmt:message key="domaine.login"/></a></p>
 				<p><a href="domaines.htm"><fmt:message key="home.domaine"/></a></p>
 				
-				<h1>Détail domaine</h1>
-				<table id="mention_domaine">
+				<h1>Détail Mention</h1>
+				<table id="mention">
 			    	<tbody>
-			    		<td>Code :</td>
-			    		<td>détail :</td>
-			    		<c:forEach items="${model.mentions}" var="mention">
+						<tr>
+				    		<td>Code :</td>
+				    		<td>nom :</td>
+			    		</tr>
 			    		<tr>
-			    			<td><c:out value="${mention.code}"/></td>
-		    				<td>
-			    				<a href="mention${mention.code}.htm"><c:out value="${mention.nom}"/></a> 
-		    				</td>
-		    			</tr>
-		    			</c:forEach>
+			    			<td><c:out value="${model.mention.code}"/></td>
+			    			<td><c:out value="${model.mention.nom}"/></td>
+			    		</tr>
 			    	</tbody>
 				</table>
 			    
+				<c:out value="${model.mention.contexte}"/>
 			    
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">

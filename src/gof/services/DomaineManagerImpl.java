@@ -2,6 +2,7 @@ package gof.services;
 
 import gof.dao.DomaineDao;
 import gof.model.Domaine;
+import gof.model.TypeMention;
 
 import java.util.Collection;
 
@@ -19,6 +20,12 @@ public class DomaineManagerImpl implements DomaineManager {
 	@Transactional
 	public Collection<Domaine> findAllDomaines() {
 		return domaineDao.findAllDomaines();
+	}
+	
+	@Override
+	@Transactional
+	public Collection<Domaine> findAllDomainesByTypeMention(TypeMention type) {
+		return domaineDao.findAllDomainesByTypeMention(type);
 	}
 
 	@Override
