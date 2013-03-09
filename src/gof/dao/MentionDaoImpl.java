@@ -22,6 +22,15 @@ public class MentionDaoImpl implements MentionDao {
 		Query query = em.createQuery("SELECT m FROM mention m");
 	    return (Collection<Mention>) query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Mention> findAllMentionsByDomaine(String domaine) {
+		Query query = em.createQuery("SELECT m FROM mention m");
+		//requete sql qui marche sur mysql mais pas jpa :
+		//select m from mention m inner join mention_domaine on mention.code=mention_domaine.code_mention where mention_domaine.code_domaine='DEG'
+	    return (Collection<Mention>) query.getResultList();
+	}
 
 	@Override
 	public Mention findMention(String code) {

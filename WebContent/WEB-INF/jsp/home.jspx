@@ -33,6 +33,33 @@
 			<div id="body">
 				<p><fmt:message key="home.message"/></p>
 				<p><a href="identification.htm"><fmt:message key="home.login"/></a></p>
+				
+				<map id="schemabfaced4a" name="schemabfaced4a">
+					<area alt="Licences Généralistes" coords="202,231,294,325" shape="rect" title="Licences Généralistes" href="licences.html" />
+					<area alt="Masters Pro et Recherche" coords="202,199,294,230" shape="rect" title="Masters Pro et Recherche" href="masters.html" />
+					<area alt="Master Recherche" coords="202,167,248,198" shape="rect" title="Master Recherche" href="masters.html" />
+					<area alt="Master Pro" coords="248,168,294,198" shape="rect" title="Master Pro" href="masters.html" />
+					<area target="_blank" alt="DUT" coords="306,260,351,325" shape="rect" title="DUT" href="dut.html" />
+					<area alt="Licence Pro" coords="360,229,414,262" shape="rect" title="Lic Pro" href="licences-pro.html" />
+					<area alt="D. d'ingénieur" coords="145,167,192,261" shape="rect" title="Ingénieur" href="diplomes-ingenieur.html" />
+					<area alt="Médecine" coords="538,8,584,325" shape="rect" title="Médecine" href="de-medecine.html" />
+					<area alt="Odontologie" coords="586,40,633,325" shape="rect" title="Odontologie" href="de-odontologie.html" />
+					<area alt="Pharmacie" coords="678,9,725,325" shape="rect" title="Pharmacie" href="de-pharmacie.html" />
+					<area alt="Magistere" coords="483,167,592,262" shape="rect" title="Magistères" href="magisteres.html" />
+				</map>
+				<center>
+					<p>[ 
+						<a href="dut.htm">D.U.T.</a> | 
+						<a href="licences.htm">Licences</a> | 
+						<a href="licences-pro.htm">Licences Pro.</a> | 
+						<a href="domaines.htm">Masters</a> | 
+						<a href="diplomes-ingenieur.htm">Dipl. d'ingénieur</a> | 
+						<a href="de-medecine.htm">Dipl. d'état en Médecine</a> | 
+						<a href="de-pharmacie.htm">Dipl. d'état en Pharmacie</a> | 
+						<a href="de-odontologie.htm">Dipl. d'état en Odontologie</a> | 
+						<a href="magisteres.htm">Magistères</a> ]
+					</p>
+				</center>
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">
 				<center class="smaller">

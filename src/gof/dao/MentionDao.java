@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface MentionDao {
 	
 	Collection<Mention> findAllMentions();
+	
+	Collection<Mention> findAllMentionsByDomaine(String domaine);
 
 	Mention findMention(String code);
 

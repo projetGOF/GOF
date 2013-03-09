@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.2"
+	xmlns:form="http://www.springframework.org/tags/form">
+<jsp:directive.page contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8" session="true"/>
+<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+		
+	<html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			      
+			<title><fmt:message key="domaineDetail.title"/></title>
+			<spring:url value="/resources/css/home.css" var="homecss" /> 	
+			<link rel="stylesheet" href="${homecss}" type="text/css" />
+				
+		</head>
+		<body>
+			<div id="header">
+<!-- 				<p>header</p> -->
+			</div>	
+			<div id="nav">
+				<div id="nav-left">
+					
+				</div><!-- fin <div id="nav-left"> -->
+				<div id="nav-right">
+					
+				</div><!-- fin <div id="nav-right"> -->	
+			</div><!-- fin <div id="nav"> -->
+			<div id="body">
+				<p><fmt:message key="domaine.message"/></p>
+				<p><a href="accueil.htm"><fmt:message key="domaine.home"/></a></p>
+				<p><a href="identification.htm"><fmt:message key="domaine.login"/></a></p>
+				<p><a href="domaine.htm"><fmt:message key="home.domaine"/></a></p>
+				
+				<h1>Détail domaine</h1>
+				<table id="mention_domaine">
+			    	<tbody>
+			    		<c:forEach items="${model.mentions}" var="mention">
+			    		<tr>
+			    			<td>Code : <c:out value="${mention.code}"/></td>
+			    			<td>Nom  : <c:out value="${mention.nom}"/></td>
+		    				<td>
+<!-- 			    				<a href="domaineDetail${domaine.code}.htm"><c:out value="${domaine.nom}"/></a>  -->
+		    				</td>
+		    			</tr>
+		    			</c:forEach>
+			    	</tbody>
+				</table>
+			    
+			    
+			</div><!-- fin <div id="body"> -->
+			<div id="footer">
+				<center class="smaller">
+					Aix-Marseille Université - 58, bd charles livon - 13284 marseille cedex 07 - france tél : 33 (0) 4 91 39 65 00 - fax : 33 (0) 4 91 31 31 36 |
+					<a href="http://www.univ-amu.fr/mentions-legales">Mentions légales</a>
+				</center>
+			</div><!-- fin <div id="footer"> -->
+		</body>
+	</html>
+</jsp:root>

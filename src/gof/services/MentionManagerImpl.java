@@ -1,9 +1,10 @@
 package gof.services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import gof.dao.MentionDao;
 import gof.model.Mention;
-
-import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,10 @@ public class MentionManagerImpl implements MentionManager {
 	public void deleteMention(Mention m) {
 		mentionDao.deleteMention(m);
 	}
-
+	
+	@Override
+	@Transactional
+	public Collection<Mention> findAllMentionsByDomaine(String domaine) {
+		return mentionDao.findAllMentionsByDomaine(domaine);
+	}
 }
