@@ -15,7 +15,7 @@
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
-			<title><fmt:message key="domaineDetail.title"/></title>
+			<title><fmt:message key="master.title"/></title>
 			<spring:url value="/resources/css/home.css" var="homecss" /> 	
 			<link rel="stylesheet" href="${homecss}" type="text/css" />
 				
@@ -33,28 +33,33 @@
 				</div><!-- fin <div id="nav-right"> -->	
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
-				<p>Catalogue des </p>
-				<p><a href="accueil.htm"><fmt:message key="domaine.home"/></a></p>
-				<p><a href="identification.htm"><fmt:message key="domaine.login"/></a></p>
-				<p><a href="domaines.htm"><fmt:message key="home.domaine"/></a></p>
+				<h1><fmt:message key="master.title"/></h1>
+				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
-				<h1>Détail domaine</h1>
-				<table id="mention_domaine">
+				
+				<p>Le 1er janvier 2012, l'<b>Université de Provence</b>,
+					l'<b>Université de la Méditerranée</b> et l'<b>Université Paul
+					Cézanne</b> fusionnent pour former <span class="nobr"><b>Aix-Marseille Université</b></span>. Ce nouvel
+					établissement vous propose tous les niveaux de formation de bac+2
+					au doctorat et diplôme d'État en santé, en passant par les diplômes
+					d'ingénieur dans tous les domaines de la connaissance
+					scientifique.</p>
+					<p>Consultez l'offre de formation en ligne (<b>en cours de
+					construction</b>) et notre <a href="offre-formations-AMU-2012.pdf">plaquette de présentation de
+					l'offre de formation globale</a> :
+				</p>
+				<table>
 			    	<tbody>
-			    		<td>Code :</td>
-			    		<td>détail :</td>
-			    		<c:forEach items="${model.mentions}" var="mention">
+			    		<c:forEach items="${model.domaines}" var="domall">
 			    		<tr>
-			    			<td><c:out value="${mention.code}"/></td>
 		    				<td>
-			    				<a href="mention${mention.code}.htm"><c:out value="${mention.nom}"/></a> 
+			    				<a href="masterDetail${domall.code}.htm"><c:out value="${domall.nom}"/></a>
 		    				</td>
 		    			</tr>
 		    			</c:forEach>
 			    	</tbody>
 				</table>
-			    
-			    
+				
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">
 				<center class="smaller">

@@ -15,7 +15,7 @@
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
-			<title><c:out value="${model.mention.nomCourt}"/></title>
+			<title><fmt:message key="licence.title"/></title>
 			<spring:url value="/resources/css/home.css" var="homecss" /> 	
 			<link rel="stylesheet" href="${homecss}" type="text/css" />
 				
@@ -33,26 +33,33 @@
 				</div><!-- fin <div id="nav-right"> -->	
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
-				
-				<h1><c:out value="${model.mention.nomCourt}"/></h1>
+				<h1><fmt:message key="licence.title"/></h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
 				
-				<table id="mention">
+				<p>Le 1er janvier 2012, l'<b>Université de Provence</b>,
+					l'<b>Université de la Méditerranée</b> et l'<b>Université Paul
+					Cézanne</b> fusionnent pour former <span class="nobr"><b>Aix-Marseille Université</b></span>. Ce nouvel
+					établissement vous propose tous les niveaux de formation de bac+2
+					au doctorat et diplôme d'État en santé, en passant par les diplômes
+					d'ingénieur dans tous les domaines de la connaissance
+					scientifique.</p>
+					<p>Consultez l'offre de formation en ligne (<b>en cours de
+					construction</b>) et notre <a href="offre-formations-AMU-2012.pdf">plaquette de présentation de
+					l'offre de formation globale</a> :
+				</p>
+				<table>
 			    	<tbody>
-						<tr>
-				    		<td>Code :</td>
-				    		<td>nom :</td>
-			    		</tr>
+			    		<c:forEach items="${model.domaines}" var="domall">
 			    		<tr>
-			    			<td><c:out value="${model.mention.code}"/></td>
-			    			<td><c:out value="${model.mention.nom}"/></td>
-			    		</tr>
+		    				<td>
+			    				<a href="licenceDetail${domall.code}.htm"><c:out value="${domall.nom}"/></a>
+		    				</td>
+		    			</tr>
+		    			</c:forEach>
 			    	</tbody>
 				</table>
-			    <br></br>
-				<c:out value="${model.mention.contexte}"/>
-			    
+				
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">
 				<center class="smaller">

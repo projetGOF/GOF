@@ -1,6 +1,7 @@
 package gof.dao;
 
 import gof.model.Domaine;
+import gof.model.Mention;
 import gof.model.TypeMention;
 
 import java.util.Collection;
@@ -26,9 +27,12 @@ public class DomaineDaoImpl implements DomaineDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Domaine> findAllDomainesByTypeMention(TypeMention type) {
-		Query query = em.createQuery("SELECT d FROM domaine d");
-	    return (Collection<Domaine>) query.getResultList();
+	public int countMentionByDomaineAndTypeMention(String domaine, TypeMention type){
+		Query query = em.createQuery("SELECT m FROM mention m INNER JOIN m.domaines md WHERE md.code= :domaine and m.typeMention= :type");
+		query.setParameter("domaine", domaine);
+		query.setParameter("type", type);
+		Collection<Mention> mention = (Collection<Mention>) query.getResultList();
+		return mention.size();
 	}
 
 	@Override

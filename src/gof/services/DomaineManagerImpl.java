@@ -4,6 +4,7 @@ import gof.dao.DomaineDao;
 import gof.model.Domaine;
 import gof.model.TypeMention;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,16 @@ public class DomaineManagerImpl implements DomaineManager {
 	
 	@Override
 	@Transactional
-	public Collection<Domaine> findAllDomainesByTypeMention(TypeMention type) {
-		return domaineDao.findAllDomainesByTypeMention(type);
+	public ArrayList<Domaine> findDomainesByTypeMention(TypeMention type) {
+		ArrayList<Domaine> result = new ArrayList<Domaine>();
+		ArrayList<Domaine> domaine=(ArrayList<Domaine>) domaineDao.findAllDomaines();
+		for(int i=0; i<domaine.size(); ++i) {
+			int count = domaineDao.countMentionByDomaineAndTypeMention(domaine.get(i).getCode() , type);
+			if(count > 0) {
+				result.add(domaine.get(i));
+			}
+		}
+		return result;
 	}
 
 	@Override

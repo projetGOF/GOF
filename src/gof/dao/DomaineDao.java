@@ -13,7 +13,7 @@ public interface DomaineDao {
 	
 	Collection<Domaine> findAllDomaines();
 	
-	Collection<Domaine> findAllDomainesByTypeMention(TypeMention type);
+	int countMentionByDomaineAndTypeMention(String domaine, TypeMention type);
 
 	Domaine findDomaine(String code);
 

@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import gof.dao.MentionDao;
 import gof.model.Mention;
+import gof.model.TypeMention;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,25 @@ public class MentionManagerImpl implements MentionManager {
 	@Transactional
 	public Collection<Mention> findAllMentions() {
 		return mentionDao.findAllMentions();
+	}
+	
+	@Override
+	@Transactional
+	public Collection<Mention> findAllMentionsByDomaine(String domaine) {
+		return mentionDao.findAllMentionsByDomaine(domaine);
+	}
+	
+	@Override
+	@Transactional
+	public Collection<Mention> findAllMentionsByDomaineAndTypeMention(String domaine, TypeMention type) {
+		ArrayList<Mention> mention = (ArrayList<Mention>) mentionDao.findAllMentionsByDomaine(domaine);
+		ArrayList<Mention> result = new ArrayList<Mention>();
+		for(int i=0; i<mention.size(); ++i) {
+			if(mention.get(i).getTypeMention()==type) {
+				result.add(mention.get(i));
+			}
+		}
+		return result;
 	}
 
 	@Override
@@ -38,11 +58,5 @@ public class MentionManagerImpl implements MentionManager {
 	@Transactional
 	public void deleteMention(Mention m) {
 		mentionDao.deleteMention(m);
-	}
-	
-	@Override
-	@Transactional
-	public Collection<Mention> findAllMentionsByDomaine(String domaine) {
-		return mentionDao.findAllMentionsByDomaine(domaine);
 	}
 }

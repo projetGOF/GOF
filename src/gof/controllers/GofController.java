@@ -3,12 +3,9 @@ package gof.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-import gof.model.Mention;
-import gof.model.Personne;
 import gof.model.TypeMention;
 import gof.services.DomaineManager;
 import gof.services.MentionManager;
-import gof.services.PersonneManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,27 +51,76 @@ public class GofController
 		return new ModelAndView("accessDenied");
 	}
 	
-	@RequestMapping("/domaines{diplome}.htm")
+	@RequestMapping("/licence{diplome}.htm")
 	public ModelAndView domaines(@PathVariable String diplome)
 	{
 		System.out.println(diplome);
+		TypeMention type = TypeMention.LICENCE;
 		
 		Map<String, Object> domaineModel = new HashMap<String, Object>();
-		TypeMention type = TypeMention.valueOf(diplome);
+		
 		domaineModel.put("type", diplome);
-		domaineModel.put("domaines", this.domaineManager.findAllDomainesByTypeMention(type));
-		return new ModelAndView("domaines", "model", domaineModel);
+		domaineModel.put("domaines", this.domaineManager.findDomainesByTypeMention(type));
+		return new ModelAndView("licence", "model", domaineModel);
 	}
 	
-	@RequestMapping("/domainesDetail{domaine}.htm")
+	@RequestMapping("/licenceDetail{domaine}.htm")
 	public ModelAndView domainesDetail(@PathVariable String domaine)
 	{
-		
 		System.out.println(domaine);
-
+		TypeMention type = TypeMention.LICENCE;
         Map<String, Object> domaineDetailModel = new HashMap<String, Object>();
-        domaineDetailModel.put("mentions", this.mentionManager.findAllMentionsByDomaine(domaine));
-        return new ModelAndView("domainesDetail", "model", domaineDetailModel);
+        domaineDetailModel.put("domaine", this.domaineManager.findDomaine(domaine));
+        domaineDetailModel.put("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(domaine, type));
+        return new ModelAndView("licenceDetail", "model", domaineDetailModel);
+	}
+	
+	@RequestMapping("/licencePro{diplome}.htm")
+	public ModelAndView licencePro(@PathVariable String diplome)
+	{
+		System.out.println(diplome);
+		TypeMention type = TypeMention.LICENCEPRO;
+		
+		Map<String, Object> domaineModel = new HashMap<String, Object>();
+		
+		domaineModel.put("type", diplome);
+		domaineModel.put("domaines", this.domaineManager.findDomainesByTypeMention(type));
+		return new ModelAndView("licencePro", "model", domaineModel);
+	}
+	
+	@RequestMapping("/licenceProDetail{domaine}.htm")
+	public ModelAndView licenceProDetail(@PathVariable String domaine)
+	{
+		System.out.println(domaine);
+		TypeMention type = TypeMention.LICENCEPRO;
+        Map<String, Object> domaineDetailModel = new HashMap<String, Object>();
+        domaineDetailModel.put("domaine", this.domaineManager.findDomaine(domaine));
+        domaineDetailModel.put("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(domaine, type));
+        return new ModelAndView("licenceProDetail", "model", domaineDetailModel);
+	}
+	
+	@RequestMapping("/master{diplome}.htm")
+	public ModelAndView master(@PathVariable String diplome)
+	{
+		System.out.println(diplome);
+		TypeMention type = TypeMention.MASTER;
+		
+		Map<String, Object> domaineModel = new HashMap<String, Object>();
+		
+		domaineModel.put("type", diplome);
+		domaineModel.put("domaines", this.domaineManager.findDomainesByTypeMention(type));
+		return new ModelAndView("master", "model", domaineModel);
+	}
+	
+	@RequestMapping("/masterDetail{domaine}.htm")
+	public ModelAndView masterDetail(@PathVariable String domaine)
+	{
+		System.out.println(domaine);
+		TypeMention type = TypeMention.MASTER;
+        Map<String, Object> domaineDetailModel = new HashMap<String, Object>();
+        domaineDetailModel.put("domaine", this.domaineManager.findDomaine(domaine));
+        domaineDetailModel.put("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(domaine, type));
+        return new ModelAndView("masterDetail", "model", domaineDetailModel);
 	}
 	
 	@RequestMapping("/mention{mention}.htm")

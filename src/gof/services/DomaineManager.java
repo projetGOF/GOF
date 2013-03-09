@@ -3,6 +3,7 @@ package gof.services;
 import gof.model.Domaine;
 import gof.model.TypeMention;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public interface DomaineManager {
 	
 	Collection<Domaine> findAllDomaines();
 	
-	Collection<Domaine> findAllDomainesByTypeMention(TypeMention type);
+	ArrayList<Domaine> findDomainesByTypeMention(TypeMention type);
 
 	Domaine findDomaine(String code);
 
