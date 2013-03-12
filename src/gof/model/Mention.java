@@ -174,7 +174,7 @@ public class Mention implements Serializable {
 	private String validiteCompetences;
 	
 	@Version
-	private int version;
+	private long version;
 	
 	private String web;
 	@Column(nullable=false)
@@ -828,11 +828,11 @@ public class Mention implements Serializable {
 		this.validiteCompetences = validiteCompetences;
 	}
 
-	public int getVersion() {
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 

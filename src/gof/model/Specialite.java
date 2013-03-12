@@ -120,7 +120,7 @@ public class Specialite implements Serializable {
 	private String validiteCompetences;
 	
 	@Version
-	private int version;
+	private long version;
 	
 	@Column(nullable=false)
 	private boolean publiable;
@@ -575,11 +575,11 @@ public class Specialite implements Serializable {
 		this.validiteCompetences = validiteCompetences;
 	}
 
-	public int getVersion() {
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 

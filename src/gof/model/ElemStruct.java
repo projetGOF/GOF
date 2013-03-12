@@ -44,7 +44,7 @@ public abstract class ElemStruct implements Serializable {
 	protected List<ElemStruct> elementsFils;
 	
 	@Version
-	protected int version;
+	protected long version;
 	
 	public ElemStruct() {}
 
@@ -126,11 +126,11 @@ public abstract class ElemStruct implements Serializable {
 		this.elementsFils = elementsFils;
 	}
 
-	public int getVersion() {
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(long version) {
 		this.version = version;
 	}
 }
