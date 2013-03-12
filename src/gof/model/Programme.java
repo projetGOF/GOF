@@ -30,6 +30,7 @@ public class Programme extends ElemStruct {
 	protected Date dateModification;
 	
 	protected float dureeStage;
+	
 	@Column(length = 2000)
 	protected String ensDelocalisees;
 	@Column(length = 2000)
@@ -67,8 +68,10 @@ public class Programme extends ElemStruct {
 	protected String specialite1;
 	protected String specialite2;
 	protected String specialite3;
+	
 	@Column(nullable=false)
 	protected boolean troncCommun;
+	
 	protected int version;
 	protected int volCM;
 	protected int volTD;

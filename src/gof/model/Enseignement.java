@@ -59,6 +59,7 @@ public class Enseignement extends ElemStruct {
 	@Column(length = 2000)
 	protected String preRequisObligHab;
 	protected String typeEns;
+	
 	protected int version;
 	protected int volAutres;
 	protected int volCM;

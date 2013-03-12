@@ -39,7 +39,9 @@ public class UECat extends ElemStruct {
 	
 	@Column(length = 2000)
 	protected String discipline;
-	protected int dureeStage;
+	
+	protected float dureeStage;
+	
 	protected String etatRof;
 	protected int langue;
 	@Column(length = 2000)
@@ -78,7 +80,7 @@ public class UECat extends ElemStruct {
 			int capacite, String capitalisation, String coefficient,
 			String competences, String competencesHab, String contenu,
 			String contenuHab, Date dateModification, String discipline,
-			int dureeStage, String etatRof, int langue, String mcc,
+			float dureeStage, String etatRof, int langue, String mcc,
 			String mccHab, boolean miseEnService, String modalitesOrganisation,
 			String preRequis, String preRequisOblig, String preRequisObligHab,
 			int version, int volAutres, int volCM, int volGlobal, int volTD,
@@ -204,11 +206,11 @@ public class UECat extends ElemStruct {
 		this.discipline = discipline;
 	}
 
-	public int getDureeStage() {
+	public float getDureeStage() {
 		return dureeStage;
 	}
 
-	public void setDureeStage(int dureeStage) {
+	public void setDureeStage(float dureeStage) {
 		this.dureeStage = dureeStage;
 	}
 
