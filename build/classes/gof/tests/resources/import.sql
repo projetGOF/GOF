@@ -5,13 +5,13 @@ INSERT INTO personne_statut VALUES('PER01','ROLE_ADMIN');
 INSERT INTO personne_statut VALUES('PER02','ROLE_USER');
 INSERT INTO personne_statut VALUES('PER02','ROLE_ROF');
 
-INSERT INTO composante VALUES ('COMPO01','ACRO1','NOM1','WEB1');
-INSERT INTO composante VALUES ('COMPO02','ACRO2','NOM2','WEB2');
+INSERT INTO composante (code, acronyme, nom, web, version) VALUES ('COMPO01','ACRO1','NOM1','WEB1', 0);
+INSERT INTO composante (code, acronyme, nom, web, version) VALUES ('COMPO02','ACRO2','NOM2','WEB2', 0);
 
 INSERT INTO domaine VALUES('DOM1','NOM1');
 INSERT INTO domaine VALUES('DOM2','NOM2');
 
-INSERT INTO mention (code, nom, typeMention, droits, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES('MENT01', 'MASTER 1 INFO', 'MASTER', 666, 1, 1, 1, 0, 42, 1);
+INSERT INTO mention (code, nom, typeMention, droits, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES('MENT01', 'MASTER 1 INFO', 'MASTER', 666, 1, 1, 1, 0, 42, 0);
 
 INSERT INTO motcle VALUES('MOTCLE1');
 INSERT INTO motcle VALUES('MOTCLE2');
@@ -27,21 +27,21 @@ INSERT INTO mention_domaine VALUES ('MENT01', 'DOM2');
 
 INSERT INTO mention_responsable VALUES ('MENT01', 'PER02');
 
-INSERT INTO specialite (code, nom, publiable, contenuValide, structureValide, nbErreurs, version, code_mention) VALUES ('SPE01', 'SPECIALITE 01', 1, 1, 1, 0, 1, 'MENT01');
+INSERT INTO specialite (code, nom, publiable, contenuValide, structureValide, nbErreurs, version, code_mention) VALUES ('SPE01', 'SPECIALITE 01', 1, 1, 1, 0, 0, 'MENT01');
 
 -- Insertion d'un programme
-INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('PROG01', 'PROGRAMME 01', 1, 1, 1, 0, 42);
-INSERT INTO programme (code, capacite, dureeStage, troncCommun, version, volCM, volTD, volTP, code_mention, langue) VALUES ('PROG01', 30, 6, 1, 1, 33, 33, 33, 'MENT01', 0);
+INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('PROG01', 'PROGRAMME 01', 1, 1, 1, 0, 42, 0);
+INSERT INTO programme (code, capacite, dureeStage, troncCommun, volCM, volTD, volTP, code_mention, langue) VALUES ('PROG01', 30, 6, 1, 33, 33, 33, 'MENT01', 0);
 
 -- Insertion d'un composant programme
-INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('SEM01', 'SEMESTRE 01', 1, 1, 1, 0, 42);
+INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('SEM01', 'SEMESTRE 01', 1, 1, 1, 0, 42, 0);
 INSERT INTO composant_programme (code, type, mutualisable, numero) VALUES ('SEM01', 'SEMESTRE', 1, 1);
 
 -- Insertion d'un enseignement
-INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('ENS01', 'ENSEIGNEMENT 01', 1, 1, 1, 0, 42);
-INSERT INTO enseignement (code, capacite, dureeStage, mutualisable, version, volAutres, volCM, volGlobal, volTD, volTP, volTravail, langue) VALUES ('ENS01', 30, 6, 1, 1, 33, 33, 33, 33, 33, 33, 0);
+INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('ENS01', 'ENSEIGNEMENT 01', 1, 1, 1, 0, 42, 0);
+INSERT INTO enseignement (code, capacite, dureeStage, mutualisable, volAutres, volCM, volGlobal, volTD, volTP, volTravail, langue) VALUES ('ENS01', 30, 6, 1, 33, 33, 33, 33, 33, 33, 0);
 
 --Insertion d'une UECat
-INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits) VALUES ('UE01', 'UECAT 01', 1, 1, 1, 0, 42);
-INSERT INTO uecat (code, capacite, dureeStage, version, volAutres, volCM, volGlobal, volTD, volTP, volTravail, miseEnService, langue) VALUES ('UE01', 30, 6, 1, 33, 33, 33, 33, 33, 33, 1, 0);
+INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('UE01', 'UECAT 01', 1, 1, 1, 0, 42, 0);
+INSERT INTO uecat (code, capacite, dureeStage, volAutres, volCM, volGlobal, volTD, volTP, volTravail, miseEnService, langue) VALUES ('UE01', 30, 6, 33, 33, 33, 33, 33, 33, 1, 0);
 

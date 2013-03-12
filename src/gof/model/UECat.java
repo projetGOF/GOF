@@ -58,7 +58,7 @@ public class UECat extends ElemStruct {
 	protected String preRequisOblig;
 	@Column(length = 2000)
 	protected String preRequisObligHab;
-	protected int version;
+
 	protected int volAutres;
 	protected int volCM;
 	protected int volGlobal;
@@ -83,7 +83,7 @@ public class UECat extends ElemStruct {
 			float dureeStage, String etatRof, int langue, String mcc,
 			String mccHab, boolean miseEnService, String modalitesOrganisation,
 			String preRequis, String preRequisOblig, String preRequisObligHab,
-			int version, int volAutres, int volCM, int volGlobal, int volTD,
+			int volAutres, int volCM, int volGlobal, int volTD,
 			int volTP, int volTravail, Set<Personne> responsables) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
 				nbErreurs, elementsFils);
@@ -108,7 +108,6 @@ public class UECat extends ElemStruct {
 		this.preRequis = preRequis;
 		this.preRequisOblig = preRequisOblig;
 		this.preRequisObligHab = preRequisObligHab;
-		this.version = version;
 		this.volAutres = volAutres;
 		this.volCM = volCM;
 		this.volGlobal = volGlobal;
@@ -284,14 +283,6 @@ public class UECat extends ElemStruct {
 
 	public void setPreRequisObligHab(String preRequisObligHab) {
 		this.preRequisObligHab = preRequisObligHab;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 
 	public int getVolAutres() {

@@ -60,7 +60,6 @@ public class Enseignement extends ElemStruct {
 	protected String preRequisObligHab;
 	protected String typeEns;
 	
-	protected int version;
 	protected int volAutres;
 	protected int volCM;
 	protected int volGlobal;
@@ -85,7 +84,7 @@ public class Enseignement extends ElemStruct {
 			String discipline, float dureeStage, String etatRof, int langue,
 			String mcc, String mccHab, String modalitesOrganisation,
 			boolean mutualisable, String preRequis, String preRequisOblig,
-			String preRequisObligHab, String typeEns, int version,
+			String preRequisObligHab, String typeEns, 
 			int volAutres, int volCM, int volGlobal, int volTD, int volTP,
 			int volTravail, Set<Personne> responsables) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
@@ -112,7 +111,6 @@ public class Enseignement extends ElemStruct {
 		this.preRequisOblig = preRequisOblig;
 		this.preRequisObligHab = preRequisObligHab;
 		this.typeEns = typeEns;
-		this.version = version;
 		this.volAutres = volAutres;
 		this.volCM = volCM;
 		this.volGlobal = volGlobal;
@@ -296,14 +294,6 @@ public class Enseignement extends ElemStruct {
 
 	public void setTypeEns(String typeEns) {
 		this.typeEns = typeEns;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 
 	public int getVolAutres() {

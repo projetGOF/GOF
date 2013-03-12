@@ -2,7 +2,6 @@ package gof.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import gof.dao.MentionDao;
 import gof.model.Domaine;

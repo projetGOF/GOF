@@ -53,7 +53,6 @@ public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContex
 		enseignement.setVolTD(0);
 		enseignement.setVolTP(0);
 		enseignement.setVolTravail(0);
-		enseignement.setVersion(0);
 		enseignement.setMutualisable(true);
 		
 		enseignementDao.saveEnseignement(enseignement);

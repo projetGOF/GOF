@@ -50,7 +50,6 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 		programme.setCapacite(0);
 		programme.setDureeStage(0);
 		programme.setTroncCommun(true);
-		programme.setVersion(0);
 		programme.setVolCM(0);
 		programme.setVolTD(0);
 		programme.setVolTP(0);

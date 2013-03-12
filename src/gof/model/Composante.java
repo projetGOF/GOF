@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @SuppressWarnings("serial")
 @Entity(name="composante")
@@ -16,7 +17,10 @@ public class Composante implements Serializable {
 	private String nom;
 	private String web;
 	private String acronyme;
-		
+	
+	@Version
+	private long version;
+
 	public Composante() {}
 	
 	public Composante(String code, String nom, String web, String acronyme) {
@@ -57,5 +61,13 @@ public class Composante implements Serializable {
 
 	public void setAcronyme(String acronyme) {
 		this.acronyme = acronyme;
+	}
+	
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 }

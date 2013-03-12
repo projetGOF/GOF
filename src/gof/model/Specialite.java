@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 @SuppressWarnings("serial")
 @Entity(name="specialite")
@@ -117,6 +118,8 @@ public class Specialite implements Serializable {
 	private String publiqueHab; 
 	@Column(length = 2000)
 	private String validiteCompetences;
+	
+	@Version
 	private int version;
 	
 	@Column(nullable=false)
@@ -148,7 +151,7 @@ public class Specialite implements Serializable {
 			String mutualisation, String orgPedago, String orgPedagoHab,
 			String pilotage, String politiqueStages, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
-			String publiqueHab, String validiteCompetences, int version,
+			String publiqueHab, String validiteCompetences, 
 			boolean publiable, boolean contenuValide, boolean structureValide,
 			int nbErreurs) {
 		super();
@@ -198,7 +201,6 @@ public class Specialite implements Serializable {
 		this.publique = publique;
 		this.publiqueHab = publiqueHab;
 		this.validiteCompetences = validiteCompetences;
-		this.version = version;
 		this.publiable = publiable;
 		this.contenuValide = contenuValide;
 		this.structureValide = structureValide;

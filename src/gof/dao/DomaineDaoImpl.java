@@ -1,8 +1,6 @@
 package gof.dao;
 
 import gof.model.Domaine;
-import gof.model.Mention;
-import gof.model.TypeMention;
 
 import java.util.Collection;
 

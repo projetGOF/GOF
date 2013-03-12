@@ -51,7 +51,6 @@ public class UECatDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 		uECat.setVolTD(0);
 		uECat.setVolTP(0);
 		uECat.setVolTravail(0);
-		uECat.setVersion(0);
 		uECat.setMiseEnService(true);
 		uECat.setLangue(0);
 		

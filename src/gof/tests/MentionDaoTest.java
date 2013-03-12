@@ -42,7 +42,6 @@ public class MentionDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 		mention.setNbCredits(0);
 		mention.setNbErreurs(0);
 		mention.setPubliable(true);
-		mention.setVersion(0);
 		
 		mentionDao.saveMention(mention);
 		assertEquals("MASTER 2 INFO", mentionDao.findMention("MENT02").getNom());

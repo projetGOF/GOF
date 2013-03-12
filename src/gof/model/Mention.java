@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 @SuppressWarnings("serial")
 @Entity(name = "mention")
@@ -171,7 +172,10 @@ public class Mention implements Serializable {
 	private String typeDiplome;
 	@Column(length = 2000)
 	private String validiteCompetences;
+	
+	@Version
 	private int version;
+	
 	private String web;
 	@Column(nullable=false)
 	private boolean publiable;
@@ -210,7 +214,7 @@ public class Mention implements Serializable {
 			String posOffreRegion, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
 			String publicHab, Set<Domaine> domaines, String secteurPro,
-			String typeDiplome, String validiteCompetences, int version,
+			String typeDiplome, String validiteCompetences,
 			String web, boolean publiable, boolean contenuValide,
 			boolean structureValide, int nbErreurs) {
 		super();
@@ -281,7 +285,6 @@ public class Mention implements Serializable {
 		this.secteurPro = secteurPro;
 		this.typeDiplome = typeDiplome;
 		this.validiteCompetences = validiteCompetences;
-		this.version = version;
 		this.web = web;
 		this.publiable = publiable;
 		this.contenuValide = contenuValide;

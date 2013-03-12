@@ -45,7 +45,6 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 		specialite.setStructureValide(true);
 		specialite.setNbErreurs(0);
 		specialite.setPubliable(true);
-		specialite.setVersion(0);
 		
 		specialiteDao.saveSpecialite(specialite);
 		

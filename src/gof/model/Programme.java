@@ -72,7 +72,6 @@ public class Programme extends ElemStruct {
 	@Column(nullable=false)
 	protected boolean troncCommun;
 	
-	protected int version;
 	protected int volCM;
 	protected int volTD;
 	protected int volTP;
@@ -107,7 +106,7 @@ public class Programme extends ElemStruct {
 			String preRequisOblig, String preRequisObligHab, String rome1,
 			String rome2, String rome3, String rome4, String rome5,
 			String specialite1, String specialite2, String specialite3,
-			boolean troncCommun, int version, int volCM, int volTD, int volTP,
+			boolean troncCommun, int volCM, int volTD, int volTP,
 			String web, Set<Personne> responsables,
 			Set<ComposantProgramme> composantsProgrammeRattaches,
 			Set<Enseignement> enseignementsRattaches) {
@@ -146,7 +145,6 @@ public class Programme extends ElemStruct {
 		this.specialite2 = specialite2;
 		this.specialite3 = specialite3;
 		this.troncCommun = troncCommun;
-		this.version = version;
 		this.volCM = volCM;
 		this.volTD = volTD;
 		this.volTP = volTP;
@@ -418,14 +416,6 @@ public class Programme extends ElemStruct {
 
 	public void setTroncCommun(boolean troncCommun) {
 		this.troncCommun = troncCommun;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 
 	public int getVolCM() {

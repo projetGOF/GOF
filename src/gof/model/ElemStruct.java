@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderColumn;
+import javax.persistence.Version;
 
 @SuppressWarnings("serial")
 @Entity(name="element")
@@ -40,7 +41,10 @@ public abstract class ElemStruct implements Serializable {
     @JoinTable(name="element_fils",
     	joinColumns=@JoinColumn(name="code_pere"),
     	inverseJoinColumns=@JoinColumn(name="code_fils"))
-	private List<ElemStruct> elementsFils;
+	protected List<ElemStruct> elementsFils;
+	
+	@Version
+	protected int version;
 	
 	public ElemStruct() {}
 
@@ -120,5 +124,13 @@ public abstract class ElemStruct implements Serializable {
 
 	public void setElementsFils(List<ElemStruct> elementsFils) {
 		this.elementsFils = elementsFils;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }
