@@ -22,20 +22,6 @@ public class DomaineManagerImpl implements DomaineManager {
 	public Collection<Domaine> findAllDomaines() {
 		return domaineDao.findAllDomaines();
 	}
-	
-	@Override
-	@Transactional
-	public ArrayList<Domaine> findDomainesByTypeMention(TypeMention type) {
-		ArrayList<Domaine> result = new ArrayList<Domaine>();
-		ArrayList<Domaine> domaine=(ArrayList<Domaine>) domaineDao.findAllDomaines();
-		for(int i=0; i<domaine.size(); ++i) {
-			int count = domaineDao.countMentionByDomaineAndTypeMention(domaine.get(i).getCode() , type);
-			if(count > 0) {
-				result.add(domaine.get(i));
-			}
-		}
-		return result;
-	}
 
 	@Override
 	@Transactional

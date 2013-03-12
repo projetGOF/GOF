@@ -24,16 +24,6 @@ public class DomaineDaoImpl implements DomaineDao {
 		Query query = em.createQuery("SELECT d FROM domaine d");
 	    return (Collection<Domaine>) query.getResultList();
 	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public int countMentionByDomaineAndTypeMention(String domaine, TypeMention type){
-		Query query = em.createQuery("SELECT m FROM mention m INNER JOIN m.domaines md WHERE md.code= :domaine and m.typeMention= :type");
-		query.setParameter("domaine", domaine);
-		query.setParameter("type", type);
-		Collection<Mention> mention = (Collection<Mention>) query.getResultList();
-		return mention.size();
-	}
 
 	@Override
 	public Domaine findDomaine(String code) {

@@ -22,14 +22,6 @@ public class MentionDaoImpl implements MentionDao {
 		Query query = em.createQuery("SELECT m FROM mention m");
 	    return (Collection<Mention>) query.getResultList();
 	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Collection<Mention> findAllMentionsByDomaine(String domaine) {
-		Query query = em.createQuery("SELECT m from mention m inner join m.domaines md WHERE md.code= :domaine ");
-		query.setParameter("domaine", domaine);
-	    return (Collection<Mention>) query.getResultList();
-	}
 
 	@Override
 	public Mention findMention(String code) {

@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 public interface DomaineManager {
 	
 	Collection<Domaine> findAllDomaines();
-	
-	ArrayList<Domaine> findDomainesByTypeMention(TypeMention type);
 
 	Domaine findDomaine(String code);
 

@@ -60,7 +60,7 @@ public class GofController
 		Map<String, Object> domaineModel = new HashMap<String, Object>();
 		
 		domaineModel.put("type", diplome);
-		domaineModel.put("domaines", this.domaineManager.findDomainesByTypeMention(type));
+		domaineModel.put("domaines", this.mentionManager.findAllDomaineByTypeMention(type));
 		return new ModelAndView("licence", "model", domaineModel);
 	}
 	
@@ -84,7 +84,7 @@ public class GofController
 		Map<String, Object> domaineModel = new HashMap<String, Object>();
 		
 		domaineModel.put("type", diplome);
-		domaineModel.put("domaines", this.domaineManager.findDomainesByTypeMention(type));
+		domaineModel.put("domaines", this.mentionManager.findAllDomaineByTypeMention(type));
 		return new ModelAndView("licencePro", "model", domaineModel);
 	}
 	
@@ -108,7 +108,7 @@ public class GofController
 		Map<String, Object> domaineModel = new HashMap<String, Object>();
 		
 		domaineModel.put("type", diplome);
-		domaineModel.put("domaines", this.domaineManager.findDomainesByTypeMention(type));
+		domaineModel.put("domaines", this.mentionManager.findAllDomaineByTypeMention(type));
 		return new ModelAndView("master", "model", domaineModel);
 	}
 	

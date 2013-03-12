@@ -1,5 +1,6 @@
 package gof.services;
 
+import gof.model.Domaine;
 import gof.model.Mention;
 import gof.model.TypeMention;
 
@@ -12,9 +13,11 @@ public interface MentionManager {
 	
 	Collection<Mention> findAllMentions();
 	
-	Collection<Mention> findAllMentionsByDomaine(String domaine);
+	Collection<Mention> findAllMentionByTypeMention(TypeMention type);
 	
 	Collection<Mention> findAllMentionsByDomaineAndTypeMention(String domaine, TypeMention type);
+	
+	Collection<Domaine> findAllDomaineByTypeMention(TypeMention type);
 
 	Mention findMention(String code);
 

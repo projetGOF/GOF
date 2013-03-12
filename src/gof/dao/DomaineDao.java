@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface DomaineDao {
 	
 	Collection<Domaine> findAllDomaines();
-	
-	int countMentionByDomaineAndTypeMention(String domaine, TypeMention type);
 
 	Domaine findDomaine(String code);
 
