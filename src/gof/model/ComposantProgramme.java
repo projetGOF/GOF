@@ -1,6 +1,7 @@
 package gof.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,14 +20,15 @@ public class ComposantProgramme extends ElemStruct {
 	
 	protected int numero;
 	
-	public ComposantProgramme() {}
+	public ComposantProgramme() { super(); }
 
 	public ComposantProgramme(String code, String nom, int nbCredits,
 			boolean publiable, boolean contenuValide, boolean structureValide,
-			int nbErreurs, List<ElemStruct> elementsFils, boolean mutualisable,
+			int nbErreurs, List<ElemStruct> elementsFils,
+			Set<ErreurStruct> erreursStruct, boolean mutualisable,
 			TypeComposantProgramme type, int numero) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
-				nbErreurs, elementsFils);
+				nbErreurs, elementsFils, erreursStruct);
 		this.mutualisable = mutualisable;
 		this.type = type;
 		this.numero = numero;
@@ -57,5 +59,4 @@ public class ComposantProgramme extends ElemStruct {
 	}
 
 	
-
 }

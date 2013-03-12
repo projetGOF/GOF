@@ -91,27 +91,27 @@ public class Programme extends ElemStruct {
     @JoinColumn(name="code_programme_rattache")
     protected Set<Enseignement> enseignementsRattaches;
     
-    public Programme() {}
+    public Programme() { super(); }
 
 	public Programme(String code, String nom, int nbCredits, boolean publiable,
 			boolean contenuValide, boolean structureValide, int nbErreurs,
-			List<ElemStruct> elementsFils, String identificateur,
-			String apogee, String aspectsFormatRecherche, int capacite,
-			String competences, Date dateModification, float dureeStage,
-			String ensDelocalisees, String ensDelocaliseesHab, String etatRof,
-			String infosDiverses, int langue, String mcc,
-			String modalitesInscription, String modalitesPedagogique,
-			String nfs1, String nfs2, String nfs3, String objectifs,
-			String politiqueStages, String preRequis, String preRequisHab,
-			String preRequisOblig, String preRequisObligHab, String rome1,
-			String rome2, String rome3, String rome4, String rome5,
-			String specialite1, String specialite2, String specialite3,
-			boolean troncCommun, int volCM, int volTD, int volTP,
-			String web, Set<Personne> responsables,
+			List<ElemStruct> elementsFils, Set<ErreurStruct> erreursStruct,
+			String identificateur, String apogee,
+			String aspectsFormatRecherche, int capacite, String competences,
+			Date dateModification, float dureeStage, String ensDelocalisees,
+			String ensDelocaliseesHab, String etatRof, String infosDiverses,
+			int langue, String mcc, String modalitesInscription,
+			String modalitesPedagogique, String nfs1, String nfs2, String nfs3,
+			String objectifs, String politiqueStages, String preRequis,
+			String preRequisHab, String preRequisOblig,
+			String preRequisObligHab, String rome1, String rome2, String rome3,
+			String rome4, String rome5, String specialite1, String specialite2,
+			String specialite3, boolean troncCommun, int volCM, int volTD,
+			int volTP, String web, Set<Personne> responsables,
 			Set<ComposantProgramme> composantsProgrammeRattaches,
 			Set<Enseignement> enseignementsRattaches) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
-				nbErreurs, elementsFils);
+				nbErreurs, elementsFils, erreursStruct);
 		this.identificateur = identificateur;
 		this.apogee = apogee;
 		this.aspectsFormatRecherche = aspectsFormatRecherche;
@@ -471,8 +471,7 @@ public class Programme extends ElemStruct {
 		return enseignementsRattaches;
 	}
 
-	public void setEnseignementsRattaches(
-			Set<Enseignement> enseignementsRattaches) {
+	public void setEnseignementsRattaches(Set<Enseignement> enseignementsRattaches) {
 		this.enseignementsRattaches = enseignementsRattaches;
 	}
 

@@ -60,6 +60,12 @@ public class Mention implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_composante"))
 	private Set<Composante> composantes;
     
+    @OneToMany
+	@JoinTable(name="mention_erreurs_structure",
+				joinColumns=@JoinColumn(name="code_mention"),
+				inverseJoinColumns=@JoinColumn(name="id_erreur"))
+	private Set<ErreurStruct> erreursStruct;
+    
     @Column(length = 2000)
 	private String adaptation;
     @Column(length = 2000)
@@ -190,10 +196,9 @@ public class Mention implements Serializable {
 
 	public Mention(String code, String nom, String nomCourt,
 			TypeMention typeMention, Set<MotCle> motsCles, int droits,
-			Set<Personne> responsables,
-			Set<Specialite> specialites,
-			Set<Programme> programmes,
-			Set<Composante> composantes, String adaptation,
+			Set<Personne> responsables, Set<Specialite> specialites,
+			Set<Programme> programmes, Set<Composante> composantes,
+			Set<ErreurStruct> erreursStruct, String adaptation,
 			String adaptationHab, String adosPro, String adosRecherche,
 			String aideInsPro, String aideInsProHab, String aideOrientation,
 			String aideOrientationHab, String aideReussite,
@@ -214,9 +219,9 @@ public class Mention implements Serializable {
 			String posOffreRegion, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
 			String publicHab, Set<Domaine> domaines, String secteurPro,
-			String typeDiplome, String validiteCompetences,
-			String web, boolean publiable, boolean contenuValide,
-			boolean structureValide, int nbErreurs) {
+			String typeDiplome, String validiteCompetences, String web,
+			boolean publiable, boolean contenuValide, boolean structureValide,
+			int nbErreurs) {
 		super();
 		this.code = code;
 		this.nom = nom;
@@ -228,6 +233,7 @@ public class Mention implements Serializable {
 		this.specialites = specialites;
 		this.programmes = programmes;
 		this.composantes = composantes;
+		this.erreursStruct = erreursStruct;
 		this.adaptation = adaptation;
 		this.adaptationHab = adaptationHab;
 		this.adosPro = adosPro;
@@ -291,6 +297,8 @@ public class Mention implements Serializable {
 		this.structureValide = structureValide;
 		this.nbErreurs = nbErreurs;
 	}
+
+
 
 	public String getCode() {
 		return code;
@@ -370,6 +378,14 @@ public class Mention implements Serializable {
 
 	public void setComposantes(Set<Composante> composantes) {
 		this.composantes = composantes;
+	}
+
+	public Set<ErreurStruct> getErreursStruct() {
+		return erreursStruct;
+	}
+
+	public void setErreursStruct(Set<ErreurStruct> erreursStruct) {
+		this.erreursStruct = erreursStruct;
 	}
 
 	public String getAdaptation() {
@@ -875,6 +891,4 @@ public class Mention implements Serializable {
 	public void setNbErreurs(int nbErreurs) {
 		this.nbErreurs = nbErreurs;
 	}
-
-
 }

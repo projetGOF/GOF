@@ -2,6 +2,7 @@ package gof.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.Version;
 
@@ -43,6 +45,12 @@ public abstract class ElemStruct implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_fils"))
 	protected List<ElemStruct> elementsFils;
 	
+	@OneToMany
+	@JoinTable(name="element_erreurs_structure",
+				joinColumns=@JoinColumn(name="code_element"),
+				inverseJoinColumns=@JoinColumn(name="id_erreur"))
+	protected Set<ErreurStruct> erreursStruct;
+	
 	@Version
 	protected long version;
 	
@@ -50,7 +58,8 @@ public abstract class ElemStruct implements Serializable {
 
 	public ElemStruct(String code, String nom, int nbCredits,
 			boolean publiable, boolean contenuValide, boolean structureValide,
-			int nbErreurs, List<ElemStruct> elementsFils) {
+			int nbErreurs, List<ElemStruct> elementsFils,
+			Set<ErreurStruct> erreursStruct) {
 		super();
 		this.code = code;
 		this.nom = nom;
@@ -60,6 +69,7 @@ public abstract class ElemStruct implements Serializable {
 		this.structureValide = structureValide;
 		this.nbErreurs = nbErreurs;
 		this.elementsFils = elementsFils;
+		this.erreursStruct = erreursStruct;
 	}
 
 	public String getCode() {
@@ -126,6 +136,14 @@ public abstract class ElemStruct implements Serializable {
 		this.elementsFils = elementsFils;
 	}
 
+	public Set<ErreurStruct> getErreursStruct() {
+		return erreursStruct;
+	}
+
+	public void setErreursStruct(Set<ErreurStruct> erreursStruct) {
+		this.erreursStruct = erreursStruct;
+	}
+
 	public long getVersion() {
 		return version;
 	}
@@ -133,4 +151,8 @@ public abstract class ElemStruct implements Serializable {
 	public void setVersion(long version) {
 		this.version = version;
 	}
+
+	
 }
+
+	

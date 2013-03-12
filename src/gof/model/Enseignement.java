@@ -73,22 +73,23 @@ public class Enseignement extends ElemStruct {
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
     protected Set<Personne> responsables;
 	
-	public Enseignement() {}
+	public Enseignement() { super(); }
 
 	public Enseignement(String code, String nom, int nbCredits,
 			boolean publiable, boolean contenuValide, boolean structureValide,
-			int nbErreurs, List<ElemStruct> elementsFils, String apogee,
+			int nbErreurs, List<ElemStruct> elementsFils,
+			Set<ErreurStruct> erreursStruct, String apogee,
 			String bibliographie, int capacite, String capitalisation,
 			String coefficient, String competences, String competencesHab,
 			String contenu, String contenuHab, Date dateModification,
 			String discipline, float dureeStage, String etatRof, int langue,
 			String mcc, String mccHab, String modalitesOrganisation,
 			boolean mutualisable, String preRequis, String preRequisOblig,
-			String preRequisObligHab, String typeEns, 
-			int volAutres, int volCM, int volGlobal, int volTD, int volTP,
-			int volTravail, Set<Personne> responsables) {
+			String preRequisObligHab, String typeEns, int volAutres, int volCM,
+			int volGlobal, int volTD, int volTP, int volTravail,
+			Set<Personne> responsables) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
-				nbErreurs, elementsFils);
+				nbErreurs, elementsFils, erreursStruct);
 		this.apogee = apogee;
 		this.bibliographie = bibliographie;
 		this.capacite = capacite;
@@ -351,6 +352,6 @@ public class Enseignement extends ElemStruct {
 	public void setResponsables(Set<Personne> responsables) {
 		this.responsables = responsables;
 	}
-	
+
 	
 }

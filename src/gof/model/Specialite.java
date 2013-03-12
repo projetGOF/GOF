@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -37,6 +38,12 @@ public class Specialite implements Serializable {
     	joinColumns=@JoinColumn(name="code_specialite"),
     	inverseJoinColumns=@JoinColumn(name="code_programme"))
 	private Set<Programme> programmes;
+    
+    @OneToMany
+	@JoinTable(name="specialite_erreurs_structure",
+				joinColumns=@JoinColumn(name="code_specialite"),
+				inverseJoinColumns=@JoinColumn(name="id_erreur"))
+	private Set<ErreurStruct> erreursStruct;
     
     @Column(length = 2000)
 	private String aideInsPro;
@@ -135,8 +142,8 @@ public class Specialite implements Serializable {
 
 	public Specialite(String code, String nom, String nomCourt,
 			String identificateur, Set<Personne> responsables,
-			Set<Programme> programmes, String aideInsPro,
-			String aideInsProHab, String aideOrientation,
+			Set<Programme> programmes, Set<ErreurStruct> erreursStruct,
+			String aideInsPro, String aideInsProHab, String aideOrientation,
 			String aideOrientationHab, String aideReussite,
 			String aideReussiteHab, String aspectsFormatContinue,
 			String aspectsFormatPro, String aspectsFormatRecherche,
@@ -151,9 +158,8 @@ public class Specialite implements Serializable {
 			String mutualisation, String orgPedago, String orgPedagoHab,
 			String pilotage, String politiqueStages, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
-			String publiqueHab, String validiteCompetences, 
-			boolean publiable, boolean contenuValide, boolean structureValide,
-			int nbErreurs) {
+			String publiqueHab, String validiteCompetences, boolean publiable,
+			boolean contenuValide, boolean structureValide, int nbErreurs) {
 		super();
 		this.code = code;
 		this.nom = nom;
@@ -161,6 +167,7 @@ public class Specialite implements Serializable {
 		this.identificateur = identificateur;
 		this.responsables = responsables;
 		this.programmes = programmes;
+		this.erreursStruct = erreursStruct;
 		this.aideInsPro = aideInsPro;
 		this.aideInsProHab = aideInsProHab;
 		this.aideOrientation = aideOrientation;
@@ -253,6 +260,14 @@ public class Specialite implements Serializable {
 
 	public void setProgrammes(Set<Programme> programmes) {
 		this.programmes = programmes;
+	}
+
+	public Set<ErreurStruct> getErreursStruct() {
+		return erreursStruct;
+	}
+
+	public void setErreursStruct(Set<ErreurStruct> erreursStruct) {
+		this.erreursStruct = erreursStruct;
 	}
 
 	public String getAideInsPro() {
@@ -616,4 +631,5 @@ public class Specialite implements Serializable {
 	}
 	
 	
+
 }

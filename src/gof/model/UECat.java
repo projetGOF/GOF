@@ -72,21 +72,22 @@ public class UECat extends ElemStruct {
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
     protected Set<Personne> responsables;
 	
-	public UECat() {}
+	public UECat() { super(); }
 
 	public UECat(String code, String nom, int nbCredits, boolean publiable,
 			boolean contenuValide, boolean structureValide, int nbErreurs,
-			List<ElemStruct> elementsFils, String apogee, String bibliographie,
-			int capacite, String capitalisation, String coefficient,
-			String competences, String competencesHab, String contenu,
-			String contenuHab, Date dateModification, String discipline,
-			float dureeStage, String etatRof, int langue, String mcc,
-			String mccHab, boolean miseEnService, String modalitesOrganisation,
+			List<ElemStruct> elementsFils, Set<ErreurStruct> erreursStruct,
+			String apogee, String bibliographie, int capacite,
+			String capitalisation, String coefficient, String competences,
+			String competencesHab, String contenu, String contenuHab,
+			Date dateModification, String discipline, float dureeStage,
+			String etatRof, int langue, String mcc, String mccHab,
+			boolean miseEnService, String modalitesOrganisation,
 			String preRequis, String preRequisOblig, String preRequisObligHab,
-			int volAutres, int volCM, int volGlobal, int volTD,
-			int volTP, int volTravail, Set<Personne> responsables) {
+			int volAutres, int volCM, int volGlobal, int volTD, int volTP,
+			int volTravail, Set<Personne> responsables) {
 		super(code, nom, nbCredits, publiable, contenuValide, structureValide,
-				nbErreurs, elementsFils);
+				nbErreurs, elementsFils, erreursStruct);
 		this.apogee = apogee;
 		this.bibliographie = bibliographie;
 		this.capacite = capacite;
