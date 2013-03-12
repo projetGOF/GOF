@@ -20,7 +20,7 @@ import javax.persistence.Version;
 public abstract class ElemStruct implements Serializable {
 
 	@Id
-	@Column(name="code", length=15)
+	@Column(name="code", length=50)
 	protected String code;
 	
 	@Column(nullable=false)

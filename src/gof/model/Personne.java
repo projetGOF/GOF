@@ -18,6 +18,7 @@ import javax.persistence.UniqueConstraint;
 public class Personne implements Serializable {
 	
 	@Id
+	@Column(length=50)
 	private String code;
 	
 	@Column(unique=true)
@@ -34,7 +35,7 @@ public class Personne implements Serializable {
 			joinColumns=@JoinColumn(name="code_personne"),
 			uniqueConstraints= @UniqueConstraint(columnNames={"code_personne","statut"}))
 	@Enumerated(EnumType.STRING)
-	@Column(name="statut")
+	@Column(name="statut", length=50)
 	private Set<Statut> statuts;
 	
 	public Personne(){}

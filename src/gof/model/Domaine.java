@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Domaine implements Serializable{
 
 	@Id
-	@Column(name="code", length=15)
+	@Column(name="code", length=50)
 	private String code;
 	private String nom;
 	

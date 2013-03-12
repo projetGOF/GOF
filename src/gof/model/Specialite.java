@@ -19,7 +19,7 @@ import javax.persistence.Version;
 public class Specialite implements Serializable {
 
 	@Id
-	@Column(name="code", length=15)
+	@Column(name="code", length=50)
 	private String code;
 	@Column(nullable=false)
 	private String nom;

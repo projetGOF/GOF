@@ -2,6 +2,7 @@ package gof.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 public class MotCle implements Serializable {
 
 	@Id
+	@Column(length=100)
 	private String motcle;
 	
 	public MotCle() {	}
