@@ -29,7 +29,7 @@ public class Programme extends ElemStruct {
 	@Temporal(TemporalType.DATE)
 	protected Date dateModification;
 	
-	protected int dureeStage;
+	protected float dureeStage;
 	@Column(length = 2000)
 	protected String ensDelocalisees;
 	@Column(length = 2000)
@@ -95,7 +95,7 @@ public class Programme extends ElemStruct {
 			boolean contenuValide, boolean structureValide, int nbErreurs,
 			List<ElemStruct> elementsFils, String identificateur,
 			String apogee, String aspectsFormatRecherche, int capacite,
-			String competences, Date dateModification, int dureeStage,
+			String competences, Date dateModification, float dureeStage,
 			String ensDelocalisees, String ensDelocaliseesHab, String etatRof,
 			String infosDiverses, int langue, String mcc,
 			String modalitesInscription, String modalitesPedagogique,
@@ -201,11 +201,11 @@ public class Programme extends ElemStruct {
 		this.dateModification = dateModification;
 	}
 
-	public int getDureeStage() {
+	public float getDureeStage() {
 		return dureeStage;
 	}
 
-	public void setDureeStage(int dureeStage) {
+	public void setDureeStage(float dureeStage) {
 		this.dureeStage = dureeStage;
 	}
 
