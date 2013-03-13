@@ -120,7 +120,7 @@ public class Specialite implements Serializable {
 	@Column(length = 2000)
 	private String publique;
 	@Column(length = 2000)
-	private String publiqueHab; 
+	private String publicHab; 
 	@Column(length = 2000)
 	private String validiteCompetences;
 	
@@ -156,7 +156,7 @@ public class Specialite implements Serializable {
 			String mutualisation, String orgPedago, String orgPedagoHab,
 			String pilotage, String politiqueStages, String poursuiteEtudes,
 			String poursuiteEtudesHab, String previsions, String publique,
-			String publiqueHab, String validiteCompetences, boolean publiable,
+			String publicHab, String validiteCompetences, boolean publiable,
 			boolean contenuValide, boolean structureValide, int nbErreurs) {
 		super();
 		this.code = code;
@@ -204,7 +204,7 @@ public class Specialite implements Serializable {
 		this.poursuiteEtudesHab = poursuiteEtudesHab;
 		this.previsions = previsions;
 		this.publique = publique;
-		this.publiqueHab = publiqueHab;
+		this.publicHab = publicHab;
 		this.validiteCompetences = validiteCompetences;
 		this.publiable = publiable;
 		this.contenuValide = contenuValide;
@@ -572,12 +572,12 @@ public class Specialite implements Serializable {
 		this.publique = publique;
 	}
 
-	public String getPubliqueHab() {
-		return publiqueHab;
+	public String getPublicHab() {
+		return publicHab;
 	}
 
-	public void setPubliqueHab(String publiqueHab) {
-		this.publiqueHab = publiqueHab;
+	public void setPublicHab(String publicHab) {
+		this.publicHab = publicHab;
 	}
 
 	public String getValiditeCompetences() {
@@ -627,7 +627,6 @@ public class Specialite implements Serializable {
 	public void setNbErreurs(int nbErreurs) {
 		this.nbErreurs = nbErreurs;
 	}
-	
-	
 
+	
 }
