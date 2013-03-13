@@ -40,9 +40,7 @@ public class Specialite implements Serializable {
 	private Set<Programme> programmes;
     
     @OneToMany
-	@JoinTable(name="specialite_erreurs_structure",
-				joinColumns=@JoinColumn(name="code_specialite"),
-				inverseJoinColumns=@JoinColumn(name="id_erreur"))
+	@JoinColumn(name="code")
 	private Set<ErreurStruct> erreursStruct;
     
     @Column(length = 2000)

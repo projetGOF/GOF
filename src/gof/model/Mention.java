@@ -59,11 +59,9 @@ public class Mention implements Serializable {
     	joinColumns=@JoinColumn(name="code_mention"),
     	inverseJoinColumns=@JoinColumn(name="code_composante"))
 	private Set<Composante> composantes;
-    
+
     @OneToMany
-	@JoinTable(name="mention_erreurs_structure",
-				joinColumns=@JoinColumn(name="code_mention"),
-				inverseJoinColumns=@JoinColumn(name="id_erreur"))
+	@JoinColumn(name="code")
 	private Set<ErreurStruct> erreursStruct;
     
     @Column(length = 2000)

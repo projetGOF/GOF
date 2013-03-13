@@ -46,9 +46,7 @@ public abstract class ElemStruct implements Serializable {
 	protected List<ElemStruct> elementsFils;
 	
 	@OneToMany
-	@JoinTable(name="element_erreurs_structure",
-				joinColumns=@JoinColumn(name="code_element"),
-				inverseJoinColumns=@JoinColumn(name="id_erreur"))
+	@JoinColumn(name="code")
 	protected Set<ErreurStruct> erreursStruct;
 	
 	@Version
