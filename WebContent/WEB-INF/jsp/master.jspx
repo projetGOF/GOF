@@ -16,8 +16,8 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
 			<title><fmt:message key="master.title"/></title>
-			<spring:url value="/resources/css/home.css" var="homecss" /> 	
-			<link rel="stylesheet" href="${homecss}" type="text/css" />
+			<spring:url value="/resources/css/domaine.css" var="domainecss" /> 	
+			<link rel="stylesheet" href="${domainecss}" type="text/css" />
 				
 		</head>
 		<body>
@@ -33,9 +33,49 @@
 				</div><!-- fin <div id="nav-right"> -->	
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
+				<p class="alerte0">Menu de travail : <a href="etat.htm">État de la publication</a></p>
 				<h1><fmt:message key="master.title"/></h1>
-				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
+				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
 				
+				<div style="float:right; clear:right; margin-left: 10px;">
+					<div class="pave-droite noprint">
+						<div class="titre-pave">Navigation</div>
+						<div class="corps-pave">
+							<ul>
+								<li><a href="accueil.htm">Toutes les formations</a> (<a href="#" onclick="$('#naviforma').toggle('fast'); return false;">détails</a>)</li>
+							</ul>
+							<div id="naviforma" style="display:none;">
+								<ul>
+									<li><a href="dut.html">Diplômes universitaires de technologie</a></li>
+									<li><a href="licence.htm">Licences généralistes</a></li>
+									<li><a href="licencePro.htm">Licences professionnelles</a></li>
+									<li><a href="master.htm">Masters</a></li>
+									<li><a href="diplomes-ingenieur.html">Diplômes d'ingénieur</a></li>
+									<li><a href="de-medecine.html">Diplômes d'état en Médecine</a></li>
+									<li><a href="de-pharmacie.html">Diplômes d'état en Pharmacie</a></li>
+									<li><a href="de-odontologie.html">Diplômes d'état en Odontologie</a></li>
+									<li><a href="magisteres.html">Magistères</a></li>
+								</ul>
+							</div>
+							<ul>
+								<li>
+									<a href="#" onclick="$('#div-search').toggle('fast'); return false;">Chercher</a>
+									<div id="div-search" style="display:none;">
+										<div style="display:block;">
+											<img src="google_logo.gif" width="80" border="0" alt="" /><br />
+											<form action="http://www.google.fr/search" method="get">
+												<input type="text" size="15" name="as_q" />
+												<input type="hidden" name="as_sitesearch" value="http://formations.univ-amu.fr" />
+												<input type="hidden" name="as_filetype" value="html" />
+												<input type="submit" name="go" value="Go" />
+											</form>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 				
 				<p>Le 1er janvier 2012, l'<b>Université de Provence</b>,
 					l'<b>Université de la Méditerranée</b> et l'<b>Université Paul

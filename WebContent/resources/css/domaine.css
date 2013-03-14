@@ -20,6 +20,7 @@ body
 p, div, ul, li
 {
 	font-size: small;
+	font-family: Verdana,Arial,sans-serif;
 }
 
 #header
@@ -97,20 +98,36 @@ div.titre-pave
     color: rgb(19, 121, 198);
 }
 
-div.corps-pave {
-    margin: 4px 10px 8px;
-    padding: 3px;
-}
-
 div.pave-droite {
     background: none repeat scroll 0 0 White;
     border: 1px solid Grey;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 2px 1px 8px #AAAAAA;
     margin-bottom: 20px;
+    margin-right: 5px;
     padding: 0;
     text-align: left;
     width: 250px;
+}
+
+div.pave-droite ul {
+	margin: 0px 0px 0px 0px;
+	list-style-image: url('puce.png');
+	padding-left: 10px;
+}
+
+div.pave-droite p {
+    margin: 4px 0px 4px 0px;
+    padding: 0px 8px 0px 8px;
+}
+
+div.pave-droite+div.pave-droite {
+    margin-top: 5px;
+}
+
+div.corps-pave {
+    margin: 4px 10px 8px;
+    padding: 3px;
 }
 
 div.pave-droite ul {
@@ -124,7 +141,7 @@ ul
     list-style-image: url("../images/puce.png");
 }
 
-h2
+h1
 {
 	color: rgb(19, 121, 198);
 	font-size: xx-large;

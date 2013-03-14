@@ -132,4 +132,17 @@ public class GofController
         mentionDetailModel.put("mention", this.mentionManager.findMention(mention));
         return new ModelAndView("mention", "model", mentionDetailModel);
 	}
+	
+	@RequestMapping("/etat.htm")
+	public ModelAndView etat()
+	{
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("domaines", this.domaineManager.findAllDomaines());
+		model.put("mentionL", this.mentionManager.findAllMentionByTypeMention(TypeMention.LICENCE));
+		model.put("mentionLP", this.mentionManager.findAllMentionByTypeMention(TypeMention.LICENCEPRO));
+		model.put("mentionM", this.mentionManager.findAllMentionByTypeMention(TypeMention.MASTER));
+		return new ModelAndView("etat", "model", model);
+	}
+	
+	
 }
