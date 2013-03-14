@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class MotCle implements Serializable {
 
 	@Id
-	@Column(length=100)
+	@Column
 	private String motcle;
 	
 	public MotCle() {	}

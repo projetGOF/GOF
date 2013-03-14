@@ -39,9 +39,9 @@ INSERT INTO composant_programme (code, type, mutualisable, numero) VALUES ('SEM0
 
 -- Insertion d'un enseignement
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('ENS01', 'ENSEIGNEMENT 01', 1, 1, 1, 0, 42, 0);
-INSERT INTO enseignement (code, capacite, dureeStage, mutualisable, volAutres, volCM, volGlobal, volTD, volTP, volTravail, langue) VALUES ('ENS01', 30, 6, 1, 33, 33, 33, 33, 33, 33, 0);
+INSERT INTO enseignement (code, capacite, dureeStage, mutualisable, volAutres, volCM, volGlobal, volTD, volTP, volTravail, langue, capitalisation) VALUES ('ENS01', 30, 6, 1, 33, 33, 33, 33, 33, 33, 0, 0);
 
 --Insertion d'une UECat
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('UE01', 'UECAT 01', 1, 1, 1, 0, 42, 0);
-INSERT INTO uecat (code, capacite, dureeStage, volAutres, volCM, volGlobal, volTD, volTP, volTravail, miseEnService, langue) VALUES ('UE01', 30, 6, 33, 33, 33, 33, 33, 33, 1, 0);
+INSERT INTO uecat (code, capacite, dureeStage, volAutres, volCM, volGlobal, volTD, volTP, volTravail, miseEnService, langue, capitalisation) VALUES ('UE01', 30, 6, 33, 33, 33, 33, 33, 33, 1, 0, 0);
 

@@ -21,8 +21,9 @@ public class Enseignement extends ElemStruct {
 	@Column(length = 2000)
 	protected String bibliographie;
 	protected int capacite;
-	@Column(length = 2000)
-	protected String capitalisation;
+
+	protected boolean capitalisation;
+	
 	@Column(length = 2000)
 	protected String coefficient;
 	@Column(length = 2000)
@@ -79,7 +80,7 @@ public class Enseignement extends ElemStruct {
 			boolean publiable, boolean contenuValide, boolean structureValide,
 			int nbErreurs, List<ElemStruct> elementsFils,
 			Set<ErreurStruct> erreursStruct, String apogee,
-			String bibliographie, int capacite, String capitalisation,
+			String bibliographie, int capacite, boolean capitalisation,
 			String coefficient, String competences, String competencesHab,
 			String contenu, String contenuHab, Date dateModification,
 			String discipline, float dureeStage, String etatRof, int langue,
@@ -145,11 +146,11 @@ public class Enseignement extends ElemStruct {
 		this.capacite = capacite;
 	}
 
-	public String getCapitalisation() {
+	public boolean getCapitalisation() {
 		return capitalisation;
 	}
 
-	public void setCapitalisation(String capitalisation) {
+	public void setCapitalisation(boolean capitalisation) {
 		this.capitalisation = capitalisation;
 	}
 
