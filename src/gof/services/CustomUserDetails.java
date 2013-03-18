@@ -29,11 +29,17 @@ import gof.model.Statut;
 public class CustomUserDetails implements UserDetailsService
 {
 	/**
-	 * Service permettant l'intéraction avec la couche DAO.
+	 * Service permettant l'intéraction avec la couche Service.
 	 */
 	@Autowired
 	private PersonneManager personneManager;
-
+	
+	@Autowired
+	private MentionManager mentionManager;
+	
+	@Autowired
+	private ElemStructManager elemStructManager;
+	
 	/* (non-Javadoc)
 	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
 	 */
@@ -63,7 +69,7 @@ public class CustomUserDetails implements UserDetailsService
 	/**
 	 * @return le nom d'utilisateur de la personne connectée
 	 */
-	public static String getCurrentUserLogin()
+	public String getCurrentUserLogin()
 	{
 		User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
@@ -73,7 +79,7 @@ public class CustomUserDetails implements UserDetailsService
 	/**
 	 * @return true si l'utilisateur connecté possède les droits d'administrateur, false sinon
 	 */
-	public static boolean isCurrentUserAdmin()
+	public boolean isCurrentUserAdmin()
 	{
 		User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
@@ -87,5 +93,19 @@ public class CustomUserDetails implements UserDetailsService
 		
 		return false;
 	}
-	
+
+	/**
+	 * @return true si l'utilisateur connecté possède les droits d'edition sur la fiche dont le code est passé en parametre, false sinon
+	 */
+	public boolean isCurrentUserHasRightOn(String code)
+	{
+		Personne currentUser = personneManager.findPersonByIdExt(this.getCurrentUserLogin());
+		
+		HashSet<String> codesFiches = (HashSet<String>) personneManager.findAllCodesFiches(currentUser);
+		
+		if(codesFiches.contains(code))
+			return true;
+		
+		return false;
+	}
 }

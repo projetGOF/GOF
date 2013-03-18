@@ -19,7 +19,7 @@ import javax.persistence.Version;
 @SuppressWarnings("serial")
 @Entity(name="element")
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class ElemStruct implements Serializable {
+public class ElemStruct implements Serializable {
 
 	@Id
 	@Column(name="code", length=50)
@@ -44,6 +44,9 @@ public abstract class ElemStruct implements Serializable {
     	joinColumns=@JoinColumn(name="code_pere"),
     	inverseJoinColumns=@JoinColumn(name="code_fils"))
 	protected List<ElemStruct> elementsFils;
+	
+	@ManyToMany(mappedBy="elementsFils")
+	protected List<ElemStruct> elementsPere;
 	
 	@OneToMany
 	@JoinColumn(name="code")
@@ -132,6 +135,14 @@ public abstract class ElemStruct implements Serializable {
 
 	public void setElementsFils(List<ElemStruct> elementsFils) {
 		this.elementsFils = elementsFils;
+	}
+
+	public List<ElemStruct> getElementsPere() {
+		return elementsPere;
+	}
+
+	public void setElementsPere(List<ElemStruct> elementsPere) {
+		this.elementsPere = elementsPere;
 	}
 
 	public Set<ErreurStruct> getErreursStruct() {

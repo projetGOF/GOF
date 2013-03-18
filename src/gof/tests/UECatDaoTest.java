@@ -2,6 +2,7 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
+import gof.dao.ComposantProgrammeDao;
 import gof.dao.UECatDao;
 import gof.model.UECat;
 
@@ -18,7 +19,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UECatDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Autowired
-	private UECatDao uECatDao;		
+	private UECatDao uECatDao;
+	
+	@Autowired
+	private ComposantProgrammeDao composantProgrammeDao;
 	
 	@Test
 	public void findAllUECatsTest(){
@@ -60,6 +64,7 @@ public class UECatDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 
 	@Test
 	public void deleteUECatTest(){
+		composantProgrammeDao.findComposantProgramme("SEM01").getElementsFils().remove(uECatDao.findUECat("UE01"));
 		uECatDao.deleteUECat(uECatDao.findUECat("UE01"));
 		assertEquals(0,uECatDao.findAllUECats().size());
 	}

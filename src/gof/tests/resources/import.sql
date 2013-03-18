@@ -27,11 +27,15 @@ INSERT INTO mention_domaine VALUES ('MENT01', 'DOM2');
 
 INSERT INTO mention_responsable VALUES ('MENT01', 'PER02');
 
+-- Insertion d'une specialite reliée ) la mention 'MENT01'
 INSERT INTO specialite (code, nom, publiable, contenuValide, structureValide, nbErreurs, version, code_mention) VALUES ('SPE01', 'SPECIALITE 01', 1, 1, 1, 0, 0, 'MENT01');
 
--- Insertion d'un programme
+-- Insertion d'un programme relié à la mention 'MENT01'
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('PROG01', 'PROGRAMME 01', 1, 1, 1, 0, 42, 0);
 INSERT INTO programme (code, capacite, dureeStage, troncCommun, volCM, volTD, volTP, code_mention, langue) VALUES ('PROG01', 30, 6, 1, 33, 33, 33, 'MENT01', 0);
+
+-- 'PROG01' est relié à la spécialité 'SPE01'
+INSERT INTO specialite_programme (code_specialite, code_programme) VALUES ('SPE01', 'PROG01');
 
 -- Insertion d'un composant programme
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('SEM01', 'SEMESTRE 01', 1, 1, 1, 0, 42, 0);
@@ -41,7 +45,27 @@ INSERT INTO composant_programme (code, type, mutualisable, numero) VALUES ('SEM0
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('ENS01', 'ENSEIGNEMENT 01', 1, 1, 1, 0, 42, 0);
 INSERT INTO enseignement (code, capacite, dureeStage, mutualisable, volAutres, volCM, volGlobal, volTD, volTP, volTravail, langue, capitalisation) VALUES ('ENS01', 30, 6, 1, 33, 33, 33, 33, 33, 33, 0, 0);
 
---Insertion d'une UECat
+-- Insertion d'une UECat
 INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('UE01', 'UECAT 01', 1, 1, 1, 0, 42, 0);
 INSERT INTO uecat (code, capacite, dureeStage, volAutres, volCM, volGlobal, volTD, volTP, volTravail, miseEnService, langue, capitalisation) VALUES ('UE01', 30, 6, 33, 33, 33, 33, 33, 33, 1, 0, 0);
 
+-- 'PROG01' est le pere de 'SEM01'
+INSERT INTO element_fils (code_pere, code_fils, rang) VALUES ('PROG01', 'SEM01', 0);
+-- 'SEM01' est le pere de 'ENS01'
+INSERT INTO element_fils (code_pere, code_fils, rang) VALUES ('SEM01', 'ENS01', 0);
+-- 'SEM01' est le pere de 'UE01'
+INSERT INTO element_fils (code_pere, code_fils, rang) VALUES ('SEM01', 'UE01', 1);
+
+-- ENS02
+-- INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('ENS02', 'ENSEIGNEMENT 02', 1, 1, 1, 0, 42, 0);
+-- INSERT INTO enseignement (code, capacite, dureeStage, mutualisable, volAutres, volCM, volGlobal, volTD, volTP, volTravail, langue, capitalisation) VALUES ('ENS02', 30, 6, 1, 33, 33, 33, 33, 33, 33, 0, 0);
+-- INSERT INTO enseignement_responsable (code_enseignement, code_responsable) VALUES ('ENS02', 'PER02');
+
+-- SPE02
+-- INSERT INTO specialite (code, nom, publiable, contenuValide, structureValide, nbErreurs, version) VALUES ('SPE02', 'SPECIALITE 02', 1, 1, 1, 0, 0);
+-- INSERT INTO specialite_responsable (code_specialite, code_responsable) VALUES ('SPE02', 'PER02');
+
+-- PROG02
+-- INSERT INTO element (code, nom, publiable, contenuValide, structureValide, nbErreurs, nbCredits, version) VALUES ('PROG02', 'PROGRAMME 02', 1, 1, 1, 0, 42, 0);
+-- INSERT INTO programme (code, capacite, dureeStage, troncCommun, volCM, volTD, volTP, langue) VALUES ('PROG02', 30, 6, 1, 33, 33, 33, 0);
+-- INSERT INTO specialite_programme (code_specialite, code_programme) VALUES ('SPE02', 'PROG02');

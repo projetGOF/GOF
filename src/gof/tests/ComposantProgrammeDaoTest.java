@@ -3,6 +3,7 @@ package gof.tests;
 import static org.junit.Assert.*;
 
 import gof.dao.ComposantProgrammeDao;
+import gof.dao.ProgrammeDao;
 import gof.model.ComposantProgramme;
 import gof.model.TypeComposantProgramme;
 
@@ -21,6 +22,9 @@ public class ComposantProgrammeDaoTest extends AbstractTransactionalJUnit4Spring
 	@Autowired
 	private ComposantProgrammeDao composantProgrammeDao;
 	
+	@Autowired
+	private ProgrammeDao programmeDao;
+	
 	@Test
 	public void findAllComposantsProgrammeTest() {
 		assertEquals(1, composantProgrammeDao.findAllComposantsProgramme().size());
@@ -29,6 +33,7 @@ public class ComposantProgrammeDaoTest extends AbstractTransactionalJUnit4Spring
 	@Test
 	public void findComposantProgrammeTest() {
 		assertEquals("SEMESTRE 01", composantProgrammeDao.findComposantProgramme("SEM01").getNom());
+		assertTrue(composantProgrammeDao.findComposantProgramme("SEM01").getElementsPere().contains(programmeDao.findProgramme("PROG01")));
 	}
 
 	@Test
@@ -51,6 +56,7 @@ public class ComposantProgrammeDaoTest extends AbstractTransactionalJUnit4Spring
 
 	@Test
 	public void deleteComposantProgrammeTest() {
+		programmeDao.findProgramme("PROG01").getElementsFils().remove(0);
 		composantProgrammeDao.deleteComposantProgramme(composantProgrammeDao.findComposantProgramme("SEM01"));
 		assertEquals(0, composantProgrammeDao.findAllComposantsProgramme().size());
 	}

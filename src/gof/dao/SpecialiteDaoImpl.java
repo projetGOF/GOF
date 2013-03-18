@@ -39,5 +39,4 @@ public class SpecialiteDaoImpl implements SpecialiteDao {
 		em.remove(s);
 		em.flush();
 	}
-
 }

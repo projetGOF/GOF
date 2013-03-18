@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -82,6 +83,13 @@ public class Programme extends ElemStruct {
     	joinColumns=@JoinColumn(name="code_programme"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
     protected Set<Personne> responsables;
+    
+    @ManyToMany(mappedBy="programmes")
+    protected Set<Specialite> specialites;
+    
+    @ManyToOne
+    @JoinColumn(name="code_mention", insertable=false, updatable=false)
+    private Mention mention;
     
     @OneToMany
     @JoinColumn(name="code_programme_rattache")
@@ -473,6 +481,22 @@ public class Programme extends ElemStruct {
 
 	public void setEnseignementsRattaches(Set<Enseignement> enseignementsRattaches) {
 		this.enseignementsRattaches = enseignementsRattaches;
+	}
+
+	public Set<Specialite> getSpecialites() {
+		return specialites;
+	}
+
+	public void setSpecialites(Set<Specialite> specialites) {
+		this.specialites = specialites;
+	}
+
+	public Mention getMention() {
+		return mention;
+	}
+
+	public void setMention(Mention mention) {
+		this.mention = mention;
 	}
 
 	

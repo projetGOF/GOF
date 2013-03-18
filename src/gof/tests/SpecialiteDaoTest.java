@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import gof.dao.MentionDao;
 import gof.dao.SpecialiteDao;
 
+import gof.model.Mention;
 import gof.model.Specialite;
 
 import org.junit.Test;
@@ -33,6 +34,7 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 	@Test
 	public void findSpecialiteTest(){
 		assertEquals("SPECIALITE 01", specialiteDao.findSpecialite("SPE01").getNom());
+		assertEquals("MENT01", specialiteDao.findSpecialite("SPE01").getMention().getCode());
 	}
 
 	@Test
@@ -45,12 +47,17 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 		specialite.setStructureValide(true);
 		specialite.setNbErreurs(0);
 		specialite.setPubliable(true);
+		specialite.setMention(mentionDao.findMention("MENT01"));
 		
 		specialiteDao.saveSpecialite(specialite);
 		
-		mentionDao.findMention("MENT01").getSpecialites().add(specialite);
+		Mention mention = mentionDao.findMention("MENT01");
+		mention.getSpecialites().add(specialiteDao.findSpecialite("SPE02"));
+		
+		mentionDao.saveMention(mention);
 		
 		assertEquals("SPECIALITE 02", specialiteDao.findSpecialite("SPE02").getNom());
+		assertEquals("MENT01", specialiteDao.findSpecialite("SPE02").getMention().getCode());
 		assertEquals(2, mentionDao.findMention("MENT01").getSpecialites().size());
 	}
 

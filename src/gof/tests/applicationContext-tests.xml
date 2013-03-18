@@ -22,11 +22,6 @@
 	<bean id="sessionFactory"
   		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
   		<property name="dataSource" ref="dataSource" />
-  		<property name="annotatedClasses">
-    		<list>
-      			<value>gof.model.Personne</value> <!-- Liste des beans persistent intervenant dans les tests -->
-    		</list>
-  		</property>
   		<property name="hibernateProperties">
     		<props>
       			<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
@@ -53,5 +48,7 @@
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 	</context:component-scan>
+	
+	<context:component-scan base-package="gof.services" />
 
 </beans>

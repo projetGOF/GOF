@@ -2,8 +2,10 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
+import gof.dao.ComposantProgrammeDao;
 import gof.dao.MentionDao;
 import gof.dao.ProgrammeDao;
+import gof.dao.SpecialiteDao;
 
 import gof.model.Programme;
 
@@ -25,6 +27,12 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 	@Autowired
 	private MentionDao mentionDao;
 	
+	@Autowired
+	private SpecialiteDao specialiteDao;
+	
+	@Autowired
+	private ComposantProgrammeDao composantProgrammeDao;
+	
 	@Test
 	public void findAllProgrammesTest(){
 		assertEquals(1, programmeDao.findAllProgrammes().size());
@@ -33,6 +41,8 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 	@Test
 	public void findProgrammeTest(){
 		assertEquals("PROGRAMME 01", programmeDao.findProgramme("PROG01").getNom());
+		assertEquals(mentionDao.findMention("MENT01"), programmeDao.findProgramme("PROG01").getMention());
+		assertTrue(programmeDao.findProgramme("PROG01").getElementsFils().contains(composantProgrammeDao.findComposantProgramme("SEM01")));
 	}
 
 	@Test
@@ -65,6 +75,7 @@ public class ProgrammeDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 
 	@Test
 	public void deleteProgrammeTest(){
+		specialiteDao.findSpecialite("SPE01").getProgrammes().remove(programmeDao.findProgramme("PROG01"));
 		programmeDao.deleteProgramme(programmeDao.findProgramme("PROG01"));
 		assertEquals(0, programmeDao.findAllProgrammes().size());
 	}

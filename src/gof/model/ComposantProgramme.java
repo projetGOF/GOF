@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @SuppressWarnings("serial")
 @Entity(name="composant_programme")
@@ -19,6 +21,10 @@ public class ComposantProgramme extends ElemStruct {
 	protected TypeComposantProgramme type;
 	
 	protected int numero;
+	
+	@ManyToOne
+    @JoinColumn(name="code_programme_rattache", insertable=false, updatable=false)
+    private Programme programme;
 	
 	public ComposantProgramme() { super(); }
 
@@ -56,6 +62,14 @@ public class ComposantProgramme extends ElemStruct {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public Programme getProgramme() {
+		return programme;
+	}
+
+	public void setProgramme(Programme programme) {
+		this.programme = programme;
 	}
 
 	

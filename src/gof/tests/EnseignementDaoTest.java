@@ -2,6 +2,7 @@ package gof.tests;
 
 import static org.junit.Assert.*;
 
+import gof.dao.ComposantProgrammeDao;
 import gof.dao.EnseignementDao;
 
 import gof.model.Enseignement;
@@ -19,7 +20,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Autowired
-	private EnseignementDao enseignementDao;	
+	private EnseignementDao enseignementDao;
+	
+	@Autowired
+	private ComposantProgrammeDao composantProgrammeDao;
 	
 	@Test
 	public void findAllEnseignementsTest(){
@@ -61,6 +65,7 @@ public class EnseignementDaoTest extends AbstractTransactionalJUnit4SpringContex
 
 	@Test
 	public void deleteEnseignementTest(){
+		composantProgrammeDao.findComposantProgramme("SEM01").getElementsFils().remove(enseignementDao.findEnseignement("ENS01"));
 		enseignementDao.deleteEnseignement(enseignementDao.findEnseignement("ENS01"));
 		assertEquals(0, enseignementDao.findAllEnseignements().size());
 	}

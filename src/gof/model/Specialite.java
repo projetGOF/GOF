@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,6 +39,10 @@ public class Specialite implements Serializable {
     	joinColumns=@JoinColumn(name="code_specialite"),
     	inverseJoinColumns=@JoinColumn(name="code_programme"))
 	private Set<Programme> programmes;
+    
+    @ManyToOne
+    @JoinColumn(name="code_mention", insertable=false, updatable=false)
+    private Mention mention;
     
     @OneToMany
 	@JoinColumn(name="code")
@@ -482,6 +487,14 @@ public class Specialite implements Serializable {
 
 	public void setMccHab(String mccHab) {
 		this.mccHab = mccHab;
+	}
+
+	public Mention getMention() {
+		return mention;
+	}
+
+	public void setMention(Mention mention) {
+		this.mention = mention;
 	}
 
 	public String getMesuresPrises() {

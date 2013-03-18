@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.UniqueConstraint;
 
 @SuppressWarnings("serial")
@@ -37,6 +38,21 @@ public class Personne implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name="statut", length=50)
 	private Set<Statut> statuts;
+	
+	@ManyToMany(mappedBy="responsables")
+	private Set<Mention> mentions;
+	
+	@ManyToMany(mappedBy="responsables")
+	private Set<Specialite> specialites;
+	
+	@ManyToMany(mappedBy="responsables")
+	private Set<Programme> programmes;
+	
+	@ManyToMany(mappedBy="responsables")
+	private Set<Enseignement> enseignements;
+	
+	@ManyToMany(mappedBy="responsables")
+	private Set<UECat> uecats;
 	
 	public Personne(){}
 
@@ -115,6 +131,46 @@ public class Personne implements Serializable {
 
 	public void setStatuts(Set<Statut> statuts) {
 		this.statuts = statuts;
+	}
+
+	public Set<Mention> getMentions() {
+		return mentions;
+	}
+
+	public void setMentions(Set<Mention> mentions) {
+		this.mentions = mentions;
+	}
+
+	public Set<Specialite> getSpecialites() {
+		return specialites;
+	}
+
+	public void setSpecialites(Set<Specialite> specialites) {
+		this.specialites = specialites;
+	}
+
+	public Set<Programme> getProgrammes() {
+		return programmes;
+	}
+
+	public void setProgrammes(Set<Programme> programmes) {
+		this.programmes = programmes;
+	}
+
+	public Set<Enseignement> getEnseignements() {
+		return enseignements;
+	}
+
+	public void setEnseignements(Set<Enseignement> enseignements) {
+		this.enseignements = enseignements;
+	}
+
+	public Set<UECat> getUecats() {
+		return uecats;
+	}
+
+	public void setUecats(Set<UECat> uecats) {
+		this.uecats = uecats;
 	}
 
 	

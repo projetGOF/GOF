@@ -16,5 +16,4 @@ public interface SpecialiteDao {
 	void saveSpecialite(Specialite s);
 
 	void deleteSpecialite(Specialite s);
-
 }

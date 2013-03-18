@@ -1,6 +1,7 @@
 package gof.services;
 
 import java.util.Collection;
+import java.util.Set;
 
 import gof.model.Personne;
 
@@ -18,4 +19,6 @@ public interface PersonneManager
 	void savePersonne(Personne p);
 	
 	void deletePersonne(Personne p);
+	
+	Set<String> findAllCodesFiches(Personne p);
 }
