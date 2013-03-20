@@ -2,22 +2,26 @@ package gof.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
+import gof.model.Mention;
+import gof.model.Programme;
+import gof.model.Specialite;
 import gof.model.TypeMention;
 import gof.services.CustomUserDetails;
 import gof.services.DomaineManager;
 import gof.services.MentionManager;
 import gof.services.PersonneManager;
+import gof.services.ProgrammeManager;
+import gof.services.SpecialiteManager;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-
-
 
 @Controller
 public class GofController
@@ -33,6 +37,9 @@ public class GofController
 	
 	@Autowired
 	ProgrammeManager programmeManager;
+	
+	@Autowired
+	PersonneManager personneManager;
 	
 	@RequestMapping("/accueil.htm")
 	public ModelAndView home(Model model)
