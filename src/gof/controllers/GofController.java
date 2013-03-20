@@ -1,15 +1,27 @@
 package gof.controllers;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
+import gof.model.ComposantProgramme;
+import gof.model.ElemStruct;
+import gof.model.Enseignement;
 import gof.model.Mention;
 import gof.model.Programme;
 import gof.model.Specialite;
 import gof.model.TypeMention;
+import gof.model.UECat;
+import gof.services.ComposantProgrammeManager;
 import gof.services.CustomUserDetails;
 import gof.services.DomaineManager;
+import gof.services.ElemStructManager;
+import gof.services.EnseignementManager;
 import gof.services.MentionManager;
 import gof.services.PersonneManager;
 import gof.services.ProgrammeManager;
 import gof.services.SpecialiteManager;
+import gof.services.UECatManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,10 +45,22 @@ public class GofController
 	SpecialiteManager specialiteManager;
 	
 	@Autowired
+	PersonneManager personneManager;
+	
+	@Autowired
+	ElemStructManager elemStructManager;
+	
+	@Autowired
 	ProgrammeManager programmeManager;
 	
 	@Autowired
-	PersonneManager personneManager;
+	UECatManager uecatManager;
+	
+	@Autowired
+	ComposantProgrammeManager composantProgManager;
+	
+	@Autowired
+	EnseignementManager enseignementManager;
 	
 	@RequestMapping("/accueil.htm")
 	public ModelAndView home(Model model)
@@ -128,8 +152,11 @@ public class GofController
 	{
         Specialite specialite = this.specialiteManager.findSpecialite(codeSpecialite);
 
+        Set<Programme> programmes = specialite.getProgrammes();
+        
         model.addAttribute("specialite", specialite);
-        model.addAttribute("programmes", specialite.getProgrammes());
+        model.addAttribute("programmes", programmes);
+        
         return new ModelAndView("specialite", "model", model);
 	}
 	
@@ -137,9 +164,140 @@ public class GofController
 	public ModelAndView programme(@PathVariable("programme") String codeProgramme, Model model)
 	{
         Programme programme = this.programmeManager.findProgramme(codeProgramme);
-          
+        
+        ArrayList<Programme> programmeFils = new ArrayList<Programme>();
+        ArrayList<UECat> uecatFils = new ArrayList<UECat>();
+        ArrayList<ComposantProgramme> composantProgFils = new ArrayList<ComposantProgramme>();
+        ArrayList<Enseignement> enseignementFils = new ArrayList<Enseignement>();
+        
+        
+        System.out.println(programme.getElementsFils().size());
+        
+        
+        for(Iterator<ElemStruct> it = programme.getElementsFils().iterator(); it.hasNext(); )
+        {
+        	ElemStruct currentElement = it.next();
+        	
+        	if(currentElement instanceof Programme)
+        		programmeFils.add((Programme) currentElement);
+        	else if(currentElement instanceof UECat)
+        		uecatFils.add((UECat) currentElement);
+        	else if(currentElement instanceof ComposantProgramme)
+        		composantProgFils.add((ComposantProgramme) currentElement);
+        	else if(currentElement instanceof Enseignement)
+        		enseignementFils.add((Enseignement) currentElement);
+        }
+        
         model.addAttribute("programme", programme);
-        return new ModelAndView("programme", "model", model);
+        
+        model.addAttribute("programmeFils", programmeFils);
+        model.addAttribute("uecatFils", uecatFils);
+        model.addAttribute("composantProgFils", composantProgFils);
+        model.addAttribute("enseignementFils", enseignementFils);
+        
+        return new ModelAndView("programme");
+	}
+
+	@RequestMapping("/uecat{uecat}.htm")
+	public ModelAndView uecat(@PathVariable("uecat") String codeUECat, Model model)
+	{
+        UECat uecat = this.uecatManager.findUECat(codeUECat);
+        
+        ArrayList<Programme> programmeFils = new ArrayList<Programme>();
+        ArrayList<UECat> uecatFils = new ArrayList<UECat>();
+        ArrayList<ComposantProgramme> composantProgFils = new ArrayList<ComposantProgramme>();
+        ArrayList<Enseignement> enseignementFils = new ArrayList<Enseignement>();
+        
+        for(Iterator<ElemStruct> it = uecat.getElementsFils().iterator(); it.hasNext(); )
+        {
+        	ElemStruct currentElement = it.next();
+        	
+        	if(currentElement instanceof Programme)
+        		programmeFils.add((Programme) currentElement);
+        	else if(currentElement instanceof UECat)
+        		uecatFils.add((UECat) currentElement);
+        	else if(currentElement instanceof ComposantProgramme)
+        		composantProgFils.add((ComposantProgramme) currentElement);
+        	else if(currentElement instanceof Enseignement)
+        		enseignementFils.add((Enseignement) currentElement);
+        }
+        
+        model.addAttribute("uecat", uecat);
+        
+        model.addAttribute("programmeFils", programmeFils);
+        model.addAttribute("uecatFils", uecatFils);
+        model.addAttribute("composantProgFils", composantProgFils);
+        model.addAttribute("enseignementFils", enseignementFils);
+        
+        return new ModelAndView("uecat", "model", model);
+	}
+	
+	@RequestMapping("/composantProg{composantProg}.htm")
+	public ModelAndView composantProg(@PathVariable("composantProg") String codeComposantProg, Model model)
+	{
+        ComposantProgramme composantProg = this.composantProgManager.findComposantProgramme(codeComposantProg);
+        
+        ArrayList<Programme> programmeFils = new ArrayList<Programme>();
+        ArrayList<UECat> uecatFils = new ArrayList<UECat>();
+        ArrayList<ComposantProgramme> composantProgFils = new ArrayList<ComposantProgramme>();
+        ArrayList<Enseignement> enseignementFils = new ArrayList<Enseignement>();
+        
+        for(Iterator<ElemStruct> it = composantProg.getElementsFils().iterator(); it.hasNext(); )
+        {
+        	ElemStruct currentElement = it.next();
+        	
+        	if(currentElement instanceof Programme)
+        		programmeFils.add((Programme) currentElement);
+        	else if(currentElement instanceof UECat)
+        		uecatFils.add((UECat) currentElement);
+        	else if(currentElement instanceof ComposantProgramme)
+        		composantProgFils.add((ComposantProgramme) currentElement);
+        	else if(currentElement instanceof Enseignement)
+        		enseignementFils.add((Enseignement) currentElement);
+        }
+        
+        model.addAttribute("composantProg", composantProg);
+        
+        model.addAttribute("programmeFils", programmeFils);
+        model.addAttribute("uecatFils", uecatFils);
+        model.addAttribute("composantProgFils", composantProgFils);
+        model.addAttribute("enseignementFils", enseignementFils);
+        
+        return new ModelAndView("composantProg", "model", model);
+	}
+	
+	@RequestMapping("/enseignement{enseignement}.htm")
+	public ModelAndView enseignement(@PathVariable("enseignement") String codeEnseignement, Model model)
+	{
+        Enseignement enseignement = this.enseignementManager.findEnseignement(codeEnseignement);
+        
+        ArrayList<Programme> programmeFils = new ArrayList<Programme>();
+        ArrayList<UECat> uecatFils = new ArrayList<UECat>();
+        ArrayList<ComposantProgramme> composantProgFils = new ArrayList<ComposantProgramme>();
+        ArrayList<Enseignement> enseignementFils = new ArrayList<Enseignement>();
+        
+        for(Iterator<ElemStruct> it = enseignement.getElementsFils().iterator(); it.hasNext(); )
+        {
+        	ElemStruct currentElement = it.next();
+        	
+        	if(currentElement instanceof Programme)
+        		programmeFils.add((Programme) currentElement);
+        	else if(currentElement instanceof UECat)
+        		uecatFils.add((UECat) currentElement);
+        	else if(currentElement instanceof ComposantProgramme)
+        		composantProgFils.add((ComposantProgramme) currentElement);
+        	else if(currentElement instanceof Enseignement)
+        		enseignementFils.add((Enseignement) currentElement);
+        }
+        
+        model.addAttribute("enseignement", enseignement);
+        
+        model.addAttribute("programmeFils", programmeFils);
+        model.addAttribute("uecatFils", uecatFils);
+        model.addAttribute("composantProgFils", composantProgFils);
+        model.addAttribute("enseignementFils", enseignementFils);
+        
+        return new ModelAndView("enseignement", "model", model);
 	}
 	
 	@RequestMapping("/etat.htm")

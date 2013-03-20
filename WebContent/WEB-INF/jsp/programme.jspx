@@ -15,7 +15,7 @@
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
-			<title><c:out value="${model.programme.nom}"/></title>
+			<title>${programme.nom}</title>
 			<spring:url value="/resources/css/home.css" var="homecss" /> 	
 			<link rel="stylesheet" href="${homecss}" type="text/css" />
 				
@@ -34,29 +34,47 @@
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
 				
-				<h1><c:out value="${model.programme.nom}"/></h1>
+				<h1>${programme.nom}</h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
 				
-				<table id="mention">
+				<table id="programmeTable">
 			    	<tbody>
 						<tr>
 				    		<td>Code :</td>
 				    		<td>nom :</td>
 			    		</tr>
 			    		<tr>
-			    			<td><c:out value="${model.programme.code}"/></td>
-			    			<td><c:out value="${model.programme.nom}"/></td>
+			    			<td>${programme.code}</td>
+			    			<td>${programme.nom}</td>
 			    		</tr>
 			    	</tbody>
 				</table>
-				<!--  
-			    <c:forEach items="${model.programmes}" var="programme">
+				 
+			    <c:forEach items="${programmeFils}" var="prog">
 					<p>
-					<a href="programme${programme.code}.htm"><c:out value="${programme.nom}"/></a>
+					<a href="programme${prog.code}.htm">${prog.nom}</a>
 					</p>
     			</c:forEach>
-			    -->
+    			
+    			<c:forEach items="${uecatFils}" var="ue">
+					<p>
+					<a href="uecat${ue.code}.htm">${ue.nom}</a>
+					</p>
+    			</c:forEach>
+    			
+    			<c:forEach items="${composantProgFils}" var="comp">
+					<p>
+					<a href="composantProg${comp.code}.htm">${comp.nom}</a>
+					</p>
+    			</c:forEach>
+    			
+    			<c:forEach items="${enseignementFils}" var="ens">
+					<p>
+					<a href="enseignement${ens.code}.htm">${ens.nom}</a>
+					</p>
+    			</c:forEach>
+			    
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">
 				<center class="smaller">

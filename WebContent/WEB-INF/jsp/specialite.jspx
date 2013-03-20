@@ -34,22 +34,23 @@
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
 				
-				<h1><c:out value="${model.specialite.nomCourt}"/></h1>
+				<h1>${model.specialite.nomCourt}</h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
 				
-				<table id="mention">
+				<table id="specialiteTable">
 			    	<tbody>
 						<tr>
 				    		<td>Code :</td>
 				    		<td>nom :</td>
 			    		</tr>
 			    		<tr>
-			    			<td><c:out value="${model.specialite.code}"/></td>
-			    			<td><c:out value="${model.specialite.nom}"/></td>
+			    			<td>${model.specialite.code}</td>
+			    			<td>${model.specialite.nom}</td>
 			    		</tr>
 			    	</tbody>
 				</table>
+				
 			    <c:forEach items="${model.programmes}" var="programme">
 					<p>
 					<a href="programme${programme.code}.htm"><c:out value="${programme.nom}"/></a>
