@@ -30,7 +30,8 @@
     <security:http use-expressions="true" auto-config="true" access-denied-page="/acces-refuse.htm">
         
         <!-- Liste des pages controllées par Spring Security avec les rôles requis pour pouvoir y accéder -->
-        
+		<security:intercept-url pattern="/etat.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+
         <security:form-login login-page="/identification.htm"
                              default-target-url="/accueil.htm" 
                              authentication-failure-url="/identification-echec.htm" />
@@ -38,6 +39,10 @@
     </security:http>
 
     <security:authentication-manager>
-    	<security:authentication-provider user-service-ref="userDetailsService"/>
+    	<security:authentication-provider user-service-ref="userDetailsService">
+    		<security:password-encoder hash="sha"/>
+    	</security:authentication-provider>
 	</security:authentication-manager>
+	
+	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
 </beans>

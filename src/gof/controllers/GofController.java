@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import gof.model.TypeMention;
+import gof.services.CustomUserDetails;
 import gof.services.DomaineManager;
 import gof.services.MentionManager;
+import gof.services.PersonneManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,14 +23,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class GofController
 {
 	@Autowired
+	PersonneManager personneManager;
+	
+	@Autowired
 	MentionManager mentionManager;
 	
 	@Autowired
 	DomaineManager domaineManager;
 	
 	@RequestMapping("/accueil.htm")
-	public ModelAndView home()
+	public ModelAndView home(Model model)
 	{	
+		model.addAttribute("loggedPersonne", personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()));
 		return new ModelAndView("home");
 	}
 	

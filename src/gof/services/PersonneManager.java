@@ -21,4 +21,6 @@ public interface PersonneManager
 	void deletePersonne(Personne p);
 	
 	Set<String> findAllCodesFiches(Personne p);
+	
+	boolean isCurrentUserHasRightOn(String code);
 }

@@ -15,6 +15,7 @@ import gof.model.Specialite;
 import gof.model.UECat;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,12 @@ public class PersonneManagerImpl implements PersonneManager
 	
 	@Autowired
 	private ElemStructManager elemStructManager;
+	
+	/**
+	 * Encodeur de mot de passe (SHA1)
+	 */
+	@Autowired
+	private ShaPasswordEncoder passwordEncoder;
 	
 	@Override
 	@Transactional
@@ -45,6 +52,7 @@ public class PersonneManagerImpl implements PersonneManager
 	@Transactional
 	public void savePersonne(Personne p)
 	{
+		p.setPassword(passwordEncoder.encodePassword(p.getPassword(), null));
 		personneDao.savePersonne(p);
 	}
 
@@ -216,6 +224,23 @@ public class PersonneManagerImpl implements PersonneManager
 		}
 		
 		return codesHashSet;
+	}
+	
+	/**
+	 * @return true si l'utilisateur connecté possède les droits d'edition sur la fiche dont le code est passé en parametre, false sinon
+	 */
+	@Override
+	@Transactional
+	public boolean isCurrentUserHasRightOn(String code)
+	{
+		Personne currentUser = this.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin());
+		
+		HashSet<String> codesFiches = (HashSet<String>) this.findAllCodesFiches(currentUser);
+		
+		if(codesFiches.contains(code))
+			return true;
+		
+		return false;
 	}
 
 }

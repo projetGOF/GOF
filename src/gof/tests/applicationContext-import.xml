@@ -16,7 +16,7 @@
 		p:driverClassName="com.mysql.jdbc.Driver"
 		p:url="jdbc:mysql://localhost/GOF"
 		p:username="root"
-		p:password="123">
+		p:password="roflmao">
 	</bean>
 
 	<bean

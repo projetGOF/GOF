@@ -34,7 +34,6 @@
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
 				
-				<p class="alerte0">Menu de travail : <a href="etat.html">État de la publication</a></p>
 				<h2><fmt:message key="etat.title"/></h2>
 				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
 				

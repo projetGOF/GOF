@@ -22,7 +22,7 @@ public class ConfigurationReader {
 		 * lecture du fichier properties
 		 */
 		
-		String path = System.getProperty("user.dir")+"\\src\\gof\\validation\\fiches-validation.properties";
+		String path = System.getProperty("user.dir")+"/src/gof/validation/fiches-validation.properties";
 		
 		Properties properties = new Properties();
 		try	{
@@ -34,7 +34,7 @@ public class ConfigurationReader {
 			}
 		
 		/*
-		 * initialisation de la liste de types de données
+		 * initialisation de la liste de types de donnï¿½es
 		 */
 		
 		List<DataType> dataTypeList = new ArrayList<DataType>();
@@ -48,7 +48,7 @@ public class ConfigurationReader {
 		}
 		
 		/*
-		 * initialisation du hashmap de fiches, leurs accesseurs et types de données des champs
+		 * initialisation du hashmap de fiches, leurs accesseurs et types de donnï¿½es des champs
 		 */
 		
 		for(String currentFiche : Arrays.asList(properties.get("fiches").toString().split(","))){
