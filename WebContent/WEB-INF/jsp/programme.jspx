@@ -15,7 +15,7 @@
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
-			<title><c:out value="${model.mention.nomCourt}"/></title>
+			<title><c:out value="${model.programme.nom}"/></title>
 			<spring:url value="/resources/css/home.css" var="homecss" /> 	
 			<link rel="stylesheet" href="${homecss}" type="text/css" />
 				
@@ -34,7 +34,7 @@
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
 				
-				<h1><c:out value="${model.mention.nomCourt}"/></h1>
+				<h1><c:out value="${model.programme.nom}"/></h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
 				
@@ -45,22 +45,18 @@
 				    		<td>nom :</td>
 			    		</tr>
 			    		<tr>
-			    			<td><c:out value="${model.mention.code}"/></td>
-			    			<td><c:out value="${model.mention.nom}"/></td>
-			    			
-		    				
+			    			<td><c:out value="${model.programme.code}"/></td>
+			    			<td><c:out value="${model.programme.nom}"/></td>
 			    		</tr>
-			    		
-			    		
-			    		
 			    	</tbody>
 				</table>
-			    <br></br>
-				<c:out value="${model.mention.contexte}"/>
-				<c:forEach items="${model.specialites}" var="specialite">
-					<p><a href="specialite${specialite.code}.htm"><c:out value="${specialite.nom}"/></a></p>
+				<!--  
+			    <c:forEach items="${model.programmes}" var="programme">
+					<p>
+					<a href="programme${programme.code}.htm"><c:out value="${programme.nom}"/></a>
+					</p>
     			</c:forEach>
-			    
+			    -->
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">
 				<center class="smaller">
