@@ -13,10 +13,10 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/> 
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		p:driverClassName="${jdbc.driver}"
-		p:url="${jdbc.url}"
-		p:username="${jdbc.username}"
-		p:password="${jdbc.password}">
+		p:driverClassName="com.mysql.jdbc.Driver"
+		p:url="jdbc:mysql://localhost/GOF"
+		p:username="root"
+		p:password="roflmao">
 	</bean>
 
 	<bean
@@ -30,21 +30,21 @@
 		id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	
+	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
 
 	<context:component-scan base-package="gof.dao">
-	<context:include-filter type="annotation"
+		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 	</context:component-scan>
 	
+	<!--
 	<context:property-placeholder location="classpath:jdbc.properties" />
-	<context:component-scan base-package="gof.services"/>
-	<context:component-scan base-package="gof.model"/>
-	<context:component-scan base-package="gof.controllers"/>
-	<context:component-scan base-package="gof.dao"/>
-	
-	<bean id="ficheProperties" class="gof.validation.FicheConfigurationReader">
-    	<property name="location" value="classpath:fiches-validation.properties"/>
-    	<property name="fileEncoding" value="utf-8"/>
-	</bean>
-	
+	-->
+	<context:component-scan base-package="gof.data" />
+	<context:component-scan base-package="gof.services" />
+	<context:component-scan base-package="gof.tests" />
+	<context:component-scan base-package="gof.controllers" />
+	<context:component-scan base-package="gof.model" />
+
 </beans>

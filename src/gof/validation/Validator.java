@@ -7,14 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Validator { 
-	
-	private Map<String,Map<String,DataType>> fiches;
-	
-	public Validator(){
-		fiches = ConfigurationReader.getInstance().getConfiguration();		
-	}
-	
+public class Validator {
+
+	private FicheConfigurationReader ficheProperties = new FicheConfigurationReader();
+		
 	@SuppressWarnings("unchecked")
 	public <T> Map<String,ValidatorLine> validateFiche(Object fiche, Class<T> classe) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		
@@ -23,7 +19,7 @@ public class Validator {
 		
 		System.out.println("Fiche : "+classe.getCanonicalName());
 		
-		ficheItems = fiches.get(classe.getCanonicalName());
+		ficheItems = ficheProperties.getFichesProperties().get(classe.getCanonicalName());
 		fiche = (T)fiche;
 		
 		List<Method> ficheMethodList = Arrays.asList(classe.getDeclaredMethods());
