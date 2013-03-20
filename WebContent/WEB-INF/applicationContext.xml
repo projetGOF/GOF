@@ -24,6 +24,11 @@
 		id="entityManagerFactory">
 		<property name="persistenceUnitName" value="persistenceUnit"/>
 		<property name="dataSource" ref="dataSource" />
+		<property name="jpaProperties">
+        <props>
+            <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+        </props>
+    </property>
 	</bean>
 	
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"

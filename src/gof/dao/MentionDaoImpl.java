@@ -15,12 +15,12 @@ public class MentionDaoImpl implements MentionDao {
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Mention> findAllMentions() {
 		Query query = em.createQuery("SELECT m FROM mention m");
-	    return (Collection<Mention>) query.getResultList();
+		return (Collection<Mention>) query.getResultList();
 	}
 
 	@Override
@@ -39,5 +39,4 @@ public class MentionDaoImpl implements MentionDao {
 		em.remove(m);
 		em.flush();
 	}
-
 }

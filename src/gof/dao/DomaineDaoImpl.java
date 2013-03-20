@@ -15,12 +15,12 @@ public class DomaineDaoImpl implements DomaineDao {
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Domaine> findAllDomaines() {
 		Query query = em.createQuery("SELECT d FROM domaine d");
-	    return (Collection<Domaine>) query.getResultList();
+		return (Collection<Domaine>) query.getResultList();
 	}
 
 	@Override

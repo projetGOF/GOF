@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -61,6 +60,12 @@ public class Mention implements Serializable {
     	joinColumns=@JoinColumn(name="code_mention"),
     	inverseJoinColumns=@JoinColumn(name="code_composante"))
 	private Set<Composante> composantes;
+    
+    @ManyToMany
+    @JoinTable(name="mention_domaine",
+    	joinColumns=@JoinColumn(name="code_mention"),
+    	inverseJoinColumns=@JoinColumn(name="code_domaine"))
+	private Set<Domaine> domaines;
 
     @OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="code")
@@ -166,13 +171,6 @@ public class Mention implements Serializable {
 	private String publique;
 	@Column(length = 2000)
 	private String publicHab;
-	
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="mention_domaine",
-    	joinColumns=@JoinColumn(name="code_mention"),
-    	inverseJoinColumns=@JoinColumn(name="code_domaine"))
-	private Set<Domaine> domaines;
-    
     @Column(length = 2000)
 	private String secteurPro;
 	private String typeDiplome;

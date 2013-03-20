@@ -1,8 +1,10 @@
 package gof.services;
 
 import gof.model.Domaine;
+import gof.model.TypeMention;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,7 @@ public interface DomaineManager {
 	void saveDomaine(Domaine d);
 
 	void deleteDomaine(Domaine d);
+	
+	Set<Domaine> findAllDomaineByTypeMention(TypeMention type);
 
 }

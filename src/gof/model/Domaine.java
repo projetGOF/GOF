@@ -1,10 +1,12 @@
 package gof.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @SuppressWarnings("serial")
 @Entity(name="domaine")
@@ -14,6 +16,9 @@ public class Domaine implements Serializable{
 	@Column(name="code", length=50)
 	private String code;
 	private String nom;
+	
+	@ManyToMany(mappedBy="domaines")
+	private Set<Mention> mentions;
 	
 	public Domaine() {}
 	
