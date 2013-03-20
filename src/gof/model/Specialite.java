@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Specialite implements Serializable {
 	private String nomCourt;
 	private String identificateur;
 
-    @ManyToMany
+	@ManyToMany
     @JoinTable(name="specialite_responsable",
     	joinColumns=@JoinColumn(name="code_specialite"),
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
@@ -44,7 +45,7 @@ public class Specialite implements Serializable {
     @JoinColumn(name="code_mention", insertable=false, updatable=false)
     private Mention mention;
     
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="code")
 	private Set<ErreurStruct> erreursStruct;
     

@@ -63,6 +63,7 @@ public class SpecialiteDaoTest extends AbstractTransactionalJUnit4SpringContextT
 
 	@Test
 	public void deleteSpecialiteTest(){
+		mentionDao.findMention("MENT01").getSpecialites().remove(specialiteDao.findSpecialite("SPE01"));
 		specialiteDao.deleteSpecialite(specialiteDao.findSpecialite("SPE01"));
 		assertEquals(0, specialiteDao.findAllSpecialites().size());
 	}

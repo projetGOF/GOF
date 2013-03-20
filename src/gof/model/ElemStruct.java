@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -48,7 +49,7 @@ public class ElemStruct implements Serializable {
 	@ManyToMany(mappedBy="elementsFils")
 	protected List<ElemStruct> elementsPere;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="code")
 	protected Set<ErreurStruct> erreursStruct;
 	

@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -91,11 +92,11 @@ public class Programme extends ElemStruct {
     @JoinColumn(name="code_mention", insertable=false, updatable=false)
     private Mention mention;
     
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="code_programme_rattache")
     protected Set<ComposantProgramme> composantsProgrammeRattaches;
     
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="code_programme_rattache")
     protected Set<Enseignement> enseignementsRattaches;
     

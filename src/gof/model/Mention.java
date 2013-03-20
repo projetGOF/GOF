@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -46,11 +48,11 @@ public class Mention implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_responsable"))
 	private Set<Personne> responsables;
     
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="code_mention")
 	private Set<Specialite> specialites;
 	
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="code_mention")
 	private Set<Programme> programmes;
 	
@@ -60,7 +62,7 @@ public class Mention implements Serializable {
     	inverseJoinColumns=@JoinColumn(name="code_composante"))
 	private Set<Composante> composantes;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="code")
 	private Set<ErreurStruct> erreursStruct;
     
@@ -165,7 +167,7 @@ public class Mention implements Serializable {
 	@Column(length = 2000)
 	private String publicHab;
 	
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="mention_domaine",
     	joinColumns=@JoinColumn(name="code_mention"),
     	inverseJoinColumns=@JoinColumn(name="code_domaine"))
