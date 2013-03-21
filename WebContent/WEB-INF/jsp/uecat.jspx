@@ -50,6 +50,12 @@
 			    		</tr>
 			    	</tbody>
 				</table>
+				
+				<c:if test="${edit == 'true'}">
+					<p>
+						VOUS AVEZ LES DROITS D'EDITER LA FICHE
+					</p>
+				</c:if>
 				 
 			    <c:forEach items="${model.programmeFils}" var="prog">
 					<p>

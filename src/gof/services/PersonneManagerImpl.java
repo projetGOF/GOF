@@ -24,11 +24,23 @@ public class PersonneManagerImpl implements PersonneManager
 	private PersonneDao personneDao;
 	
 	@Autowired
-	private ElemStructManager elemStructManager;
+	private MentionManager mentionManager;
 	
-	/**
-	 * Encodeur de mot de passe (SHA1)
-	 */
+	@Autowired
+	private SpecialiteManager specialiteManager;
+	
+	@Autowired
+	private EnseignementManager enseignementManager;
+	
+	@Autowired
+	private ProgrammeManager programmeManager;
+	
+	@Autowired
+	private UECatManager uecatManager;
+	
+	@Autowired
+	private ComposantProgrammeManager composantProgrammeManager;
+	
 	@Autowired
 	private ShaPasswordEncoder passwordEncoder;
 	
@@ -68,28 +80,33 @@ public class PersonneManagerImpl implements PersonneManager
 		return personneDao.findPersonneByCode(code);
 	}
 
+	@Override
 	@Transactional
 	public boolean isPersonneHasRightOnMention(Personne personne, Mention mention)
 	{
-		if(mention.getResponsables().contains(personne))
+		if(personne.getMentions().contains(mention))
 			return true;
 		
 		return false;
 	}
 	
+	@Override
 	@Transactional
 	public boolean isPersonneHasRightOnSpecialite(Personne personne, Specialite specialite)
 	{
-		if(specialite.getResponsables().contains(personne) || isPersonneHasRightOnMention(personne, specialite.getMention()))
+		if(personne.getSpecialites().contains(specialite))
+			return true;
+		else if(isPersonneHasRightOnMention(personne, specialite.getMention()))
 			return true;
 		
 		return false;
 	}
 	
+	@Override
 	@Transactional
 	public boolean isPersonneHasRightOnProgramme(Personne personne, Programme programme)
 	{
-		if(programme.getResponsables().contains(personne)) // La personne est directement responsable du programme
+		if(personne.getProgrammes().contains(programme)) // La personne est directement responsable du programme
 			return true;
 		else if(isPersonneHasRightOnMention(personne, programme.getMention())) // La personne est responsable de la mention à laquelle est rattaché le programme
 			return true;
@@ -97,25 +114,28 @@ public class PersonneManagerImpl implements PersonneManager
 		return false;
 	}
 	
+	@Override
 	@Transactional
 	public boolean isPersonneHasRightOnUECat(Personne personne, UECat uecat)
 	{
-		if(uecat.getResponsables().contains(personne))
+		if(personne.getUecats().contains(uecat))
 			return true;
 		
 		return false;
 	}
 	
+	@Override
 	@Transactional
 	public boolean isPersonneHasRightOnComposantProg(Personne personne, ComposantProgramme compProg)
 	{
 		return isPersonneHasRightOnProgramme(personne, compProg.getProgramme());
 	}
 	
+	@Override
 	@Transactional
 	public boolean isPersonneHasRightOnEnseignement(Personne personne, Enseignement ens)
 	{
-		if(ens.getResponsables().contains(personne)) // La personne est directement responsable de l'enseignement
+		if(personne.getEnseignements().contains(ens)) // La personne est directement responsable de l'enseignement
 			return true;
 		else if(isPersonneHasRightOnProgramme(personne, ens.getProgramme())) // La personne est responsable du programme auquel est rattaché l'enseignement
 			return true;
@@ -123,6 +143,7 @@ public class PersonneManagerImpl implements PersonneManager
 		return false;
 	}
 	
+	@Override
 	@Transactional
 	public boolean isPersonneHasRightOnElemStruct(Personne personne, ElemStruct element)
 	{

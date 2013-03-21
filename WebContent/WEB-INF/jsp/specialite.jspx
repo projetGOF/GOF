@@ -51,6 +51,12 @@
 			    	</tbody>
 				</table>
 				
+				<c:if test="${edit == 'true'}">
+					<p>
+						VOUS AVEZ LES DROITS D'EDITER LA FICHE
+					</p>
+				</c:if>
+				
 			    <c:forEach items="${model.programmes}" var="programme">
 					<p>
 					<a href="programme${programme.code}.htm"><c:out value="${programme.nom}"/></a>

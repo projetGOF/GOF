@@ -56,7 +56,15 @@
 			    	</tbody>
 				</table>
 			    <br></br>
-				<c:out value="${model.mention.contexte}"/>
+			    
+				${model.mention.contexte}
+								
+				<c:if test="${edit == 'true'}">
+					<p>
+						VOUS AVEZ LES DROITS D'EDITER LA FICHE
+					</p>
+				</c:if>
+				
 				<c:forEach items="${model.specialites}" var="specialite">
 					<p><a href="specialite${specialite.code}.htm"><c:out value="${specialite.nom}"/></a></p>
     			</c:forEach>

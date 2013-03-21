@@ -2,7 +2,6 @@ package gof.controllers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 import gof.model.ComposantProgramme;
 import gof.model.ElemStruct;
@@ -141,6 +140,15 @@ public class GofController
 	{
 		Mention mention = this.mentionManager.findMention(codeMention);
 
+		boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
+		
+		System.out.println("USERCONNECTED = " + CustomUserDetails.getCurrentUserLogin());
+		
+		if(isUserConnected && personneManager.isPersonneHasRightOnMention(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), mention))
+        	model.addAttribute("edit","true");
+        else
+        	model.addAttribute("edit","false");
+		
 		model.addAttribute("mention", mention);
 		model.addAttribute("specialites", mention.getSpecialites());
 		
@@ -151,11 +159,16 @@ public class GofController
 	public ModelAndView specialite(@PathVariable("specialite") String codeSpecialite, Model model)
 	{
         Specialite specialite = this.specialiteManager.findSpecialite(codeSpecialite);
-
-        Set<Programme> programmes = specialite.getProgrammes();
+        
+        boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
+        
+        if(isUserConnected && personneManager.isPersonneHasRightOnSpecialite(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), specialite))
+        	model.addAttribute("edit","true");
+        else
+        	model.addAttribute("edit","false");
         
         model.addAttribute("specialite", specialite);
-        model.addAttribute("programmes", programmes);
+        model.addAttribute("programmes", specialite.getProgrammes());
         
         return new ModelAndView("specialite", "model", model);
 	}
@@ -169,11 +182,7 @@ public class GofController
         ArrayList<UECat> uecatFils = new ArrayList<UECat>();
         ArrayList<ComposantProgramme> composantProgFils = new ArrayList<ComposantProgramme>();
         ArrayList<Enseignement> enseignementFils = new ArrayList<Enseignement>();
-        
-        
-        System.out.println(programme.getElementsFils().size());
-        
-        
+
         for(Iterator<ElemStruct> it = programme.getElementsFils().iterator(); it.hasNext(); )
         {
         	ElemStruct currentElement = it.next();
@@ -188,14 +197,20 @@ public class GofController
         		enseignementFils.add((Enseignement) currentElement);
         }
         
-        model.addAttribute("programme", programme);
+        boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
+        if(isUserConnected && personneManager.isPersonneHasRightOnProgramme(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), programme))
+        	model.addAttribute("edit","true");
+        else
+        	model.addAttribute("edit","false");
+        
+        model.addAttribute("programme", programme);
         model.addAttribute("programmeFils", programmeFils);
         model.addAttribute("uecatFils", uecatFils);
         model.addAttribute("composantProgFils", composantProgFils);
         model.addAttribute("enseignementFils", enseignementFils);
         
-        return new ModelAndView("programme");
+        return new ModelAndView("programme", "model", model);
 	}
 
 	@RequestMapping("/uecat{uecat}.htm")
@@ -222,8 +237,14 @@ public class GofController
         		enseignementFils.add((Enseignement) currentElement);
         }
         
-        model.addAttribute("uecat", uecat);
+        boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
+        if(isUserConnected && personneManager.isPersonneHasRightOnUECat(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), uecat))
+        	model.addAttribute("edit","true");
+        else
+        	model.addAttribute("edit","false");
+        
+        model.addAttribute("uecat", uecat);
         model.addAttribute("programmeFils", programmeFils);
         model.addAttribute("uecatFils", uecatFils);
         model.addAttribute("composantProgFils", composantProgFils);
@@ -256,8 +277,14 @@ public class GofController
         		enseignementFils.add((Enseignement) currentElement);
         }
         
-        model.addAttribute("composantProg", composantProg);
+        boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
+        if(isUserConnected && personneManager.isPersonneHasRightOnComposantProg(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), composantProg))
+        	model.addAttribute("edit","true");
+        else
+        	model.addAttribute("edit","false");
+        
+        model.addAttribute("composantProg", composantProg);
         model.addAttribute("programmeFils", programmeFils);
         model.addAttribute("uecatFils", uecatFils);
         model.addAttribute("composantProgFils", composantProgFils);
@@ -290,8 +317,14 @@ public class GofController
         		enseignementFils.add((Enseignement) currentElement);
         }
         
-        model.addAttribute("enseignement", enseignement);
+        boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
+        if(isUserConnected && personneManager.isPersonneHasRightOnEnseignement(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), enseignement))
+        	model.addAttribute("edit","true");
+        else
+        	model.addAttribute("edit","false");
+        
+        model.addAttribute("enseignement", enseignement);
         model.addAttribute("programmeFils", programmeFils);
         model.addAttribute("uecatFils", uecatFils);
         model.addAttribute("composantProgFils", composantProgFils);
@@ -307,6 +340,7 @@ public class GofController
 		model.addAttribute("mentionL", this.mentionManager.findAllMentionByTypeMention(TypeMention.LICENCE));
 		model.addAttribute("mentionLP", this.mentionManager.findAllMentionByTypeMention(TypeMention.LICENCEPRO));
 		model.addAttribute("mentionM", this.mentionManager.findAllMentionByTypeMention(TypeMention.MASTER));
+		
 		return new ModelAndView("etat", "model", model);
 	}
 	
