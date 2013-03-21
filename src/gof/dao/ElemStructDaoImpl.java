@@ -28,4 +28,16 @@ public class ElemStructDaoImpl implements ElemStructDao {
 		return em.find(ElemStruct.class, code);
 	}
 
+	@Override
+	public void saveElemStruct(ElemStruct element) {
+		em.merge(element);
+		em.flush();
+	}
+
+	@Override
+	public void deleteElemStruct(ElemStruct element) {
+		em.remove(element);
+		em.flush();
+	}
+
 }

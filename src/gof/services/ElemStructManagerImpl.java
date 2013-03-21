@@ -4,9 +4,6 @@ import gof.dao.ElemStructDao;
 import gof.model.ElemStruct;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,23 +29,13 @@ public class ElemStructManagerImpl implements ElemStructManager {
 
 	@Override
 	@Transactional
-	public Set<ElemStruct> getElemStructTree(String code) {
-		
-		ElemStruct elemStruct = elemStructDao.findElemStruct(code);
-		
-		HashSet<ElemStruct> elemStructHashSet = new HashSet<ElemStruct>();
-		elemStructHashSet.add(elemStruct);
-		
-		ElemStruct currentElemStruct = new ElemStruct();
-		
-		for(Iterator<ElemStruct> it = elemStruct.getElementsFils().iterator(); it.hasNext(); )
-		{
-			currentElemStruct = it.next();
-			
-			elemStructHashSet.addAll(getElemStructTree(currentElemStruct.getCode()));
-		}
-		
-		return elemStructHashSet;
+	public void saveElemStruct(ElemStruct element) {
+		elemStructDao.saveElemStruct(element);
 	}
 
+	@Override
+	@Transactional
+	public void deleteElemStruct(ElemStruct element) {
+		elemStructDao.deleteElemStruct(element);
+	}
 }

@@ -3,7 +3,6 @@ package gof.services;
 import gof.model.ElemStruct;
 
 import java.util.Collection;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -14,5 +13,8 @@ public interface ElemStructManager {
 
 	ElemStruct findElemStruct(String code);
 	
-	Set<ElemStruct> getElemStructTree(String code);
+	void saveElemStruct(ElemStruct element);
+	
+	void deleteElemStruct(ElemStruct element);
+
 }

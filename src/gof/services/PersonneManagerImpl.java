@@ -1,11 +1,9 @@
 package gof.services;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 import gof.dao.PersonneDao;
+import gof.model.ComposantProgramme;
 import gof.model.ElemStruct;
 import gof.model.Enseignement;
 import gof.model.Mention;
@@ -70,175 +68,80 @@ public class PersonneManagerImpl implements PersonneManager
 		return personneDao.findPersonneByCode(code);
 	}
 
-	@Override
 	@Transactional
-	public Set<String> findAllCodesFiches(Personne p) {
+	public boolean isPersonneHasRightOnMention(Personne personne, Mention mention)
+	{
+		if(mention.getResponsables().contains(personne))
+			return true;
 		
-		HashSet<String> codesHashSet = new HashSet<String>();
-		
-		/* Mentions */
-		
-		for(Iterator<Mention> itMention = p.getMentions().iterator(); itMention.hasNext(); )
-		{
-			Mention currentMention = itMention.next();
-			
-			codesHashSet.add(currentMention.getCode());
-			
-			/* Specialites de la mention */
-			
-			for(Iterator<Specialite> itSpe = currentMention.getSpecialites().iterator(); itSpe.hasNext(); )
-			{
-				Specialite currentSpe = itSpe.next();
-				
-				codesHashSet.add(currentSpe.getCode());
-				
-				/* Programmes de la specialite */
-				
-				for(Iterator<Programme> itProg = currentSpe.getProgrammes().iterator(); itProg.hasNext(); )
-				{
-					Programme currentProg = itProg.next();
-					
-					codesHashSet.add(currentProg.getCode());
-					
-					/* ElemStructs du programme */
-					
-					HashSet<ElemStruct> elemStructHashSet = (HashSet<ElemStruct>) elemStructManager.getElemStructTree(currentProg.getCode());
-					
-					for(Iterator<ElemStruct> itElem = elemStructHashSet.iterator(); itElem.hasNext(); )
-					{
-						ElemStruct currentElemStruct = itElem.next();
-						
-						codesHashSet.add(currentElemStruct.getCode());				
-					}
-				}
-			}
-			
-			/* Programmes de la mention */
-			
-			for(Iterator<Programme> itProg = currentMention.getProgrammes().iterator(); itProg.hasNext(); )
-			{
-				Programme currentProg = itProg.next();
-				
-				codesHashSet.add(currentProg.getCode());
-				
-				/* ElemStructs du programme */
-				
-				HashSet<ElemStruct> elemStructHashSet = (HashSet<ElemStruct>) elemStructManager.getElemStructTree(currentProg.getCode());
-				
-				for(Iterator<ElemStruct> itElem = elemStructHashSet.iterator(); itElem.hasNext(); )
-				{
-					ElemStruct currentElemStruct = itElem.next();
-					
-					codesHashSet.add(currentElemStruct.getCode());				
-				}
-			}
-		}
-		
-		/* Specialites */
-		
-		for(Iterator<Specialite> itSpe = p.getSpecialites().iterator(); itSpe.hasNext(); )
-		{
-			Specialite currentSpe = itSpe.next();
-			
-			codesHashSet.add(currentSpe.getCode());
-			
-			/* Programmes de la specialite */
-			
-			for(Iterator<Programme> itProg = currentSpe.getProgrammes().iterator(); itProg.hasNext(); )
-			{
-				Programme currentProg = itProg.next();
-				
-				codesHashSet.add(currentProg.getCode());
-				
-				/* ElemStructs du programme */
-				
-				HashSet<ElemStruct> elemStructHashSet = (HashSet<ElemStruct>) elemStructManager.getElemStructTree(currentProg.getCode());
-				
-				for(Iterator<ElemStruct> itElem = elemStructHashSet.iterator(); itElem.hasNext(); )
-				{
-					ElemStruct currentElemStruct = itElem.next();
-					
-					codesHashSet.add(currentElemStruct.getCode());				
-				}
-			}
-		}
-		
-		/* Programmes */
-		
-		for(Iterator<Programme> itProg = p.getProgrammes().iterator(); itProg.hasNext(); )
-		{
-			Programme currentProg = itProg.next();
-			
-			codesHashSet.add(currentProg.getCode());
-			
-			/* ElemStructs du programme */
-			
-			HashSet<ElemStruct> elemStructHashSet = (HashSet<ElemStruct>) elemStructManager.getElemStructTree(currentProg.getCode());
-			
-			for(Iterator<ElemStruct> itElem = elemStructHashSet.iterator(); itElem.hasNext(); )
-			{
-				ElemStruct currentElemStruct = itElem.next();
-				
-				codesHashSet.add(currentElemStruct.getCode());				
-			}
-		}
-		
-		/* UECats */
-		
-		for(Iterator<UECat> itUECat = p.getUecats().iterator(); itUECat.hasNext(); )
-		{
-			UECat currentUECat = itUECat.next();
-			
-			codesHashSet.add(currentUECat.getCode());
-			
-			/* ElemStructs de l'UECat */
-			
-			HashSet<ElemStruct> elemStructHashSet = (HashSet<ElemStruct>) elemStructManager.getElemStructTree(currentUECat.getCode());
-			
-			for(Iterator<ElemStruct> itElem = elemStructHashSet.iterator(); itElem.hasNext(); )
-			{
-				ElemStruct currentElemStruct = itElem.next();
-				
-				codesHashSet.add(currentElemStruct.getCode());				
-			}
-		}
-		
-		/* Enseignements */
-		
-		for(Iterator<Enseignement> itEns = p.getEnseignements().iterator(); itEns.hasNext(); )
-		{
-			Enseignement currentEns = itEns.next();
-			
-			codesHashSet.add(currentEns.getCode());
-			
-			/* ElemStructs de l'Enseignement */
-			
-			HashSet<ElemStruct> elemStructHashSet = (HashSet<ElemStruct>) elemStructManager.getElemStructTree(currentEns.getCode());
-			
-			for(Iterator<ElemStruct> itElem = elemStructHashSet.iterator(); itElem.hasNext(); )
-			{
-				ElemStruct currentElemStruct = itElem.next();
-				
-				codesHashSet.add(currentElemStruct.getCode());				
-			}
-		}
-		
-		return codesHashSet;
+		return false;
 	}
 	
-	/**
-	 * @return true si l'utilisateur connecté possède les droits d'edition sur la fiche dont le code est passé en parametre, false sinon
-	 */
-	@Override
 	@Transactional
-	public boolean isCurrentUserHasRightOn(String code)
+	public boolean isPersonneHasRightOnSpecialite(Personne personne, Specialite specialite)
 	{
-		Personne currentUser = this.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin());
-		
-		HashSet<String> codesFiches = (HashSet<String>) this.findAllCodesFiches(currentUser);
-		
-		if(codesFiches.contains(code))
+		if(specialite.getResponsables().contains(personne) || isPersonneHasRightOnMention(personne, specialite.getMention()))
 			return true;
+		
+		return false;
+	}
+	
+	@Transactional
+	public boolean isPersonneHasRightOnProgramme(Personne personne, Programme programme)
+	{
+		if(programme.getResponsables().contains(personne)) // La personne est directement responsable du programme
+			return true;
+		else if(isPersonneHasRightOnMention(personne, programme.getMention())) // La personne est responsable de la mention à laquelle est rattaché le programme
+			return true;
+		
+		return false;
+	}
+	
+	@Transactional
+	public boolean isPersonneHasRightOnUECat(Personne personne, UECat uecat)
+	{
+		if(uecat.getResponsables().contains(personne))
+			return true;
+		
+		return false;
+	}
+	
+	@Transactional
+	public boolean isPersonneHasRightOnComposantProg(Personne personne, ComposantProgramme compProg)
+	{
+		return isPersonneHasRightOnProgramme(personne, compProg.getProgramme());
+	}
+	
+	@Transactional
+	public boolean isPersonneHasRightOnEnseignement(Personne personne, Enseignement ens)
+	{
+		if(ens.getResponsables().contains(personne)) // La personne est directement responsable de l'enseignement
+			return true;
+		else if(isPersonneHasRightOnProgramme(personne, ens.getProgramme())) // La personne est responsable du programme auquel est rattaché l'enseignement
+			return true;
+		
+		return false;
+	}
+	
+	@Transactional
+	public boolean isPersonneHasRightOnElemStruct(Personne personne, ElemStruct element)
+	{
+		if(element instanceof Programme)
+		{
+			return isPersonneHasRightOnProgramme(personne, (Programme) element);
+		}
+		else if(element instanceof UECat)
+		{
+			return isPersonneHasRightOnUECat(personne, (UECat) element);
+		}
+		else if(element instanceof ComposantProgramme)
+		{
+			return isPersonneHasRightOnComposantProg(personne, (ComposantProgramme) element);
+		}
+		else if(element instanceof Enseignement)
+		{
+			return isPersonneHasRightOnEnseignement(personne, (Enseignement) element);
+		}
 		
 		return false;
 	}

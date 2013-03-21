@@ -12,5 +12,9 @@ public interface ElemStructDao {
 	Collection<ElemStruct> findAllElemStructs();
 
 	ElemStruct findElemStruct(String code);
+	
+	void saveElemStruct(ElemStruct element);
+	
+	void deleteElemStruct(ElemStruct element);
 
 }
