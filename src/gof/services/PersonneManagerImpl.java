@@ -10,6 +10,7 @@ import gof.model.Mention;
 import gof.model.Personne;
 import gof.model.Programme;
 import gof.model.Specialite;
+import gof.model.Statut;
 import gof.model.UECat;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,9 @@ public class PersonneManagerImpl implements PersonneManager
 	@Transactional
 	public boolean isPersonneHasRightOnMention(Personne personne, Mention mention)
 	{
+		if(personne.getStatuts().contains(Statut.ROLE_ADMIN))
+			return true;
+		
 		if(personne.getMentions().contains(mention))
 			return true;
 		
@@ -94,6 +98,9 @@ public class PersonneManagerImpl implements PersonneManager
 	@Transactional
 	public boolean isPersonneHasRightOnSpecialite(Personne personne, Specialite specialite)
 	{
+		if(personne.getStatuts().contains(Statut.ROLE_ADMIN))
+			return true;
+		
 		if(personne.getSpecialites().contains(specialite))
 			return true;
 		else if(isPersonneHasRightOnMention(personne, specialite.getMention()))
@@ -106,6 +113,9 @@ public class PersonneManagerImpl implements PersonneManager
 	@Transactional
 	public boolean isPersonneHasRightOnProgramme(Personne personne, Programme programme)
 	{
+		if(personne.getStatuts().contains(Statut.ROLE_ADMIN))
+			return true;
+		
 		if(personne.getProgrammes().contains(programme)) // La personne est directement responsable du programme
 			return true;
 		else if(isPersonneHasRightOnMention(personne, programme.getMention())) // La personne est responsable de la mention à laquelle est rattaché le programme
@@ -118,6 +128,9 @@ public class PersonneManagerImpl implements PersonneManager
 	@Transactional
 	public boolean isPersonneHasRightOnUECat(Personne personne, UECat uecat)
 	{
+		if(personne.getStatuts().contains(Statut.ROLE_ADMIN))
+			return true;
+		
 		if(personne.getUecats().contains(uecat))
 			return true;
 		
@@ -128,6 +141,9 @@ public class PersonneManagerImpl implements PersonneManager
 	@Transactional
 	public boolean isPersonneHasRightOnComposantProg(Personne personne, ComposantProgramme compProg)
 	{
+		if(personne.getStatuts().contains(Statut.ROLE_ADMIN))
+			return true;
+		
 		return isPersonneHasRightOnProgramme(personne, compProg.getProgramme());
 	}
 	
@@ -135,6 +151,9 @@ public class PersonneManagerImpl implements PersonneManager
 	@Transactional
 	public boolean isPersonneHasRightOnEnseignement(Personne personne, Enseignement ens)
 	{
+		if(personne.getStatuts().contains(Statut.ROLE_ADMIN))
+			return true;
+		
 		if(personne.getEnseignements().contains(ens)) // La personne est directement responsable de l'enseignement
 			return true;
 		else if(isPersonneHasRightOnProgramme(personne, ens.getProgramme())) // La personne est responsable du programme auquel est rattaché l'enseignement
@@ -147,6 +166,9 @@ public class PersonneManagerImpl implements PersonneManager
 	@Transactional
 	public boolean isPersonneHasRightOnElemStruct(Personne personne, ElemStruct element)
 	{
+		if(personne.getStatuts().contains(Statut.ROLE_ADMIN))
+			return true;
+		
 		if(element instanceof Programme)
 		{
 			return isPersonneHasRightOnProgramme(personne, (Programme) element);
