@@ -29,7 +29,7 @@ public class ElemStruct implements Serializable {
 	@Column(nullable=false)
 	protected String nom;
 	@Column(nullable=false)
-	protected int nbCredits;
+	protected float nbCredits;
 	@Column(nullable=false)
 	protected boolean publiable;
 	@Column(nullable=false)
@@ -58,7 +58,7 @@ public class ElemStruct implements Serializable {
 	
 	public ElemStruct() {}
 
-	public ElemStruct(String code, String nom, int nbCredits,
+	public ElemStruct(String code, String nom, float nbCredits,
 			boolean publiable, boolean contenuValide, boolean structureValide,
 			int nbErreurs, List<ElemStruct> elementsFils,
 			Set<ErreurStruct> erreursStruct) {
@@ -90,11 +90,11 @@ public class ElemStruct implements Serializable {
 		this.nom = nom;
 	}
 
-	public int getNbCredits() {
+	public float getNbCredits() {
 		return nbCredits;
 	}
 
-	public void setNbCredits(int nbCredits) {
+	public void setNbCredits(float nbCredits) {
 		this.nbCredits = nbCredits;
 	}
 

@@ -36,8 +36,12 @@
 			<div id="body">
 				
 				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-				<p class="alerte0">Menu de travail : <a href="etat.htm">État de la publication</a></p>
+				<p class="alerte0">
+					Menu de travail :
+					<a href="etat.htm">État de la publication</a>, <a href="responsablesROF.htm">Responsables ROF</a>
+				</p>
 				</sec:authorize>
+				
 				<h2><fmt:message key="home.message"/></h2>
 				<p>
 					<c:choose>
@@ -52,6 +56,7 @@
       					</c:otherwise>
 					</c:choose>
 				</p>
+				
 				<div style="float:right; clear:right; margin-left: 10px; margin-right: 10px;">
 					<div class="pave-droite">
 						<div class="titre-pave">Aix-Marseille Université</div>

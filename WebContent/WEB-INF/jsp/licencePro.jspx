@@ -2,8 +2,9 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.2"
-	xmlns:form="http://www.springframework.org/tags/form">
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:sec="http://www.springframework.org/security/tags" version="2.2">
 <jsp:directive.page contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8" session="true"/>
 <jsp:output doctype-root-element="html"
@@ -33,7 +34,14 @@
 				</div><!-- fin <div id="nav-right"> -->	
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
-				<p class="alerte0">Menu de travail : <a href="etat.htm">État de la publication</a></p>
+			
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+				<p class="alerte0">
+					Menu de travail :
+					<a href="etat.htm">État de la publication</a>, <a href="responsablesROF.htm">Responsables ROF</a>
+				</p>
+				</sec:authorize>
+			
 				<h1><fmt:message key="licencePro.title"/></h1>
 				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
 				
@@ -90,7 +98,7 @@
 				</p>
 				<table>
 			    	<tbody>
-			    		<c:forEach items="${model.domaines}" var="domall">
+			    		<c:forEach items="${domaines}" var="domall">
 			    		<tr>
 		    				<td>
 			    				<a href="licenceProDetail${domall.code}.htm"><c:out value="${domall.nom}"/></a>

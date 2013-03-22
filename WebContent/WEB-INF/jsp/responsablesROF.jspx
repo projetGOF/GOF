@@ -34,33 +34,20 @@
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
 				
-				<h2><fmt:message key="etat.title"/></h2>
+				<h2>Responsables ROF</h2>
 				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
 				
-				<c:forEach items="${domaines}" var="domaine">
-					<p><c:out value="${domaine.nom}"/> : <c:out value="${domaine.code}"/></p>
-					<table>
-				    	<tbody>
-				    		<td>
-				    			<c:forEach items="${mentionL}" var="licence">
-				    				<tr>
-				    					<p> test : ${licence.code} : {licence.typeMention}</p>
-				    				</tr>
-				    			</c:forEach>
-				    			<c:forEach items="${mentionLP}" var="LicencePro">
-				    				<tr>
-				    					<p>${LicencePro.code} : ${LicencePro.typeMention}</p>
-				    				</tr>
-				    			</c:forEach>
-				    			<c:forEach items="${mentionM}" var="Master">
-			    					<tr>
-				    					<p>${Master.code} : ${Master.typeMention}</p>
-				    				</tr>
-				    			</c:forEach>
-				    		</td>
-				    	</tbody>
-					</table>
+				<table>
+				<c:forEach items="${responsablesROF}" var="responsable">
+				<tr>
+					<td>${responsable.code}</td>
+					<td>${responsable.nom}</td>
+					<td>${responsable.prenom}</td>
+					<td>${responsable.mail}</td>
+				</tr>
 				</c:forEach>
+				</table>
+				
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">
 				<center class="smaller">

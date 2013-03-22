@@ -64,7 +64,11 @@ public class GofController
 	@RequestMapping("/accueil.htm")
 	public ModelAndView home(Model model)
 	{	
-		model.addAttribute("loggedPersonne", personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()));
+		boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
+		
+		if(isUserConnected)
+			model.addAttribute("loggedPersonne", personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()));
+		
 		return new ModelAndView("home");
 	}
 	
@@ -92,7 +96,7 @@ public class GofController
 	{
 		model.addAttribute("type", codeDiplome);
 		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.LICENCE));
-		return new ModelAndView("licence", "model", model);
+		return new ModelAndView("licence");
 	}
 	
 	@RequestMapping("/licenceDetail{domaine}.htm")
@@ -100,7 +104,7 @@ public class GofController
 	{
         model.addAttribute("domaine", this.domaineManager.findDomaine(codeDomaine));
         model.addAttribute("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(codeDomaine, TypeMention.LICENCE));
-        return new ModelAndView("licenceDetail", "model", model);
+        return new ModelAndView("licenceDetail");
 	}
 	
 	@RequestMapping("/licencePro{diplome}.htm")
@@ -108,7 +112,7 @@ public class GofController
 	{
 		model.addAttribute("type", codeDiplome);
 		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.LICENCEPRO));
-		return new ModelAndView("licencePro", "model", model);
+		return new ModelAndView("licencePro");
 	}
 	
 	@RequestMapping("/licenceProDetail{domaine}.htm")
@@ -116,7 +120,7 @@ public class GofController
 	{
         model.addAttribute("domaine", this.domaineManager.findDomaine(codeDomaine));
         model.addAttribute("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(codeDomaine, TypeMention.LICENCEPRO));
-        return new ModelAndView("licenceProDetail", "model", model);
+        return new ModelAndView("licenceProDetail");
 	}
 	
 	@RequestMapping("/master{diplome}.htm")
@@ -124,7 +128,7 @@ public class GofController
 	{
 		model.addAttribute("type", codeDiplome);
 		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.MASTER));
-		return new ModelAndView("master", "model", model);
+		return new ModelAndView("master");
 	}
 	
 	@RequestMapping("/masterDetail{domaine}.htm")
@@ -132,7 +136,7 @@ public class GofController
 	{
         model.addAttribute("domaine", this.domaineManager.findDomaine(codeDomaine));
         model.addAttribute("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(codeDomaine, TypeMention.MASTER));
-        return new ModelAndView("masterDetail", "model", model);
+        return new ModelAndView("masterDetail");
 	}
 	
 	@RequestMapping("/mention{mention}.htm")
@@ -142,8 +146,6 @@ public class GofController
 
 		boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
 		
-		System.out.println("USERCONNECTED = " + CustomUserDetails.getCurrentUserLogin());
-		
 		if(isUserConnected && personneManager.isPersonneHasRightOnMention(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), mention))
         	model.addAttribute("edit","true");
         else
@@ -152,7 +154,7 @@ public class GofController
 		model.addAttribute("mention", mention);
 		model.addAttribute("specialites", mention.getSpecialites());
 		
-        return new ModelAndView("mention", "model", model);
+        return new ModelAndView("mention");
 	}
 	
 	@RequestMapping("/specialite{specialite}.htm")
@@ -170,7 +172,7 @@ public class GofController
         model.addAttribute("specialite", specialite);
         model.addAttribute("programmes", specialite.getProgrammes());
         
-        return new ModelAndView("specialite", "model", model);
+        return new ModelAndView("specialite");
 	}
 	
 	@RequestMapping("/programme{programme}.htm")
@@ -210,7 +212,7 @@ public class GofController
         model.addAttribute("composantProgFils", composantProgFils);
         model.addAttribute("enseignementFils", enseignementFils);
         
-        return new ModelAndView("programme", "model", model);
+        return new ModelAndView("programme");
 	}
 
 	@RequestMapping("/uecat{uecat}.htm")
@@ -250,7 +252,7 @@ public class GofController
         model.addAttribute("composantProgFils", composantProgFils);
         model.addAttribute("enseignementFils", enseignementFils);
         
-        return new ModelAndView("uecat", "model", model);
+        return new ModelAndView("uecat");
 	}
 	
 	@RequestMapping("/composantProg{composantProg}.htm")
@@ -290,7 +292,7 @@ public class GofController
         model.addAttribute("composantProgFils", composantProgFils);
         model.addAttribute("enseignementFils", enseignementFils);
         
-        return new ModelAndView("composantProg", "model", model);
+        return new ModelAndView("composantProg");
 	}
 	
 	@RequestMapping("/enseignement{enseignement}.htm")
@@ -330,7 +332,7 @@ public class GofController
         model.addAttribute("composantProgFils", composantProgFils);
         model.addAttribute("enseignementFils", enseignementFils);
         
-        return new ModelAndView("enseignement", "model", model);
+        return new ModelAndView("enseignement");
 	}
 	
 	@RequestMapping("/etat.htm")
@@ -341,7 +343,15 @@ public class GofController
 		model.addAttribute("mentionLP", this.mentionManager.findAllMentionByTypeMention(TypeMention.LICENCEPRO));
 		model.addAttribute("mentionM", this.mentionManager.findAllMentionByTypeMention(TypeMention.MASTER));
 		
-		return new ModelAndView("etat", "model", model);
+		return new ModelAndView("etat");
+	}
+	
+	@RequestMapping("/responsablesROF.htm")
+	public ModelAndView responsablesROF(Model model)
+	{
+		model.addAttribute("responsablesROF", this.personneManager.findAllRespoROF());
+		
+		return new ModelAndView("responsablesROF");
 	}
 	
 	

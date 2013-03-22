@@ -31,6 +31,7 @@
         
         <!-- Liste des pages controllées par Spring Security avec les rôles requis pour pouvoir y accéder -->
 		<security:intercept-url pattern="/etat.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/responsablesROF.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
 
         <security:form-login login-page="/identification.htm"
                              default-target-url="/accueil.htm" 

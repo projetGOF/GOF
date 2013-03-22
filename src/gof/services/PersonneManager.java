@@ -26,6 +26,8 @@ public interface PersonneManager
 	
 	void deletePersonne(Personne p);
 	
+	Collection<Personne> findAllRespoROF();
+	
 	boolean isPersonneHasRightOnMention(Personne personne, Mention mention);
 	
 	boolean isPersonneHasRightOnSpecialite(Personne personne, Specialite specialite);

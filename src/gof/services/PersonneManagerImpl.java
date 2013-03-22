@@ -1,6 +1,8 @@
 package gof.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import gof.dao.PersonneDao;
 import gof.model.ComposantProgramme;
@@ -81,6 +83,27 @@ public class PersonneManagerImpl implements PersonneManager
 		return personneDao.findPersonneByCode(code);
 	}
 
+	@Override
+	@Transactional
+	public Collection<Personne> findAllRespoROF()
+	{
+		Collection<Personne> result = new ArrayList<Personne>();
+		Collection<Personne> personnes = this.findAllPersonnes();
+		
+		Personne currentPersonne = new Personne();
+		
+		for(Iterator<Personne> it = personnes.iterator(); it.hasNext(); )
+		{
+			currentPersonne = it.next();
+			
+			if(currentPersonne.getStatuts().contains(Statut.ROLE_ROF))
+				result.add(currentPersonne);
+		}
+		
+		return result;
+	}
+
+	
 	@Override
 	@Transactional
 	public boolean isPersonneHasRightOnMention(Personne personne, Mention mention)
@@ -188,5 +211,4 @@ public class PersonneManagerImpl implements PersonneManager
 		
 		return false;
 	}
-
 }

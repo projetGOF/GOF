@@ -144,7 +144,7 @@ public class Mention implements Serializable {
 	private String modalitesPedagoHab;
 	@Column(length = 2000)
 	private String modifications;
-	private int nbCredits;
+	private float nbCredits;
 	@Column(length = 2000)
 	private String orgPedago;
 	@Column(length = 2000)
@@ -211,7 +211,7 @@ public class Mention implements Serializable {
 			String finalite, String identificateur, String indicateurs,
 			String international, String internationalHab, String mcc,
 			String mccHab, String mesuresPrises, String modalitesPedagoHab,
-			String modifications, int nbCredits, String orgPedago,
+			String modifications, float nbCredits, String orgPedago,
 			String orgPedagoHab, String partenaires, String partenairesHab,
 			String pilotage, String politiqueStages, String posOffreEtablis,
 			String posOffreRegion, String poursuiteEtudes,
@@ -698,11 +698,11 @@ public class Mention implements Serializable {
 		this.modifications = modifications;
 	}
 
-	public int getNbCredits() {
+	public float getNbCredits() {
 		return nbCredits;
 	}
 
-	public void setNbCredits(int nbCredits) {
+	public void setNbCredits(float nbCredits) {
 		this.nbCredits = nbCredits;
 	}
 
