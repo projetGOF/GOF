@@ -1,6 +1,7 @@
 package gof.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import gof.model.ComposantProgramme;
@@ -26,9 +27,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @Transactional
@@ -151,13 +155,31 @@ public class GofController
 			model.addAttribute("erreursStruct", mention.getErreursStruct());
 			
 			if(personneManager.isPersonneHasRightOnMention(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), mention))
+			{	
+				HashMap<Boolean, String> publiableMap = new HashMap<Boolean, String>();
+				
+				publiableMap.put(false, "Non");
+				publiableMap.put(true, "Oui");
+				
 				model.addAttribute("edit","true");
+				model.addAttribute("publiableMap", publiableMap);
+			}
 		}
 		
 		model.addAttribute("mention", mention);
 		model.addAttribute("specialites", mention.getSpecialites());
 		
         return new ModelAndView("mention");
+	}
+	
+	@RequestMapping(value="/editMentionPubliable.htm", method=RequestMethod.POST)
+	public ModelAndView editMentionPubliable(@ModelAttribute Mention oldMention, Model model)
+	{
+		Mention newMention = this.mentionManager.findMention(oldMention.getCode());
+		newMention.setPubliable(oldMention.isPubliable());
+		this.mentionManager.saveMention(newMention);
+		
+        return new ModelAndView(new RedirectView("mention" + newMention.getCode() + ".htm"));
 	}
 	
 	@RequestMapping("/specialite{specialite}.htm")
@@ -172,13 +194,31 @@ public class GofController
         	model.addAttribute("erreursStruct", specialite.getErreursStruct());
         	
         	if(personneManager.isPersonneHasRightOnSpecialite(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), specialite))
-        		model.addAttribute("edit","true");
+        	{
+        		HashMap<Boolean, String> publiableMap = new HashMap<Boolean, String>();
+				
+				publiableMap.put(false, "Non");
+				publiableMap.put(true, "Oui");
+				
+				model.addAttribute("edit","true");
+				model.addAttribute("publiableMap", publiableMap);
+        	}
         }
         
         model.addAttribute("specialite", specialite);
         model.addAttribute("programmes", specialite.getProgrammes());
         
         return new ModelAndView("specialite");
+	}
+	
+	@RequestMapping(value="/editSpecialitePubliable.htm", method=RequestMethod.POST)
+	public ModelAndView editSpecialitePubliable(@ModelAttribute Specialite oldSpecialite, Model model)
+	{
+		Specialite newSpecialite = this.specialiteManager.findSpecialite(oldSpecialite.getCode());
+		newSpecialite.setPubliable(oldSpecialite.isPubliable());
+		this.specialiteManager.saveSpecialite(newSpecialite);
+		
+		return new ModelAndView(new RedirectView("specialite" + newSpecialite.getCode() + ".htm"));
 	}
 	
 	@RequestMapping("/programme{programme}.htm")
@@ -212,7 +252,15 @@ public class GofController
         	model.addAttribute("erreursStruct", programme.getErreursStruct());
         	
         	if(personneManager.isPersonneHasRightOnProgramme(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), programme))
-        		model.addAttribute("edit","true");
+        	{
+        		HashMap<Boolean, String> publiableMap = new HashMap<Boolean, String>();
+				
+				publiableMap.put(false, "Non");
+				publiableMap.put(true, "Oui");
+				
+				model.addAttribute("edit","true");
+				model.addAttribute("publiableMap", publiableMap);
+        	}
         }
         
         model.addAttribute("programme", programme);
@@ -222,6 +270,16 @@ public class GofController
         model.addAttribute("enseignementFils", enseignementFils);
         
         return new ModelAndView("programme");
+	}
+	
+	@RequestMapping(value="/editProgrammePubliable.htm", method=RequestMethod.POST)
+	public ModelAndView editProgrammePubliable(@ModelAttribute Programme oldProgramme, Model model)
+	{
+		Programme newProgramme = this.programmeManager.findProgramme(oldProgramme.getCode());
+		newProgramme.setPubliable(oldProgramme.isPubliable());
+		this.programmeManager.saveProgramme(newProgramme);
+		
+		return new ModelAndView(new RedirectView("programme" + newProgramme.getCode() + ".htm"));
 	}
 
 	@RequestMapping("/uecat{uecat}.htm")
@@ -255,7 +313,15 @@ public class GofController
         	model.addAttribute("erreursStruct", uecat.getErreursStruct());
         	
         	if(personneManager.isPersonneHasRightOnUECat(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), uecat))
-        		model.addAttribute("edit","true");
+        	{
+        		HashMap<Boolean, String> publiableMap = new HashMap<Boolean, String>();
+				
+				publiableMap.put(false, "Non");
+				publiableMap.put(true, "Oui");
+				
+				model.addAttribute("edit","true");
+				model.addAttribute("publiableMap", publiableMap);
+        	}
         }
         
         model.addAttribute("uecat", uecat);
@@ -265,6 +331,16 @@ public class GofController
         model.addAttribute("enseignementFils", enseignementFils);
         
         return new ModelAndView("uecat");
+	}
+	
+	@RequestMapping(value="/editUECatPubliable.htm", method=RequestMethod.POST)
+	public ModelAndView editUECatPubliable(@ModelAttribute UECat oldUECat, Model model)
+	{
+		UECat newUECat = this.uecatManager.findUECat(oldUECat.getCode());
+		newUECat.setPubliable(oldUECat.isPubliable());
+		this.uecatManager.saveUECat(newUECat);
+		
+		return new ModelAndView(new RedirectView("uecat" + newUECat.getCode() + ".htm"));
 	}
 	
 	@RequestMapping("/composantProg{composantProg}.htm")
@@ -298,7 +374,15 @@ public class GofController
         	model.addAttribute("erreursStruct", composantProg.getErreursStruct());
         	
         	if(personneManager.isPersonneHasRightOnComposantProg(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), composantProg))
-        		model.addAttribute("edit","true");
+        	{
+        		HashMap<Boolean, String> publiableMap = new HashMap<Boolean, String>();
+				
+				publiableMap.put(false, "Non");
+				publiableMap.put(true, "Oui");
+				
+				model.addAttribute("edit","true");
+				model.addAttribute("publiableMap", publiableMap);
+        	}
         }
         
         model.addAttribute("composantProg", composantProg);
@@ -308,6 +392,16 @@ public class GofController
         model.addAttribute("enseignementFils", enseignementFils);
         
         return new ModelAndView("composantProg");
+	}
+	
+	@RequestMapping(value="/editComposantProgPubliable.htm", method=RequestMethod.POST)
+	public ModelAndView editComposantProgPubliable(@ModelAttribute ComposantProgramme oldComposantProg, Model model)
+	{
+		ComposantProgramme newComposantProg = this.composantProgManager.findComposantProgramme(oldComposantProg.getCode());
+		newComposantProg.setPubliable(oldComposantProg.isPubliable());
+		this.composantProgManager.saveComposantProgramme(newComposantProg);
+		
+		return new ModelAndView(new RedirectView("composantProg" + newComposantProg.getCode() + ".htm"));
 	}
 	
 	@RequestMapping("/enseignement{enseignement}.htm")
@@ -341,7 +435,15 @@ public class GofController
         	model.addAttribute("erreursStruct", enseignement.getErreursStruct());
         	
         	if(personneManager.isPersonneHasRightOnEnseignement(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), enseignement))
-        		model.addAttribute("edit","true");
+        	{
+        		HashMap<Boolean, String> publiableMap = new HashMap<Boolean, String>();
+				
+				publiableMap.put(false, "Non");
+				publiableMap.put(true, "Oui");
+				
+				model.addAttribute("edit","true");
+				model.addAttribute("publiableMap", publiableMap);
+        	}
         }
         
         model.addAttribute("enseignement", enseignement);
@@ -351,6 +453,16 @@ public class GofController
         model.addAttribute("enseignementFils", enseignementFils);
         
         return new ModelAndView("enseignement");
+	}
+	
+	@RequestMapping(value="/editEnseignementPubliable.htm", method=RequestMethod.POST)
+	public ModelAndView editEnseignementPubliable(@ModelAttribute Enseignement oldEnseignement, Model model)
+	{
+		Enseignement newEnseignement = this.enseignementManager.findEnseignement(oldEnseignement.getCode());
+		newEnseignement.setPubliable(oldEnseignement.isPubliable());
+		this.enseignementManager.saveEnseignement(newEnseignement);
+		
+		return new ModelAndView(new RedirectView("enseignement" + newEnseignement.getCode() + ".htm"));
 	}
 	
 	@RequestMapping("/etat.htm")

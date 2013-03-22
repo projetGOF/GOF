@@ -49,6 +49,14 @@
 					<p>
 						VOUS AVEZ LES DROITS D'EDITER LA FICHE
 					</p>
+					<p>
+						<form:form id="formPubliable" action="editProgrammePubliable.htm" commandName="programme">
+							<form:input id="formPubliable.code.${programme.code}" type="hidden" path="code" />
+							<form:label path="publiable"> Publiable </form:label>
+							<form:select path="publiable" items="${publiableMap}"/>
+							<input id="formPubliable.submit" class ="buttons" type="submit" value="Modifier" />
+						</form:form>
+					</p>
 				</c:if>
 				<c:if test="${not empty erreursStruct}">
 					<p>
