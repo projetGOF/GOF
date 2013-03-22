@@ -45,6 +45,19 @@
 				<h1>${mention.nomCourt}</h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
+				<c:if test="${not empty edit}">
+					<p>
+						VOUS AVEZ LES DROITS D'EDITER LA FICHE
+					</p>
+				</c:if>
+				<c:if test="${not empty erreursStruct}">
+					<p>
+						ERREURS DE STRUCTURE:
+						<c:forEach items="${erreursStruct}" var="erreurStruct">
+							<li>${erreurStruct.description}</li>
+	    				</c:forEach>
+	    			</p>
+    			</c:if>
 				
 				<table id="mention">
 			    	<tbody>
@@ -53,25 +66,12 @@
 				    		<td>nom :</td>
 			    		</tr>
 			    		<tr>
-			    			<td><c:out value="${mention.code}"/></td>
-			    			<td><c:out value="${mention.nom}"/></td>
-			    			
-		    				
+			    			<td>${mention.code}</td>
+			    			<td>${mention.nom}</td>			
 			    		</tr>
-			    		
-			    		
-			    		
 			    	</tbody>
 				</table>
 			    <br></br>
-			    
-				${mention.contexte}
-								
-				<c:if test="${edit == 'true'}">
-					<p>
-						VOUS AVEZ LES DROITS D'EDITER LA FICHE
-					</p>
-				</c:if>
 				
 				<c:forEach items="${specialites}" var="specialite">
 					<p><a href="specialite${specialite.code}.htm">${specialite.nom}</a></p>

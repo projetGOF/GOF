@@ -146,10 +146,13 @@ public class GofController
 
 		boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
 		
-		if(isUserConnected && personneManager.isPersonneHasRightOnMention(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), mention))
-        	model.addAttribute("edit","true");
-        else
-        	model.addAttribute("edit","false");
+		if(isUserConnected)
+		{
+			model.addAttribute("erreursStruct", mention.getErreursStruct());
+			
+			if(personneManager.isPersonneHasRightOnMention(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), mention))
+				model.addAttribute("edit","true");
+		}
 		
 		model.addAttribute("mention", mention);
 		model.addAttribute("specialites", mention.getSpecialites());
@@ -164,10 +167,13 @@ public class GofController
         
         boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
-        if(isUserConnected && personneManager.isPersonneHasRightOnSpecialite(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), specialite))
-        	model.addAttribute("edit","true");
-        else
-        	model.addAttribute("edit","false");
+        if(isUserConnected)
+        {
+        	model.addAttribute("erreursStruct", specialite.getErreursStruct());
+        	
+        	if(personneManager.isPersonneHasRightOnSpecialite(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), specialite))
+        		model.addAttribute("edit","true");
+        }
         
         model.addAttribute("specialite", specialite);
         model.addAttribute("programmes", specialite.getProgrammes());
@@ -201,10 +207,13 @@ public class GofController
         
         boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
-        if(isUserConnected && personneManager.isPersonneHasRightOnProgramme(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), programme))
-        	model.addAttribute("edit","true");
-        else
-        	model.addAttribute("edit","false");
+        if(isUserConnected)
+        {
+        	model.addAttribute("erreursStruct", programme.getErreursStruct());
+        	
+        	if(personneManager.isPersonneHasRightOnProgramme(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), programme))
+        		model.addAttribute("edit","true");
+        }
         
         model.addAttribute("programme", programme);
         model.addAttribute("programmeFils", programmeFils);
@@ -241,10 +250,13 @@ public class GofController
         
         boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
-        if(isUserConnected && personneManager.isPersonneHasRightOnUECat(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), uecat))
-        	model.addAttribute("edit","true");
-        else
-        	model.addAttribute("edit","false");
+        if(isUserConnected)
+        {
+        	model.addAttribute("erreursStruct", uecat.getErreursStruct());
+        	
+        	if(personneManager.isPersonneHasRightOnUECat(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), uecat))
+        		model.addAttribute("edit","true");
+        }
         
         model.addAttribute("uecat", uecat);
         model.addAttribute("programmeFils", programmeFils);
@@ -281,10 +293,13 @@ public class GofController
         
         boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
-        if(isUserConnected && personneManager.isPersonneHasRightOnComposantProg(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), composantProg))
-        	model.addAttribute("edit","true");
-        else
-        	model.addAttribute("edit","false");
+        if(isUserConnected)
+        {
+        	model.addAttribute("erreursStruct", composantProg.getErreursStruct());
+        	
+        	if(personneManager.isPersonneHasRightOnComposantProg(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), composantProg))
+        		model.addAttribute("edit","true");
+        }
         
         model.addAttribute("composantProg", composantProg);
         model.addAttribute("programmeFils", programmeFils);
@@ -321,10 +336,13 @@ public class GofController
         
         boolean isUserConnected = (CustomUserDetails.getCurrentUserLogin().equals("anonymousUser") ? false : true);
         
-        if(isUserConnected && personneManager.isPersonneHasRightOnEnseignement(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), enseignement))
-        	model.addAttribute("edit","true");
-        else
-        	model.addAttribute("edit","false");
+        if(isUserConnected)
+        {
+        	model.addAttribute("erreursStruct", enseignement.getErreursStruct());
+        	
+        	if(personneManager.isPersonneHasRightOnEnseignement(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), enseignement))
+        		model.addAttribute("edit","true");
+        }
         
         model.addAttribute("enseignement", enseignement);
         model.addAttribute("programmeFils", programmeFils);

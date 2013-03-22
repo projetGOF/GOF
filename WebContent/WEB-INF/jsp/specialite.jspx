@@ -45,6 +45,19 @@
 				<h1>${specialite.nomCourt}</h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
+				<c:if test="${not empty edit}">
+					<p>
+						VOUS AVEZ LES DROITS D'EDITER LA FICHE
+					</p>
+				</c:if>
+				<c:if test="${not empty erreursStruct}">
+					<p>
+						ERREURS DE STRUCTURE:
+						<c:forEach items="${erreursStruct}" var="erreurStruct">
+							<li>${erreurStruct.description}</li>
+	    				</c:forEach>
+	    			</p>
+    			</c:if>
 				
 				<table id="specialiteTable">
 			    	<tbody>
@@ -58,12 +71,6 @@
 			    		</tr>
 			    	</tbody>
 				</table>
-				
-				<c:if test="${edit == 'true'}">
-					<p>
-						VOUS AVEZ LES DROITS D'EDITER LA FICHE
-					</p>
-				</c:if>
 				
 			    <c:forEach items="${programmes}" var="programme">
 					<p>
