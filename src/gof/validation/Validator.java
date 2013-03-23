@@ -1,18 +1,25 @@
 package gof.validation;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.w3c.tidy.Tidy;
+
 public class Validator {
 
-	private FicheConfigurationReader ficheProperties = new FicheConfigurationReader();
+	private static FicheConfigurationReader ficheProperties = new FicheConfigurationReader();
 		
 	@SuppressWarnings("unchecked")
-	public <T> Map<String,ValidatorLine> validateFiche(Object fiche, Class<T> classe) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	public static <T> Map<String,ValidatorLine> validateFiche(Object fiche, Class<T> classe) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		
 		Map<String, ValidatorLine> validationMap = new HashMap<String, ValidatorLine>();
 		Map<String, DataType> ficheItems = new HashMap<String, DataType>();
@@ -33,10 +40,44 @@ public class Validator {
 				validatorLine.setDescription(dataType.getDescription());
 				validatorLine.setExample(dataType.getExample());
 				validatorLine.setState(state);
+				validatorLine.setErrorList(getErrorList(result));
 				validationMap.put(ficheMethodList.get(i).getName(), validatorLine);
 				System.out.println("Method: "+ficheMethodList.get(i).getName()+" Valid : "+state);
 			}
 		}
 		return validationMap;
-	}	
+	}
+	
+	private static List<String> getErrorList(String field){
+		
+		Tidy tidy = new Tidy();
+		ArrayList<String> errorList = new ArrayList<String>();
+		
+		tidy.setXmlOut(true);
+		tidy.setXHTML(true);
+		tidy.setShowWarnings(true);
+		tidy.setDocType("strict");
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		tidy.setErrout(new PrintWriter(out, true));
+		
+		ByteArrayInputStream result = new ByteArrayInputStream(field.getBytes());
+		tidy.parseDOM(new BufferedInputStream(result), null);
+		
+		String errors = (new String(out.toByteArray())).trim();
+		if(errors.length()>0)
+		{
+			String[] errorsTab = errors.split("\n");
+			for(int i=0;i< errorsTab.length;i++)
+			{
+				if(errorsTab[i].length()>5)
+				{
+					String subString = errorsTab[i].substring(0,5);
+					if(subString.equals("ligne"))
+						errorList.add(errorsTab[i]);
+				}
+			}
+		}
+		return errorList;
+	}
 }

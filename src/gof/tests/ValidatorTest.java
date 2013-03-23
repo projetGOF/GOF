@@ -3,6 +3,7 @@ package gof.tests;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 import gof.dao.MentionDao;
@@ -24,19 +25,17 @@ public class ValidatorTest {
 	@Autowired
 	private MentionDao mentionDao;
 	private Mention mention;
-	private Validator validator;
 	
 	@Before
 	public void setUp(){
 		
-		validator = new Validator();
 		mention = mentionDao.findMention("ME3BAS");
 	}
 	
 	@Test
 	public void validateFicheTest() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		
-		Map<String,ValidatorLine> result = validator.validateFiche(mention, Mention.class);
+		Map<String,ValidatorLine> result = Validator.validateFiche(mention, Mention.class);
 		
 		System.out.println(result.size());
 		
@@ -53,11 +52,27 @@ public class ValidatorTest {
 		assertEquals(true,result.get("getAideOrientation").getState());
 		assertEquals(true,result.get("getAideOrientationHab").getState());		
 		assertEquals(true,result.get("getArticuAutresFormat").getState());
-		//assertEquals(false,result.get("getAutoEvaluation").getState());
-		//assertEquals(false,result.get("getCohabilitation").getState());
+		assertEquals(true,result.get("getAutoEvaluation").getState());
+		
+		assertEquals(false,result.get("getCohabilitation").getState());
+		if(result.get("getCohabilitation").getState()==false){
+			List<String> errors = result.get("getCohabilitation").getErrorList();
+			System.out.println("Le champ contient les erreurs suivantes :");
+			for(int i=0;i<errors.size();i++)
+				System.out.println(errors.get(i));
+		}
+		
 		assertEquals(true,result.get("getCompetences").getState());
 		assertEquals(true,result.get("getCompetencesHab").getState());
-		//assertEquals(false,result.get("getConditionsAdmission").getState());
+		
+		assertEquals(false,result.get("getConditionsAdmission").getState());
+		if(result.get("getConditionsAdmission").getState()==false){
+			List<String> errors = result.get("getConditionsAdmission").getErrorList();
+			System.out.println("Le champ contient les erreurs suivantes :");
+			for(int i=0;i<errors.size();i++)
+				System.out.println(errors.get(i));
+		}
+		
 		assertEquals(true,result.get("getConditionsAdmissionHab").getState());
 		assertEquals(true,result.get("getConnaissances").getState());
 		assertEquals(true,result.get("getConnaissancesHab").getState());
