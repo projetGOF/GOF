@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import gof.model.ArianeItem;
 import gof.model.ComposantProgramme;
 import gof.model.Domaine;
 import gof.model.ElemStruct;
@@ -16,6 +17,7 @@ import gof.model.Programme;
 import gof.model.Specialite;
 import gof.model.TypeMention;
 import gof.model.UECat;
+import gof.services.Ariane;
 import gof.services.ComposantProgrammeManager;
 import gof.services.CustomUserDetails;
 import gof.services.DomaineManager;
@@ -68,13 +70,22 @@ public class GofController
 
 	@Autowired
 	EnseignementManager enseignementManager;
+	
+	Ariane ariane;
+	
+	public ArrayList<ArianeItem> filAriane(String url, String nom) 
+	{
+		if(this.ariane==null) this.ariane= new Ariane();
+		this.ariane.add(url, nom);
+		return this.ariane.getArianeFil();
+	}
 
 	@RequestMapping("/accueil.htm")
 	public ModelAndView home(Model model)
 	{		
 		if(CustomUserDetails.isUserConnected())
 			model.addAttribute("loggedPersonne", personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()));
-
+		model.addAttribute("arianes", filAriane("accueil.htm", "Accueil"));
 		return new ModelAndView("home");
 	}
 
@@ -102,6 +113,7 @@ public class GofController
 	{
 		model.addAttribute("type", codeDiplome);
 		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.LICENCE));
+		model.addAttribute("arianes", filAriane("licence.htm", "Licences"));
 		return new ModelAndView("licence");
 	}
 
@@ -115,6 +127,7 @@ public class GofController
 		
 		model.addAttribute("domaine", domaine);
 		model.addAttribute("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(codeDomaine, TypeMention.LICENCE));
+		model.addAttribute("arianes", filAriane("licenceDetail"+codeDomaine+".htm", "Licence: "+domaine.getNom()));
 		return new ModelAndView("licenceDetail");
 	}
 
@@ -123,6 +136,7 @@ public class GofController
 	{
 		model.addAttribute("type", codeDiplome);
 		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.LICENCEPRO));
+		model.addAttribute("arianes", filAriane("licencePro.htm", "Licences Professionnelles"));
 		return new ModelAndView("licencePro");
 	}
 
@@ -136,6 +150,7 @@ public class GofController
 		
 		model.addAttribute("domaine", domaine);
 		model.addAttribute("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(codeDomaine, TypeMention.LICENCEPRO));
+		model.addAttribute("arianes", filAriane("licenceProDetail"+codeDomaine+".htm", "Licence Professionnelle: "+domaine.getNom()));
 		return new ModelAndView("licenceProDetail");
 	}
 
@@ -144,6 +159,7 @@ public class GofController
 	{
 		model.addAttribute("type", codeDiplome);
 		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.MASTER));
+		model.addAttribute("arianes", filAriane("master.htm", "Masters"));
 		return new ModelAndView("master");
 	}
 
@@ -157,6 +173,7 @@ public class GofController
 		
 		model.addAttribute("domaine", domaine);
 		model.addAttribute("mentions", this.mentionManager.findAllMentionsByDomaineAndTypeMention(codeDomaine, TypeMention.MASTER));
+		model.addAttribute("arianes", filAriane("masterDetail"+codeDomaine+".htm", "Masters: "+domaine.getNom()));
 		return new ModelAndView("masterDetail");
 	}
 
@@ -186,7 +203,7 @@ public class GofController
 
 		model.addAttribute("mention", mention);
 		model.addAttribute("specialites", mention.getSpecialites());
-
+		model.addAttribute("arianes", filAriane("mention"+codeMention+".htm", "Mention: "+mention.getNomCourt()));
 		return new ModelAndView("mention");
 	}
 
@@ -230,7 +247,7 @@ public class GofController
 
 		model.addAttribute("specialite", specialite);
 		model.addAttribute("programmes", specialite.getProgrammes());
-
+		model.addAttribute("arianes", filAriane("specialite"+codeSpecialite+".htm", "Spécialité: "+specialite.getNomCourt()));
 		return new ModelAndView("specialite");
 	}
 
@@ -296,7 +313,7 @@ public class GofController
 		model.addAttribute("uecatFils", uecatFils);
 		model.addAttribute("composantProgFils", composantProgFils);
 		model.addAttribute("enseignementFils", enseignementFils);
-
+		model.addAttribute("arianes", filAriane("programme"+codeProgramme+".htm", "Programme: "+programme.getNom()));
 		return new ModelAndView("programme");
 	}
 
@@ -362,7 +379,7 @@ public class GofController
 		model.addAttribute("uecatFils", uecatFils);
 		model.addAttribute("composantProgFils", composantProgFils);
 		model.addAttribute("enseignementFils", enseignementFils);
-
+		model.addAttribute("arianes", filAriane("composantProg"+codeUECat+".htm", "Unité d'enseignement: "+uecat.getNom()));
 		return new ModelAndView("uecat");
 	}
 
@@ -428,7 +445,7 @@ public class GofController
 		model.addAttribute("uecatFils", uecatFils);
 		model.addAttribute("composantProgFils", composantProgFils);
 		model.addAttribute("enseignementFils", enseignementFils);
-
+		model.addAttribute("arianes", filAriane("composantProg"+codeComposantProg+".htm", "Composant de programme: "+composantProg.getNom()));
 		return new ModelAndView("composantProg");
 	}
 
@@ -494,7 +511,7 @@ public class GofController
 		model.addAttribute("uecatFils", uecatFils);
 		model.addAttribute("composantProgFils", composantProgFils);
 		model.addAttribute("enseignementFils", enseignementFils);
-
+		model.addAttribute("arianes", filAriane("enseignement"+codeEnseignement+".htm", "Enseignement: "+enseignement.getNom()));
 		return new ModelAndView("enseignement");
 	}
 

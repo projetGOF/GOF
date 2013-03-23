@@ -27,7 +27,13 @@
 			</div>	
 			<div id="nav">
 				<div id="nav-left">
-					
+					<ul>
+						<c:forEach items="${arianes}" var="ariane">
+							<li>
+								<a href="${ariane.url}">${ariane.nom}</a>
+							</li>
+    					</c:forEach>
+    				</ul>
 				</div><!-- fin <div id="nav-left"> -->
 				<div id="nav-right">
 					
