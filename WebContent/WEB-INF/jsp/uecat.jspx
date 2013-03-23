@@ -50,6 +50,9 @@
 						VOUS AVEZ LES DROITS D'EDITER LA FICHE
 					</p>
 					<p>
+						Vous pouvez gérer les responsables de cette fiche <a href="responsablesUECat${uecat.code}.htm">ici</a>.
+					</p>
+					<p>
 						<form:form id="formPubliable" action="editUECatPubliable.htm" commandName="uecat">
 							<form:input id="formPubliable.code.${uecat.code}" type="hidden" path="code" />
 							<form:label path="publiable"> Publiable </form:label>

@@ -43,6 +43,9 @@
 						VOUS AVEZ LES DROITS D'EDITER LA FICHE
 					</p>
 					<p>
+						Vous pouvez gérer les responsables de cette fiche <a href="responsablesEnseignement${enseignement.code}.htm">ici</a>.
+					</p>
+					<p>
 						<form:form id="formPubliable" action="editEnseignementPubliable.htm" commandName="enseignement">
 							<form:input id="formPubliable.code.${enseignement.code}" type="hidden" path="code" />
 							<form:label path="publiable"> Publiable </form:label>

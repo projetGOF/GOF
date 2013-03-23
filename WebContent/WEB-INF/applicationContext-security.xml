@@ -32,6 +32,26 @@
         <!-- Liste des pages controllées par Spring Security avec les rôles requis pour pouvoir y accéder -->
 		<security:intercept-url pattern="/etat.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
 		<security:intercept-url pattern="/responsablesROF.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		
+		<security:intercept-url pattern="/responsablesMention{mention}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/supprimerResponsableMention{mention}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/ajouterResponsableMention{mention}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		
+		<security:intercept-url pattern="/responsablesSpecialite{specialite}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/supprimerResponsableSpecialite{specialite}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/ajouterResponsableSpecialite{specialite}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		
+		<security:intercept-url pattern="/responsablesProgramme{programme}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/supprimerResponsableProgramme{programme}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/ajouterResponsableProgramme{programme}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		
+		<security:intercept-url pattern="/responsablesUECat{uecat}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/supprimerResponsableUECat{uecat}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/ajouterResponsableUECat{uecat}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		
+		<security:intercept-url pattern="/responsablesEnseignement{enseignement}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/supprimerResponsableEnseignement{enseignement}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
+		<security:intercept-url pattern="/ajouterResponsableEnseignement{enseignement}.htm" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"  />
 
         <security:form-login login-page="/identification.htm"
                              default-target-url="/accueil.htm" 

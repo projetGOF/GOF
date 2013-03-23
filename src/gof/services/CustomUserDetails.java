@@ -73,6 +73,11 @@ public class CustomUserDetails implements UserDetailsService
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
 	
+	public static boolean isUserConnected()
+	{
+		return !getCurrentUserLogin().equals("anonymousUser");
+	}
+	
 	/**
 	 * @return true si l'utilisateur connecté possède les droits d'administrateur, false sinon
 	 */

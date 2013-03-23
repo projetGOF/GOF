@@ -15,7 +15,7 @@
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
-			<title>Responsables ROF</title>
+			<title>Ajouter un responsable au programme ${programme.code}</title>
 			<spring:url value="/resources/css/home.css" var="homecss" /> 	
 			<link rel="stylesheet" href="${homecss}" type="text/css" />
 				
@@ -34,16 +34,21 @@
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
 				
-				<h2>Responsables ROF</h2>
-				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
+				<h2>Ajouter un responsable au programme ${programme.code}</h2>
 				
 				<table>
-				<c:forEach items="${responsablesROF}" var="responsable">
+				<c:forEach items="${personnes}" var="personne">
+				<c:set var="currentPersonne" scope="request" value="${personne}"/>
 				<tr>
-					<td>${responsable.code}</td>
-					<td>${responsable.nom}</td>
-					<td>${responsable.prenom}</td>
-					<td>${responsable.mail}</td>
+					<td>${personne.code}</td>
+					<td>${personne.nom}</td>
+					<td>${personne.prenom}</td>
+					<td>
+						<form:form id="formAdd.${personne.code}" action="ajouterResponsableProgramme${programme.code}.htm" commandName="currentPersonne">
+							<form:input id="formAdd.code.${personne.code}" type="hidden" path="code" />
+							<input id="formAdd.submit" class ="buttons" type="submit" value="Ajouter" onclick="return confirm('Etes-vous sûr de vouloir ajouter ${personne.nom} ${personne.prenom} à la liste des responsables du programme ${programme.code}?')"/>
+						</form:form>
+					</td>
 				</tr>
 				</c:forEach>
 				</table>
