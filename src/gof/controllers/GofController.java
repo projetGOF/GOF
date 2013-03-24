@@ -85,7 +85,7 @@ public class GofController
 	{		
 		if(CustomUserDetails.isUserConnected())
 			model.addAttribute("loggedPersonne", personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()));
-		model.addAttribute("arianes", filAriane("accueil.htm", "Accueil"));
+		model.addAttribute("arianes", filAriane("accueil.htm", "Home"));
 		return new ModelAndView("home");
 	}
 
@@ -544,7 +544,7 @@ public class GofController
 	public ModelAndView responsablesROF(Model model)
 	{
 		model.addAttribute("responsablesROF", this.personneManager.findAllRespoROF());
-
+		model.addAttribute("arianes", filAriane("responsablesROF.htm", "Responsables ROF"));
 		return new ModelAndView("responsablesROF");
 	}
 
@@ -570,7 +570,7 @@ public class GofController
 		
 		model.addAttribute("mention", mention);
 		model.addAttribute("responsables", responsables);
-
+		model.addAttribute("arianes", filAriane("responsablesMention"+codeMention+".htm", "Responsables de la Mention: "+mention.getNomCourt()));
 		return new ModelAndView("responsablesMention");
 	}
 
@@ -660,7 +660,7 @@ public class GofController
 
 		model.addAttribute("specialite", specialite);
 		model.addAttribute("responsables", specialite.getResponsables());
-
+		model.addAttribute("arianes", filAriane("responsablesSpecialite"+codeSpecialite+".htm", "Responsables de la Spécialité: "+specialite.getNomCourt()));
 		return new ModelAndView("responsablesSpecialite");
 	}
 
@@ -750,7 +750,7 @@ public class GofController
 
 		model.addAttribute("programme", programme);
 		model.addAttribute("responsables", responsables);
-
+		model.addAttribute("arianes", filAriane("responsablesProgramme"+codeProgramme+".htm", "Responsable du Programme: "+programme.getNom()));
 		return new ModelAndView("responsablesProgramme");
 	}
 
@@ -840,7 +840,7 @@ public class GofController
 
 		model.addAttribute("uecat", uecat);
 		model.addAttribute("responsables", responsables);
-
+		model.addAttribute("arianes", filAriane("responsablesUECat"+codeUECat+".htm", "Responsables de l'UECat: "+uecat.getNom()));
 		return new ModelAndView("responsablesUECat");
 	}
 
@@ -930,7 +930,7 @@ public class GofController
 		
 		model.addAttribute("enseignement", enseignement);
 		model.addAttribute("responsables", responsables);
-
+		model.addAttribute("arianes", filAriane("responsablesEnseignement"+codeEnseignement+".htm", "Responsables de l'enseignement: "+enseignement.getNom()));
 		return new ModelAndView("responsablesEnseignement");
 	}
 

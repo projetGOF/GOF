@@ -11,14 +11,14 @@ public class Ariane {
 	public Ariane() {
 		if(this.fil==null) {
 			this.fil = new ArrayList<ArianeItem>();
-			this.fil.add(new ArianeItem("accueil.htm","Accueil"));
+			this.fil.add(new ArianeItem("accueil.htm","Home"));
 		}
 	}
 	
 	public void add(String url, String nom) {
 		if(this.fil==null) {
 			this.fil = new ArrayList<ArianeItem>();
-			this.fil.add(new ArianeItem("accueil.htm","Accueil"));
+			this.fil.add(new ArianeItem("accueil.htm","Home"));
 		}
 		int positionTrue=-1;
 		for(int i=0; i<fil.size();++i) {
