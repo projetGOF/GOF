@@ -203,7 +203,9 @@ public class GofController
 
 		model.addAttribute("mention", mention);
 		model.addAttribute("specialites", mention.getSpecialites());
+		model.addAttribute("programmes", mention.getProgrammes());
 		model.addAttribute("arianes", filAriane("mention"+codeMention+".htm", "Mention: "+mention.getNomCourt()));
+		
 		return new ModelAndView("mention");
 	}
 
@@ -529,15 +531,28 @@ public class GofController
 		return new ModelAndView(new RedirectView("enseignement" + newEnseignement.getCode() + ".htm"));
 	}
 
+	/** Pages d'etats **/
+	
 	@RequestMapping("/etat.htm")
 	public ModelAndView etat(Model model)
 	{
-		model.addAttribute("domaines", this.domaineManager.findAllDomaines());
-		model.addAttribute("mentionL", this.mentionManager.findAllMentionByTypeMention(TypeMention.LICENCE));
-		model.addAttribute("mentionLP", this.mentionManager.findAllMentionByTypeMention(TypeMention.LICENCEPRO));
-		model.addAttribute("mentionM", this.mentionManager.findAllMentionByTypeMention(TypeMention.MASTER));
+		model.addAttribute("mentions", this.mentionManager.findAllMentions());
 
 		return new ModelAndView("etat");
+	}
+	
+	@RequestMapping("/etatMention{mention}.htm")
+	public ModelAndView etatMention(@PathVariable("mention") String codeMention, Model model)
+	{
+		Mention mention = this.mentionManager.findMention(codeMention);
+
+		if(mention == null)
+			return new ModelAndView("accessDenied");
+		
+		model.addAttribute("specialites", mention.getSpecialites());
+		model.addAttribute("programmes", mention.getProgrammes());
+		
+		return new ModelAndView("etatMention");
 	}
 
 	@RequestMapping("/responsablesROF.htm")

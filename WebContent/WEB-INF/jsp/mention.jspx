@@ -4,6 +4,7 @@
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:fn ="http://java.sun.com/jsp/jstl/functions"
 	xmlns:sec="http://www.springframework.org/security/tags" version="2.2">
 <jsp:directive.page contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8" session="true"/>
@@ -117,10 +118,21 @@
 			    		</tr>
 			    	</tbody>
 				</table>
-			    <br></br>
+				
+				<c:if test="${fn:length(specialites) != 0}">
+					<p>Spécialités:</p>
+				</c:if>
 				
 				<c:forEach items="${specialites}" var="specialite">
 					<p><a href="specialite${specialite.code}.htm">${specialite.nom}</a></p>
+    			</c:forEach>
+    			
+    			<c:if test="${fn:length(programmes) != 0}">
+					<p>Programmes:</p>
+				</c:if>
+    			
+    			<c:forEach items="${programmes}" var="programme">
+					<p><a href="programme${programme.code}.htm">${programme.nom}</a></p>
     			</c:forEach>
 			    
 			</div><!-- fin <div id="body"> -->

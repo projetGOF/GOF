@@ -2,8 +2,9 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.2"
-	xmlns:form="http://www.springframework.org/tags/form">
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:fn ="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form" version="2.2">
 <jsp:directive.page contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8" session="true"/>
 <jsp:output doctype-root-element="html"
@@ -37,30 +38,42 @@
 				<h2><fmt:message key="etat.title"/></h2>
 				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
 				
-				<c:forEach items="${domaines}" var="domaine">
-					<p><c:out value="${domaine.nom}"/> : <c:out value="${domaine.code}"/></p>
-					<table>
-				    	<tbody>
-				    		<td>
-				    			<c:forEach items="${mentionL}" var="licence">
-				    				<tr>
-				    					<p> test : ${licence.code} : {licence.typeMention}</p>
-				    				</tr>
-				    			</c:forEach>
-				    			<c:forEach items="${mentionLP}" var="LicencePro">
-				    				<tr>
-				    					<p>${LicencePro.code} : ${LicencePro.typeMention}</p>
-				    				</tr>
-				    			</c:forEach>
-				    			<c:forEach items="${mentionM}" var="Master">
-			    					<tr>
-				    					<p>${Master.code} : ${Master.typeMention}</p>
-				    				</tr>
-				    			</c:forEach>
-				    		</td>
-				    	</tbody>
-					</table>
-				</c:forEach>
+				<table>
+					<thead>
+						<tr>
+							<th>Code</th>
+							<th>Nom</th>
+							<th>Détails</th>
+							<th>Publiable</th>
+							<th>Erreurs de contenu</th>
+							<th>Erreurs de structure</th>
+						</tr>
+			  		</thead>
+					<c:forEach items="${mentions}" var="mention">
+						<tr>
+							<td>${mention.code}</td>
+							<td><a href="etatMention${mention.code}.htm">${mention.nom}</a></td>
+							<td><a href="mention${mention.code}.htm">Voir</a></td>
+							<td>
+								<c:choose>
+									<c:when test="${mention.publiable == true}"> Oui </c:when>
+									<c:when test="${mention.publiable == false}"> Non </c:when>
+								</c:choose>
+							</td>
+							<td>
+								
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${fn:length(mention.erreursStruct) == 0}"> OK </c:when>
+									<c:when test="${fn:length(mention.erreursStruct) != 0}"> ${fn:length(mention.erreursStruct)} </c:when>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+				
+				
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">
 				<center class="smaller">
