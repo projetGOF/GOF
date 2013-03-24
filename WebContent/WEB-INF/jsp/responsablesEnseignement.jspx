@@ -35,7 +35,8 @@
 			<div id="body">
 				
 				<h2>Responsables de l'enseignement ${enseignement.code}</h2>
-				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
+				
+				<p><a href="enseignement${enseignement.code}.htm">Retour à la fiche</a></p>
 				
 				<p><a href="ajouterResponsableEnseignement${enseignement.code}.htm"> Ajouter un responsable</a></p>
 				

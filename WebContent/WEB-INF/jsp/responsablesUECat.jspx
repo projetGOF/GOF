@@ -35,7 +35,8 @@
 			<div id="body">
 				
 				<h2>Responsables de l'UE catalogue ${uecat.code}</h2>
-				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
+				
+				<p><a href="uecat${uecat.code}.htm">Retour à la fiche</a></p>
 				
 				<p><a href="ajouterResponsableUECat${uecat.code}.htm"> Ajouter un responsable</a></p>
 				
