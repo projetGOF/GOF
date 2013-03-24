@@ -79,7 +79,7 @@
 				<h1><fmt:message key="master.title"/></h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
-				<h3>Détail sur le Domaine : ${domaine.nom}"/></h3>
+				<h3>Détail sur le Domaine : ${domaine.nom}</h3>
 				<table>
 			    	<tbody>
 			    		<td>Code :</td>
