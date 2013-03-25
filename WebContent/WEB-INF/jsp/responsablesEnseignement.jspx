@@ -15,14 +15,14 @@
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
-			<title>Responsables de l'enseignement {enseignement.code}</title>
+			<title>Responsables de l'enseignement ${enseignement.code}</title>
 			<spring:url value="/resources/css/home.css" var="homecss" /> 	
 			<link rel="stylesheet" href="${homecss}" type="text/css" />
 					
 			<spring:url value="/resources/css/BreadCrumb.css" var="crumcss" /> 	
 			<link rel="stylesheet" href="${crumcss}" type="text/css" />
 			
-			<spring:url value="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" var="jquery"/>
+			<spring:url value="/resources/js/jquery.min.js" var="jquery"/>
 			<spring:url value="/resources/js/jquery.easing.1.3.js" var="jqueryEasing"/>
 			<spring:url value="/resources/js/jquery.jBreadCrumb.1.1.js" var="jBreadCrumb"/>
 			
