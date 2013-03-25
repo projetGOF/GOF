@@ -40,7 +40,7 @@ Cette application s'inclut dans le cadre de notre projet de fin d'année.
 <h5>installation :</h5>
 
 1.créer une base de données nommé  <br/>
-2.éditer le fichier /GOF/src/META-INF/persistence.xml en modifiant l'attribut value de "upload" à "create"  <br/>
+2.éditer le fichier /GOF/src/META-INF/persistence.xml en modifiant l'attribut value de "update" à "create"  <br/>
 3.éditer le fichier GOFSync.properties de la façon suivante:  <br/>
 
 xml.pathToContentXSl= // Chemin d'acces au fichier XSL d'import de contenu  <br/>
@@ -52,7 +52,7 @@ xml.pathGeneratedStructureSQL= //Emplacement du fichier sql qui sera généré (
 jdbc.username= // Nom d'utilisateur  <br/>
 jdbc.password= // Mot de passe <br/>
 5.lancer l'application en exécutant "/GOF/WebContent/index.jspx" <br/>
-6.éditer le fichier /GOF/src/META-INF/persistence.xml en modifiant l'attribut value de "create" à "upload"   <br/>
+6.éditer le fichier /GOF/src/META-INF/persistence.xml en modifiant l'attribut value de "create" à "update"   <br/>
 7.relancer l'application en exécutant à nouveau "/GOF/WebContent/index.jspx"  <br/>
 
 ******************
