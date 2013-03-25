@@ -39,7 +39,7 @@ p, div, ul, li
 
 #nav
 {
-/* 	background-color: white; */
+	background-color: white;
 	height: 40px;
 	border: 2px solid white;
 /* 	border-bottom-color: yellow; */
@@ -49,22 +49,22 @@ p, div, ul, li
 
 #nav-left
 {
-/* 	background-color: white; */
+	background-color: white;
 }
 
 #nav-right
 {
-/* 	background-color: white; */
+	background-color: white;
 	margin-top: 1px;
 	float: right;
 }
 
 #body
 {
-/* 	background-color: white; */
+	background-color: white;
 
-	height: 690px;
-	margin-top:42px;
+/* 	height: 690px; */
+/* 	margin-top:42px; */
 
 	padding-left: 10px;
 
@@ -76,6 +76,7 @@ p, div, ul, li
 /* 	background-color: white; */
 	float: bottom;
 	text-align: center;
+	padding-top: 20px;
 /* 	border: 4px groove blue; */
 	height: 40px;
 }
