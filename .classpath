@@ -53,5 +53,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-portlet-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tidyGof.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ckeditor-java-core-3.5.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

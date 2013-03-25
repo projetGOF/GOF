@@ -16,15 +16,17 @@ import org.w3c.tidy.Tidy;
 
 public class Validator {
 
-	private static FicheConfigurationReader ficheProperties = new FicheConfigurationReader();
+	private FicheConfigurationReader ficheProperties = new FicheConfigurationReader();
+	private int errors = 0;
 		
 	@SuppressWarnings("unchecked")
-	public static <T> Map<String,ValidatorLine> validateFiche(Object fiche, Class<T> classe) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	public <T> Map<String,ValidatorLine> validateFiche(Object fiche, Class<T> classe) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		
 		Map<String, ValidatorLine> validationMap = new HashMap<String, ValidatorLine>();
 		Map<String, DataType> ficheItems = new HashMap<String, DataType>();
+		errors = 0;
 		
-		System.out.println("Fiche : "+classe.getCanonicalName());
+		//System.out.println("Fiche : "+classe.getCanonicalName());
 		
 		ficheItems = ficheProperties.getFichesProperties().get(classe.getCanonicalName());
 		fiche = (T)fiche;
@@ -41,14 +43,18 @@ public class Validator {
 				validatorLine.setExample(dataType.getExample());
 				validatorLine.setState(state);
 				validatorLine.setErrorList(getErrorList(result));
-				validationMap.put(ficheMethodList.get(i).getName(), validatorLine);
-				System.out.println("Method: "+ficheMethodList.get(i).getName()+" Valid : "+state);
+				String column = ficheMethodList.get(i).getName().replaceFirst("get", "");
+				String key = column.substring(0,1).toLowerCase()+column.substring(1);
+				validationMap.put(key, validatorLine);
+				if(!state)
+					errors+= 1;
+				//System.out.println("Method: "+ficheMethodList.get(i).getName()+" -> "+key+" Valid : "+state);
 			}
 		}
 		return validationMap;
 	}
 	
-	private static List<String> getErrorList(String field){
+	private List<String> getErrorList(String field){
 		
 		Tidy tidy = new Tidy();
 		ArrayList<String> errorList = new ArrayList<String>();
@@ -79,5 +85,9 @@ public class Validator {
 			}
 		}
 		return errorList;
+	}
+	
+	public int getErrors(){
+		return this.errors;
 	}
 }

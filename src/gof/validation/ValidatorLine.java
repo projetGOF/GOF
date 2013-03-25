@@ -9,7 +9,7 @@ public class ValidatorLine {
 	private String example;
 	private boolean state;
 	private List<String> errorList;
-	
+
 	public ValidatorLine(){
 		this.errorList = new ArrayList<String>();
 	}
