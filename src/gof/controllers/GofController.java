@@ -201,9 +201,15 @@ public class GofController
 			}
 		}
 
+		Set<Specialite> specialites = mention.getSpecialites();
+		
 		model.addAttribute("mention", mention);
-		model.addAttribute("specialites", mention.getSpecialites());
-		model.addAttribute("programmes", mention.getProgrammes());
+		
+		if(specialites.size() == 0)
+			model.addAttribute("programmes", mention.getProgrammes());
+		else
+			model.addAttribute("specialites", specialites);
+		
 		model.addAttribute("arianes", filAriane("mention"+codeMention+".htm", "Mention: "+mention.getNomCourt()));
 		
 		return new ModelAndView("mention");
