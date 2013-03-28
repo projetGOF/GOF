@@ -107,6 +107,15 @@ public class GofController
 	{
 		return new ModelAndView("accessDenied");
 	}
+	
+	@RequestMapping("/dut{diplome}.htm")
+	public ModelAndView dut(@PathVariable("diplome") String codeDiplome, Model model)
+	{
+		model.addAttribute("type", codeDiplome);
+		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.DUT));
+		model.addAttribute("arianes", filAriane("dut.htm", "D.U.T"));
+		return new ModelAndView("dut");
+	}
 
 	@RequestMapping("/licence{diplome}.htm")
 	public ModelAndView domaines(@PathVariable("diplome") String codeDiplome, Model model)
@@ -132,7 +141,7 @@ public class GofController
 	}
 
 	@RequestMapping("/licencePro{diplome}.htm")
-	public ModelAndView licencePromaster(@PathVariable("diplome") String codeDiplome, Model model)
+	public ModelAndView licencePro(@PathVariable("diplome") String codeDiplome, Model model)
 	{
 		model.addAttribute("type", codeDiplome);
 		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.LICENCEPRO));

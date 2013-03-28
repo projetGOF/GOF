@@ -17,15 +17,20 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
 			<title><fmt:message key="master.title"/></title>
-			<spring:url value="/resources/css/home.css" var="homecss" /> 	
-			<link rel="stylesheet" href="${homecss}" type="text/css" />
 					
 			<spring:url value="/resources/css/BreadCrumb.css" var="crumcss" /> 	
 			<link rel="stylesheet" href="${crumcss}" type="text/css" />
-
+			<spring:url value="/resources/css/table.css" var="datatablescss" /> 	
+			<link rel="stylesheet" href="${datatablescss}" type="text/css" />
+			
+			<spring:url value="/resources/css/domaine.css" var="domainecss" /> 	
+			<link rel="stylesheet" href="${domainecss}" type="text/css" />
+			
 			<spring:url value="/resources/js/jquery.min.js" var="jquery"/>
 			<spring:url value="/resources/js/jquery.easing.1.3.js" var="jqueryEasing"/>
 			<spring:url value="/resources/js/jquery.jBreadCrumb.1.1.js" var="jBreadCrumb"/>
+			<spring:url value="/resources/js/dataTables/jquery.dataTables.js" var="jqDatatables"/>
+			<spring:url value="/resources/js/dataTables/AutoFill.js" var="jAutofill"/>
 			
 			<script src="${jquery}" type="text/javascript" >
 			<!-- -->
@@ -36,13 +41,24 @@
 			<script src="${jBreadCrumb}" type="text/javascript" >
 			<!-- -->
 			</script>
+			<script src="${jqDatatables}" type="text/javascript" >
+			<!-- -->
+			</script>
+			<script src="${jAutofill}" type="text/javascript" >
+			<!-- -->
+			</script>
 			
 			<script type="text/javascript">
             jQuery(document).ready(function()
             {
                 jQuery("#breadCrumb2").jBreadCrumb();
             })
-            <!-- -->
+        	</script>
+        	<script type="text/javascript">
+        	$(document).ready( function () {
+				var oTable = $('#table').dataTable();
+				new AutoFill( oTable );
+			} );
         	</script>
 		</head>
 		<body>
@@ -77,24 +93,28 @@
 				</sec:authorize>
 			
 				<h1><fmt:message key="master.title"/></h1>
-				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
 				<h3>Détail sur le Domaine : ${domaine.nom}</h3>
-				<table>
+				<center>
+				<table id="table">
+					<thead>
+						<tr>
+							<th id="code">Code :</th>
+							<th id="url">Détail :</th>
+						</tr>
+					</thead>
 			    	<tbody>
-			    		<td>Code :</td>
-			    		<td>détail :</td>
 			    		<c:forEach items="${mentions}" var="mention">
 			    		<tr>
-			    			<td>${mention.code}</td>
-		    				<td>
+			    			<td id="code">${mention.code}</td>
+		    				<td id="url">
 			    				<a href="mention${mention.code}.htm">${mention.nom}</a> 
 		    				</td>
 		    			</tr>
 		    			</c:forEach>
 			    	</tbody>
 				</table>
-			    
+			    </center>
 			    
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">

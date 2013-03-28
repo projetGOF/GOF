@@ -19,12 +19,17 @@
 			<spring:url value="/resources/css/home.css" var="homecss" /> 	
 			<link rel="stylesheet" href="${homecss}" type="text/css" />
 					
+					
 			<spring:url value="/resources/css/BreadCrumb.css" var="crumcss" /> 	
 			<link rel="stylesheet" href="${crumcss}" type="text/css" />
+			<spring:url value="/resources/css/table.css" var="datatablescss" /> 	
+			<link rel="stylesheet" href="${datatablescss}" type="text/css" />
 			
 			<spring:url value="/resources/js/jquery.min.js" var="jquery"/>
 			<spring:url value="/resources/js/jquery.easing.1.3.js" var="jqueryEasing"/>
 			<spring:url value="/resources/js/jquery.jBreadCrumb.1.1.js" var="jBreadCrumb"/>
+			<spring:url value="/resources/js/dataTables/jquery.dataTables.js" var="jqDatatables"/>
+			<spring:url value="/resources/js/dataTables/AutoFill.js" var="jAutofill"/>
 			
 			<script src="${jquery}" type="text/javascript" >
 			<!-- -->
@@ -35,13 +40,24 @@
 			<script src="${jBreadCrumb}" type="text/javascript" >
 			<!-- -->
 			</script>
+			<script src="${jqDatatables}" type="text/javascript" >
+			<!-- -->
+			</script>
+			<script src="${jAutofill}" type="text/javascript" >
+			<!-- -->
+			</script>
 			
 			<script type="text/javascript">
             jQuery(document).ready(function()
             {
                 jQuery("#breadCrumb2").jBreadCrumb();
             })
-            <!-- -->
+        	</script>
+        	<script type="text/javascript">
+        	$(document).ready( function () {
+				var oTable = $('#table').dataTable();
+				new AutoFill( oTable );
+			} );
         	</script>
 		</head>
 		<body>
@@ -73,25 +89,34 @@
 				<p><a href="mention${mention.code}.htm">Retour à la fiche</a></p>
 				
 				<p><a href="ajouterResponsableMention${mention.code}.htm"> Ajouter un responsable</a></p>
-				
-				<table>
-				<c:forEach items="${responsables}" var="responsable">
-				<c:set var="currentResponsable" scope="request" value="${responsable}"/>	
-				<tr>
-					<td>${responsable.code}</td>
-					<td>${responsable.nom}</td>
-					<td>${responsable.prenom}</td>
-					<td>${responsable.mail}</td>
-					<td>
-						<form:form id="formDelete.${responsable.code}" action="supprimerResponsableMention${mention.code}.htm" commandName="currentResponsable">
-							<form:input id="formDelete.code.${responsable.code}" type="hidden" path="code" />
-							<input id="formDelete.submit" class ="buttons" type="submit" value="Retirer" onclick="return confirm('Etes-vous sûr de vouloir retirer ${responsable.nom} ${responsable.prenom} de la liste des responsables de la mention ${mention.code}?')"/>
-						</form:form>
-					</td>
-				</tr>
-				</c:forEach>
-				</table>
-				
+				<center>
+					<table id="table">
+						<thead>
+							<tr>
+								<th>Code</th>
+								<th>Nom</th>
+								<th>Prénom</th>
+								<th>Email</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+					<c:forEach items="${responsables}" var="responsable">
+					<c:set var="currentResponsable" scope="request" value="${responsable}"/>	
+					<tr>
+						<td>${responsable.code}</td>
+						<td>${responsable.nom}</td>
+						<td>${responsable.prenom}</td>
+						<td>${responsable.mail}</td>
+						<td>
+							<form:form id="formDelete.${responsable.code}" action="supprimerResponsableMention${mention.code}.htm" commandName="currentResponsable">
+								<form:input id="formDelete.code.${responsable.code}" type="hidden" path="code" />
+								<input id="formDelete.submit" class ="buttons" type="submit" value="Retirer" onclick="return confirm('Etes-vous sûr de vouloir retirer ${responsable.nom} ${responsable.prenom} de la liste des responsables de la mention ${mention.code}?')"/>
+							</form:form>
+						</td>
+					</tr>
+					</c:forEach>
+					</table>
+				</center>
 			</div><!-- fin <div id="body"> -->
 			<div id="footer">
 				<center class="smaller">
