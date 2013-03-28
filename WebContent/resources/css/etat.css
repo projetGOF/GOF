@@ -1,17 +1,17 @@
 html 
 {
-	height: 101%;	
+/* 	min-height:101%; */
 	background-color: #EDEAE0; 
 }
 
 body
 {
  	background-color: white;
-	margin: 0;
 	margin-left: 20%;
 	margin-right: 19.4%;
-	min-width: 600px;
-	height:120%;
+/* 	min-width: 600px; */
+/* 	height: 3000%; */
+	min-height: 890px;
 	border-left: 2px solid rgb(19, 121, 198);
 	border-right: 2px solid rgb(19, 121, 198);
 	font-family: Verdana,Arial,sans-serif;
@@ -24,7 +24,7 @@ p, div, ul, li
 
 #header
 {
-
+	background-color: white;
 	background-image: url("../images/AMU.png");
 	background-repeat: no-repeat;
 /* 	background-color: white; */
@@ -62,23 +62,27 @@ p, div, ul, li
 #body
 {
 	background-color: white;
-
+/* 	min-height: 101%; */
 /* 	height: 690px; */
 /* 	margin-top:42px; */
-
-	padding-left: 10px;
-
-	
+	margin-left: -2px;
+	margin-right: -2px;
+	border-left: 2px solid rgb(19, 121, 198);
+	border-right: 2px solid rgb(19, 121, 198);
 }
 
 #footer
 {
 /* 	background-color: white; */
+/* 	position: absolute; */
 	float: bottom;
 	text-align: center;
 	padding-top: 20px;
-/* 	border: 4px groove blue; */
 	height: 40px;
+	margin-left: -2px;
+	margin-right: -2px;
+	border-left: 2px solid rgb(19, 121, 198);
+	border-right: 2px solid rgb(19, 121, 198);
 }
 
 center
@@ -163,6 +167,18 @@ p.alerte2 {
 	border:solid 2px red;
 	color:red;
 	margin: 0px;
+}
+
+#code {
+	
+}
+
+#nom {
+	
+}
+
+#detail {
+	text-align:center;
 }
 
 #oui {

@@ -17,8 +17,48 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
 			<title><fmt:message key="etat.title"/></title>
-			<spring:url value="/resources/css/home.css" var="homecss" /> 	
-			<link rel="stylesheet" href="${homecss}" type="text/css" />
+			
+			<spring:url value="/resources/css/BreadCrumb.css" var="crumcss" /> 	
+			<link rel="stylesheet" href="${crumcss}" type="text/css" />
+			<spring:url value="/resources/css/table.css" var="datatablescss" /> 	
+			<link rel="stylesheet" href="${datatablescss}" type="text/css" />
+			<spring:url value="/resources/css/home.css" var="etatcss" /> 	
+			<link rel="stylesheet" href="${etatcss}" type="text/css" />
+			
+			<spring:url value="/resources/js/jquery.min.js" var="jquery"/>
+			<spring:url value="/resources/js/jquery.easing.1.3.js" var="jqueryEasing"/>
+			<spring:url value="/resources/js/jquery.jBreadCrumb.1.1.js" var="jBreadCrumb"/>
+			<spring:url value="/resources/js/dataTables/jquery.dataTables.js" var="jqDatatables"/>
+			<spring:url value="/resources/js/dataTables/AutoFill.js" var="jAutofill"/>
+			
+			<script src="${jquery}" type="text/javascript" >
+			<!-- -->
+			</script>
+			<script src="${jqueryEasing}" type="text/javascript" >
+			<!-- -->
+			</script>
+			<script src="${jBreadCrumb}" type="text/javascript" >
+			<!-- -->
+			</script>
+			<script src="${jqDatatables}" type="text/javascript" >
+			<!-- -->
+			</script>
+			<script src="${jAutofill}" type="text/javascript" >
+			<!-- -->
+			</script>
+			
+			<script type="text/javascript">
+            jQuery(document).ready(function()
+            {
+                jQuery("#breadCrumb2").jBreadCrumb();
+            })
+        	</script>
+        	<script type="text/javascript">
+        	$(document).ready( function () {
+        		var oTable = $('#table').dataTable();
+				new AutoFill( oTable );
+			} );
+        	</script>
 				
 		</head>
 		<body>
@@ -39,7 +79,8 @@
 				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
 				
 				<c:if test="${fn:length(specialites) != 0}">
-					<table>
+				<center>
+					<table id="table">
 						<thead>
 							<tr>
 								<th>Code</th>
@@ -55,31 +96,27 @@
 								<td>${specialite.code}</td>
 								<td>${specialite.nom}</td>
 								<td><a href="specialite${specialite.code}.htm">Voir</a></td>
-								<td>
-									<c:choose>
-										<c:when test="${specialite.publiable == true}"> Oui </c:when>
-										<c:when test="${specialite.publiable == false}"> Non </c:when>
-									</c:choose>
-								</td>
-								<td>
-									<c:choose>
-									<c:when test="${specialite.contenuValide == true}"> OK </c:when>
-									<c:when test="${specialite.contenuValide == false}"> ${specialite.nbErreurs} </c:when>
+								<c:choose>
+									<c:when test="${specialite.publiable == true}"><td id="oui"> Oui</td> </c:when>
+									<c:when test="${specialite.publiable == false}"><td id="non"> Non</td> </c:when>
 								</c:choose>
-								</td>
-								<td>
-									<c:choose>
-										<c:when test="${fn:length(specialite.erreursStruct) == 0}"> OK </c:when>
-										<c:when test="${fn:length(specialite.erreursStruct) != 0}"> ${fn:length(specialite.erreursStruct)} </c:when>
-									</c:choose>
-								</td>
+								<c:choose>
+									<c:when test="${specialite.contenuValide == true}"><td id="oui"> OK</td> </c:when>
+									<c:when test="${specialite.contenuValide == false}"><td id="non"> ${specialite.nbErreurs}</td> </c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${fn:length(specialite.erreursStruct) == 0}"><td id="oui"> OK</td> </c:when>
+									<c:when test="${fn:length(specialite.erreursStruct) != 0}"><td id="non"> ${fn:length(specialite.erreursStruct)}</td> </c:when>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</table>
+					</center>
 				</c:if>
 				
 				<c:if test="${fn:length(programmes) != 0}">
-					<table>
+				<center>
+					<table id="table">
 						<thead>
 							<tr>
 								<th>Code</th>
@@ -95,24 +132,22 @@
 								<td>${programme.code}</td>
 								<td>${programme.nom}</td>
 								<td><a href="programme${programme.code}.htm">Voir</a></td>
-								<td>
-									<c:choose>
-										<c:when test="${programme.publiable == true}"> Oui </c:when>
-										<c:when test="${programme.publiable == false}"> Non </c:when>
-									</c:choose>
-								</td>
-								<td>
-									
-								</td>
-								<td>
-									<c:choose>
-										<c:when test="${fn:length(programme.erreursStruct) == 0}"> OK </c:when>
-										<c:when test="${fn:length(programme.erreursStruct) != 0}"> ${fn:length(programme.erreursStruct)} </c:when>
-									</c:choose>
-								</td>
+								<c:choose>
+									<c:when test="${programme.publiable == true}"><td id="oui"> Oui</td> </c:when>
+									<c:when test="${programme.publiable == false}"><td id="non"> Non</td> </c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${(programme.contenuValide) == true}"><td id="oui"> OK</td> </c:when>
+									<c:when test="${(programme.contenuValide) == false}"><td id="non"> ${programme.nbErreurs}</td> </c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${fn:length(programme.erreursStruct) == 0}"><td id="oui"> OK</td> </c:when>
+									<c:when test="${fn:length(programme.erreursStruct) != 0}"><td id="non"> ${fn:length(programme.erreursStruct)}</td> </c:when>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</table>
+					</center>
 				</c:if>
 				
 				
