@@ -26,7 +26,7 @@ public class PersonneManagerImpl implements PersonneManager
 	@Autowired
 	private PersonneDao personneDao;
 	
-	@Autowired
+	/*@Autowired
 	private MentionManager mentionManager;
 	
 	@Autowired
@@ -42,7 +42,7 @@ public class PersonneManagerImpl implements PersonneManager
 	private UECatManager uecatManager;
 	
 	@Autowired
-	private ComposantProgrammeManager composantProgrammeManager;
+	private ComposantProgrammeManager composantProgrammeManager;*/
 	
 	@Autowired
 	private ShaPasswordEncoder passwordEncoder;

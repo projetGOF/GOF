@@ -1,9 +1,11 @@
 package gof.controllers;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import gof.model.ArianeItem;
@@ -28,6 +30,8 @@ import gof.services.PersonneManager;
 import gof.services.ProgrammeManager;
 import gof.services.SpecialiteManager;
 import gof.services.UECatManager;
+import gof.validation.Validator;
+import gof.validation.ValidatorLine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -185,19 +189,33 @@ public class GofController
 		model.addAttribute("arianes", filAriane("masterDetail"+codeDomaine+".htm", "Masters: "+domaine.getNom()));
 		return new ModelAndView("masterDetail");
 	}
-
-	@RequestMapping("/mention{mention}.htm")
-	public ModelAndView mention(@PathVariable("mention") String codeMention, Model model)
+	
+	@RequestMapping(value="/mention{mention}.htm", method=RequestMethod.GET)
+	public ModelAndView mention(@PathVariable("mention") String codeMention, Model model) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
-		Mention mention = this.mentionManager.findMention(codeMention);
-
+		Mention mention = this.mentionManager.findMention(codeMention);	
+		
 		if(mention == null)
 			return new ModelAndView("accessDenied");
 		
 		if(CustomUserDetails.isUserConnected())
 		{
+			model.addAttribute("userConnected", true);
 			model.addAttribute("erreursStruct", mention.getErreursStruct());
-
+			
+			Validator validatorMention = new Validator();
+			Map<String, ValidatorLine> resultValidationMention = validatorMention.validateFiche(mention, Mention.class);
+			
+			if(validatorMention.getErrors() == 0)
+				mention.setContenuValide(true);
+			else
+				mention.setContenuValide(false);
+			
+			mention.setNbErreurs(validatorMention.getErrors());
+			this.mentionManager.saveMention(mention);
+			
+			model.addAttribute("validation",resultValidationMention);
+			
 			if(personneManager.isPersonneHasRightOnMention(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), mention))
 			{	
 				HashMap<Boolean, String> publiableMap = new HashMap<Boolean, String>();
@@ -209,37 +227,38 @@ public class GofController
 				model.addAttribute("publiableMap", publiableMap);
 			}
 		}
-
-		Set<Specialite> specialites = mention.getSpecialites();
 		
+		model.addAttribute("listmotscles", mention.getMotsCles());
 		model.addAttribute("mention", mention);
-		
-		if(specialites.size() == 0)
-			model.addAttribute("programmes", mention.getProgrammes());
-		else
-			model.addAttribute("specialites", specialites);
-		
+		model.addAttribute("specialites", mention.getSpecialites());
+		model.addAttribute("programmes", mention.getProgrammes());
 		model.addAttribute("arianes", filAriane("mention"+codeMention+".htm", "Mention: "+mention.getNomCourt()));
 		
 		return new ModelAndView("mention");
 	}
-
-	@RequestMapping(value="/editMentionPubliable.htm", method=RequestMethod.POST)
-	public ModelAndView editMentionPubliable(@ModelAttribute Mention oldMention, Model model)
-	{
+	
+	@RequestMapping(value="/editMention.htm", method=RequestMethod.POST)
+	public ModelAndView editMention(@ModelAttribute("mention") Mention oldMention, Model model)
+	{	
+		
 		Mention newMention = this.mentionManager.findMention(oldMention.getCode());
 		
 		if(!this.personneManager.isPersonneHasRightOnMention(this.personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), newMention))
 			return new ModelAndView("accessDenied");
-		
+	
 		newMention.setPubliable(oldMention.isPubliable());
+		newMention.setNbCredits(oldMention.getNbCredits());
+		newMention.setContexte(oldMention.getContexte());
+		newMention.setOrgPedago(oldMention.getOrgPedago());
+		newMention.setDebouches(oldMention.getDebouches());
+		
 		this.mentionManager.saveMention(newMention);
-
+		
 		return new ModelAndView(new RedirectView("mention" + newMention.getCode() + ".htm"));
 	}
-
+	
 	@RequestMapping("/specialite{specialite}.htm")
-	public ModelAndView specialite(@PathVariable("specialite") String codeSpecialite, Model model)
+	public ModelAndView specialite(@PathVariable("specialite") String codeSpecialite, Model model) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
 		Specialite specialite = this.specialiteManager.findSpecialite(codeSpecialite);
 
@@ -248,7 +267,21 @@ public class GofController
 		
 		if(CustomUserDetails.isUserConnected())
 		{
+			model.addAttribute("userConnected", true);
 			model.addAttribute("erreursStruct", specialite.getErreursStruct());
+			
+			Validator validatorSpecialite = new Validator();
+			Map<String, ValidatorLine> resultValidationSpecialite = validatorSpecialite.validateFiche(specialite, Specialite.class);
+			
+			if(validatorSpecialite.getErrors() == 0)
+				specialite.setContenuValide(true);
+			else
+				specialite.setContenuValide(false);
+			
+			specialite.setNbErreurs(validatorSpecialite.getErrors());
+			this.specialiteManager.saveSpecialite(specialite);
+			
+			model.addAttribute("validation",resultValidationSpecialite);
 
 			if(personneManager.isPersonneHasRightOnSpecialite(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), specialite))
 			{
@@ -268,22 +301,25 @@ public class GofController
 		return new ModelAndView("specialite");
 	}
 
-	@RequestMapping(value="/editSpecialitePubliable.htm", method=RequestMethod.POST)
-	public ModelAndView editSpecialitePubliable(@ModelAttribute Specialite oldSpecialite, Model model)
-	{
+	@RequestMapping(value="/editSpecialite.htm", method=RequestMethod.POST)
+	public ModelAndView editSpecialite(@ModelAttribute("specialite") Specialite oldSpecialite, Model model)
+	{	
+		
 		Specialite newSpecialite = this.specialiteManager.findSpecialite(oldSpecialite.getCode());
 		
 		if(!this.personneManager.isPersonneHasRightOnSpecialite(this.personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), newSpecialite))
 			return new ModelAndView("accessDenied");
-		
+	
 		newSpecialite.setPubliable(oldSpecialite.isPubliable());
+		newSpecialite.setConnaissances(oldSpecialite.getConnaissances());
+		
 		this.specialiteManager.saveSpecialite(newSpecialite);
-
+		
 		return new ModelAndView(new RedirectView("specialite" + newSpecialite.getCode() + ".htm"));
 	}
 
 	@RequestMapping("/programme{programme}.htm")
-	public ModelAndView programme(@PathVariable("programme") String codeProgramme, Model model)
+	public ModelAndView programme(@PathVariable("programme") String codeProgramme, Model model) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
 		Programme programme = this.programmeManager.findProgramme(codeProgramme);
 
@@ -311,7 +347,21 @@ public class GofController
 
 		if(CustomUserDetails.isUserConnected())
 		{
+			model.addAttribute("userConnected", true);
 			model.addAttribute("erreursStruct", programme.getErreursStruct());
+			
+			Validator validatorProgramme = new Validator();
+			Map<String, ValidatorLine> resultValidationProgramme = validatorProgramme.validateFiche(programme, Programme.class);
+			
+			if(validatorProgramme.getErrors() == 0)
+				programme.setContenuValide(true);
+			else
+				programme.setContenuValide(false);
+			
+			programme.setNbErreurs(validatorProgramme.getErrors());
+			
+			model.addAttribute("validation",resultValidationProgramme);
+			this.programmeManager.saveProgramme(programme);
 
 			if(personneManager.isPersonneHasRightOnProgramme(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), programme))
 			{
@@ -333,23 +383,26 @@ public class GofController
 		model.addAttribute("arianes", filAriane("programme"+codeProgramme+".htm", "Programme: "+programme.getNom()));
 		return new ModelAndView("programme");
 	}
-
-	@RequestMapping(value="/editProgrammePubliable.htm", method=RequestMethod.POST)
-	public ModelAndView editProgrammePubliable(@ModelAttribute Programme oldProgramme, Model model)
-	{
+	
+	@RequestMapping(value="/editProgramme.htm", method=RequestMethod.POST)
+	public ModelAndView editProgramme(@ModelAttribute("programme") Programme oldProgramme, Model model)
+	{	
 		Programme newProgramme = this.programmeManager.findProgramme(oldProgramme.getCode());
 		
 		if(!this.personneManager.isPersonneHasRightOnProgramme(this.personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), newProgramme))
 			return new ModelAndView("accessDenied");
-		
+	
 		newProgramme.setPubliable(oldProgramme.isPubliable());
+		newProgramme.setNbCredits(oldProgramme.getNbCredits());
+		newProgramme.setObjectifs(oldProgramme.getObjectifs());
+		
 		this.programmeManager.saveProgramme(newProgramme);
-
+		
 		return new ModelAndView(new RedirectView("programme" + newProgramme.getCode() + ".htm"));
 	}
 
 	@RequestMapping("/uecat{uecat}.htm")
-	public ModelAndView uecat(@PathVariable("uecat") String codeUECat, Model model)
+	public ModelAndView uecat(@PathVariable("uecat") String codeUECat, Model model) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
 		UECat uecat = this.uecatManager.findUECat(codeUECat);
 
@@ -377,7 +430,21 @@ public class GofController
 
 		if(CustomUserDetails.isUserConnected())
 		{
+			model.addAttribute("userConnected", true);
 			model.addAttribute("erreursStruct", uecat.getErreursStruct());
+			
+			Validator validatorUECat = new Validator();
+			Map<String, ValidatorLine> resultValidationUECat = validatorUECat.validateFiche(uecat, UECat.class);
+			
+			if(validatorUECat.getErrors() == 0)
+				uecat.setContenuValide(true);
+			else
+				uecat.setContenuValide(false);
+			
+			uecat.setNbErreurs(validatorUECat.getErrors());
+			this.uecatManager.saveUECat(uecat);
+			
+			model.addAttribute("validation",resultValidationUECat);
 
 			if(personneManager.isPersonneHasRightOnUECat(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), uecat))
 			{
@@ -400,17 +467,20 @@ public class GofController
 		return new ModelAndView("uecat");
 	}
 
-	@RequestMapping(value="/editUECatPubliable.htm", method=RequestMethod.POST)
-	public ModelAndView editUECatPubliable(@ModelAttribute UECat oldUECat, Model model)
-	{
+	@RequestMapping(value="/editUECat.htm", method=RequestMethod.POST)
+	public ModelAndView editUecat(@ModelAttribute("uecat") UECat oldUECat, Model model)
+	{	
 		UECat newUECat = this.uecatManager.findUECat(oldUECat.getCode());
 		
 		if(!this.personneManager.isPersonneHasRightOnUECat(this.personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), newUECat))
 			return new ModelAndView("accessDenied");
-		
+	
 		newUECat.setPubliable(oldUECat.isPubliable());
+		newUECat.setNbCredits(oldUECat.getNbCredits());
+		newUECat.setContenu(oldUECat.getContenu());
+		
 		this.uecatManager.saveUECat(newUECat);
-
+		
 		return new ModelAndView(new RedirectView("uecat" + newUECat.getCode() + ".htm"));
 	}
 
@@ -466,7 +536,7 @@ public class GofController
 		return new ModelAndView("composantProg");
 	}
 
-	@RequestMapping(value="/editComposantProgPubliable.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/editComposantProg.htm", method=RequestMethod.POST)
 	public ModelAndView editComposantProgPubliable(@ModelAttribute ComposantProgramme oldComposantProg, Model model)
 	{
 		ComposantProgramme newComposantProg = this.composantProgManager.findComposantProgramme(oldComposantProg.getCode());
@@ -481,7 +551,7 @@ public class GofController
 	}
 
 	@RequestMapping("/enseignement{enseignement}.htm")
-	public ModelAndView enseignement(@PathVariable("enseignement") String codeEnseignement, Model model)
+	public ModelAndView enseignement(@PathVariable("enseignement") String codeEnseignement, Model model) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
 		Enseignement enseignement = this.enseignementManager.findEnseignement(codeEnseignement);
 
@@ -509,7 +579,21 @@ public class GofController
 
 		if(CustomUserDetails.isUserConnected())
 		{
+			model.addAttribute("userConnected", true);
 			model.addAttribute("erreursStruct", enseignement.getErreursStruct());
+			
+			Validator validatorEns = new Validator();
+			Map<String, ValidatorLine> resultValidationEns = validatorEns.validateFiche(enseignement, Enseignement.class);
+			
+			if(validatorEns.getErrors() == 0)
+				enseignement.setContenuValide(true);
+			else
+				enseignement.setContenuValide(false);
+			
+			enseignement.setNbErreurs(validatorEns.getErrors());
+			this.enseignementManager.saveEnseignement(enseignement);
+			
+			model.addAttribute("validation",resultValidationEns);
 
 			if(personneManager.isPersonneHasRightOnEnseignement(personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), enseignement))
 			{
@@ -532,18 +616,21 @@ public class GofController
 		return new ModelAndView("enseignement");
 	}
 
-	@RequestMapping(value="/editEnseignementPubliable.htm", method=RequestMethod.POST)
-	public ModelAndView editEnseignementPubliable(@ModelAttribute Enseignement oldEnseignement, Model model)
+	@RequestMapping(value="/editEnseignement.htm", method=RequestMethod.POST)
+	public ModelAndView editUecat(@ModelAttribute("enseignement") Enseignement oldEnseignement, Model model)
 	{	
-		Enseignement newEnseignement = this.enseignementManager.findEnseignement(oldEnseignement.getCode());
+		Enseignement newEns = this.enseignementManager.findEnseignement(oldEnseignement.getCode());
 		
-		if(!this.personneManager.isPersonneHasRightOnEnseignement(this.personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), newEnseignement))
+		if(!this.personneManager.isPersonneHasRightOnEnseignement(this.personneManager.findPersonByIdExt(CustomUserDetails.getCurrentUserLogin()), newEns))
 			return new ModelAndView("accessDenied");
+	
+		newEns.setPubliable(oldEnseignement.isPubliable());
+		newEns.setNbCredits(oldEnseignement.getNbCredits());
+		newEns.setContenu(oldEnseignement.getContenu());
 		
-		newEnseignement.setPubliable(oldEnseignement.isPubliable());
-		this.enseignementManager.saveEnseignement(newEnseignement);
-
-		return new ModelAndView(new RedirectView("enseignement" + newEnseignement.getCode() + ".htm"));
+		this.enseignementManager.saveEnseignement(newEns);
+		
+		return new ModelAndView(new RedirectView("enseignement" + newEns.getCode() + ".htm"));
 	}
 
 	/** Pages d'etats **/

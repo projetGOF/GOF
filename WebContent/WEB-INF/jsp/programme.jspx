@@ -4,9 +4,11 @@
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:ckeditor="http://ckeditor.com"
 	xmlns:sec="http://www.springframework.org/security/tags" version="2.2">
 <jsp:directive.page contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8" session="true"/>
+<jsp:directive.page import="gof.edition.ConfigurationHelper"/>
 <jsp:output doctype-root-element="html"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
@@ -27,14 +29,14 @@
 			<spring:url value="/resources/js/jquery.easing.1.3.js" var="jqueryEasing"/>
 			<spring:url value="/resources/js/jquery.jBreadCrumb.1.1.js" var="jBreadCrumb"/>
 			
+			<script type="text/javascript" src="./resources/js/ckeditor/ckeditor.js"/>
+			<script>CKEDITOR.on( 'instanceCreated', function( event ) {	});</script>
+			
 			<script src="${jquery}" type="text/javascript" >
-			<!-- -->
 			</script>
 			<script src="${jqueryEasing}" type="text/javascript" >
-			<!-- -->
 			</script>
 			<script src="${jBreadCrumb}" type="text/javascript" >
-			<!-- -->
 			</script>
 			
 			<script type="text/javascript">
@@ -42,12 +44,10 @@
             {
                 jQuery("#breadCrumb2").jBreadCrumb();
             })
-            <!-- -->
         	</script>
 		</head>
 		<body>
 			<div id="header">
-<!-- 				<p>header</p> -->
 			</div>	
 			<div id="nav">
 				<div id="nav-left">
@@ -79,43 +79,131 @@
 				<h1>${programme.nom}</h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
-				<c:if test="${not empty edit}">
-					<p>
-						VOUS AVEZ LES DROITS D'EDITER LA FICHE
-					</p>
+				<c:choose>
+				<!-- Droits d'édition -->
+				<c:when test="${not empty edit}">
+					<c:if test="${not empty erreursStruct}">
+						<tr><td>ERREURS DE STRUCTURE:</td>
+							<td><c:forEach items="${erreursStruct}" var="erreurStruct">
+									<li>${erreurStruct.description}</li>
+								</c:forEach></td>
+						</tr>	
+					</c:if>
 					<p>
 						Vous pouvez gérer les responsables de cette fiche <a href="responsablesProgramme${programme.code}.htm">ici</a>.
 					</p>
-					<p>
-						<form:form id="formPubliable" action="editProgrammePubliable.htm" commandName="programme">
-							<form:input id="formPubliable.code.${programme.code}" type="hidden" path="code" />
-							<form:label path="publiable"> Publiable </form:label>
-							<form:select path="publiable" items="${publiableMap}"/>
-							<input id="formPubliable.submit" class ="buttons" type="submit" value="Modifier" />
+					<table id="mention">
+						<form:form method="POST" id="editForm" action="editProgramme.htm" commandName="programme">
+							<tbody>
+								
+								<form:input id="code" name="code" path="code" type="hidden" />
+								
+								<c:if test="${not empty edit}"> 
+									<tr>
+										<td><h3><form:label path="publiable"> Publiable </form:label></h3></td>
+										<td><form:select path="publiable" items="${publiableMap}"/></td>
+									</tr>
+								</c:if>
+								
+								<tr>
+									<td><h3>Code:</h3></td>
+									<td>${programme.code}</td>
+								</tr>
+								
+								<tr>
+									<td><h3>Nom :</h3></td>
+									<td>${programme.nom}</td>
+								</tr>
+								
+								
+								<!-- champ identificateur: champ simple  -->
+								<tr>
+									<td><h3>Nombre de Credits ::</h3></td>
+									<td>
+										<c:set var = "validation_credits" value="${validation['nbCredits']}" />
+										<c:if test="${!validation_credits.state}">
+											<li>Error: ${validation_credits.description}</li>
+										</c:if>
+										<form:input id="nbCredits" name="nbCredits" path="nbCredits" size="12" />
+									</td>
+								</tr>
+
+								<tr>
+									<td><h3>Objectifs:</h3></td>
+									<td>
+										<c:set var = "validation_objectifs" value="${validation['objectifs']}" />
+										<c:if test="${!validation_objectifs.state}">
+										<!-- on montre la validation --> <!--Mettre en rouge changer, style des imputs -->
+											<li>Error: ${validation_objectifs.description}</li>
+											<c:forEach items="${validation_objectifs.errorList}" var="validatorLine">
+												<li><input type="text" value="${validatorLine}" readonly="true" size="50" disabled="disabled" /></li>
+											</c:forEach>
+										</c:if>
+										<form:textarea id="objectifs" name="objectifs" path="objectifs" rows="5" cols="30" /> 
+									</td>
+								</tr>
+								<tr>
+									<td><input id="editForm.submit" class ="buttons" type="submit" value="Enregistrer" /></td>
+								</tr>	
+							</tbody>
 						</form:form>
-					</p>
-				</c:if>
-				<c:if test="${not empty erreursStruct}">
+					</table>
+					<ckeditor:replaceAll basePath="./resources/js/ckeditor/" config="%=ConfigurationHelper.createConfig()%" events="%=ConfigurationHelper.createEventHandlers()%"/> 
+				</c:when>
+				<!-- fiche publiable ou utilisateur connecté -->
+				<c:when test="${(programme.publiable or userConnected) and empty edit}">
+					<c:if test="${userConnected and not empty erreursStruct}">
+						<tr><td>ERREURS DE STRUCTURE:</td>
+							<td><c:forEach items="${erreursStruct}" var="erreurStruct">
+									<li>${erreurStruct.description}</li>
+								</c:forEach></td>
+						</tr>	
+					</c:if>
 					<p>
-						ERREURS DE STRUCTURE:
-						<c:forEach items="${erreursStruct}" var="erreurStruct">
-							<li>${erreurStruct.description}</li>
-	    				</c:forEach>
-	    			</p>
-    			</c:if>
-				
-				<table id="programmeTable">
-			    	<tbody>
-						<tr>
-				    		<td>Code :</td>
-				    		<td>nom :</td>
-			    		</tr>
-			    		<tr>
-			    			<td>${programme.code}</td>
-			    			<td>${programme.nom}</td>
-			    		</tr>
-			    	</tbody>
-				</table>
+						<table id="programme">
+							<tbody>
+								<tr>
+									<td><h3>Code:</h3></td>
+									<td>${programme.code}</td>
+								</tr>
+								
+								<tr>
+									<td><h3>Nom :</h3></td>
+									<td>${programme.nom}</td>
+								</tr>
+								<c:if test="${programme.nbCredits != 0}">
+									<tr>
+										<td><h3>Nombre de crédits:</h3></td>
+										<td>${programme.nbCredits}</td>
+									</tr>
+								</c:if>
+								<c:if test="${programme.objectifs ne ''}">
+									<td><h3>Objectifs:</h3></td>
+									<td>${programme.objectifs}</td>
+								</c:if>
+							</tbody>
+						</table>
+					</p>
+				</c:when>
+				<c:otherwise>
+					<table id="programme">
+						<tbody>
+							<tr>
+								<td><h3>Code:</h3></td>
+								<td>${programme.code}</td>
+							</tr>
+								
+							<tr>
+								<td><h3>Nom :</h3></td>
+								<td>${programme.nom}</td>
+							</tr>		
+						</tbody>
+					</table>
+					<p>
+						Cette fiche n'est pas publiable.
+					</p>
+				</c:otherwise>
+				</c:choose>
 				 
 			    <c:forEach items="${programmeFils}" var="prog">
 					<p>

@@ -42,7 +42,6 @@
             {
                 jQuery("#breadCrumb2").jBreadCrumb();
             })
-            <!-- -->
         	</script>
 		</head>
 		<body>
@@ -79,40 +78,100 @@
 				<h1>${composantProg.nom}</h1>
 				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
-				<c:if test="${not empty edit}">
-					<p>
-						VOUS AVEZ LES DROITS D'EDITER LA FICHE
-					</p>
-					<p>
-						<form:form id="formPubliable" action="editComposantProgPubliable.htm" commandName="composantProg">
-							<form:input id="formPubliable.code.${composantProg.code}" type="hidden" path="code" />
-							<form:label path="publiable"> Publiable </form:label>
-							<form:select path="publiable" items="${publiableMap}"/>
-							<input id="formPubliable.submit" class ="buttons" type="submit" value="Modifier" />
+				<c:choose>
+				<!-- Droits d'édition -->
+				<c:when test="${not empty edit}">
+					<c:if test="${not empty erreursStruct}">
+						<tr><td>ERREURS DE STRUCTURE:</td>
+							<td><c:forEach items="${erreursStruct}" var="erreurStruct">
+									<li>${erreurStruct.description}</li>
+								</c:forEach></td>
+						</tr>	
+					</c:if>
+					<table id="composantProg">
+						<form:form method="POST" id="editForm" action="editComposantProg.htm" commandName="composantProg">
+							<tbody>
+								
+								<form:input id="code" name="code" path="code" type="hidden" />
+								
+								<c:if test="${not empty edit}"> 
+									<tr>
+										<td><h3><form:label path="publiable"> Publiable </form:label></h3></td>
+										<td><form:select path="publiable" items="${publiableMap}"/></td>
+									</tr>
+								</c:if>
+								
+								<tr>
+									<td><h3>Code:</h3></td>
+									<td>${composantProg.code}</td>
+								</tr>
+								
+								<tr>
+									<td><h3>Type :</h3></td>
+									<td>${composantProg.type}</td>
+								</tr>
+								
+								<tr>
+									<td><h3>Numéro :</h3></td>
+									<td>${composantProg.numero}</td>
+								</tr>
+								
+								<tr>
+									<td><input id="editForm.submit" class ="buttons" type="submit" value="Enregistrer" /></td>
+								</tr>	
+							</tbody>
 						</form:form>
-					</p>
-				</c:if>
-				<c:if test="${not empty erreursStruct}">
+					</table> 
+				</c:when>
+				<!-- fiche publiable ou utilisateur connecté -->
+				<c:when test="${(composantProg.publiable or userConnected) and empty edit}">
+					<c:if test="${userConnected and not empty erreursStruct}">
+						<tr><td>ERREURS DE STRUCTURE:</td>
+							<td><c:forEach items="${erreursStruct}" var="erreurStruct">
+									<li>${erreurStruct.description}</li>
+								</c:forEach></td>
+						</tr>	
+					</c:if>
 					<p>
-						ERREURS DE STRUCTURE:
-						<c:forEach items="${erreursStruct}" var="erreurStruct">
-							<li>${erreurStruct.description}</li>
-	    				</c:forEach>
-	    			</p>
-    			</c:if>
-				
-				<table id="composantProgTable">
-			    	<tbody>
-						<tr>
-				    		<td>Code :</td>
-				    		<td>nom :</td>
-			    		</tr>
-			    		<tr>
-			    			<td>${composantProg.code}</td>
-			    			<td>${composantProg.nom}</td>
-			    		</tr>
-			    	</tbody>
-				</table>
+						<table id="composantProg">
+							<tbody>
+								<tr>
+									<td><h3>Code:</h3></td>
+									<td>${composantProg.code}</td>
+								</tr>
+								
+								<tr>
+									<td><h3>Type :</h3></td>
+									<td>${composantProg.type}</td>
+								</tr>
+								
+								<tr>
+									<td><h3>Numéro :</h3></td>
+									<td>${composantProg.numero}</td>
+								</tr>
+							</tbody>
+						</table>
+					</p>
+				</c:when>
+				<c:otherwise>
+					<table id="composantProg">
+						<tbody>
+							<tr>
+								<td><h3>Code:</h3></td>
+								<td>${composantProg.code}</td>
+							</tr>
+								
+							<tr>
+								<td><h3>Nom :</h3></td>
+								<td>${composantProg.nom}</td>
+							</tr>		
+						</tbody>
+					</table>
+					<p>
+						Cette fiche n'est pas publiable.
+					</p>
+				</c:otherwise>
+				</c:choose>
 				 
 			    <c:forEach items="${programmeFils}" var="prog">
 					<p>

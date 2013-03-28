@@ -18,7 +18,7 @@ public class ConfigurationHelper {
 		subList.add("-");
 		subList.add("Format");
 		subList.add("Bold");
-		subList.add("Italic");
+		//subList.add("Italic");
 		subList.add("BulletedList");
 		subList.add("-");
 		subList.add("Link");
@@ -28,6 +28,13 @@ public class ConfigurationHelper {
 		list.add(subList);
 		config.addConfigValue("toolbar", list);
 		config.addConfigValue("width","500");
+		config.addConfigValue("entities", false);
+		config.addConfigValue("entities_latin",false);
+		config.addConfigValue("basicEntities",false);
+		config.addConfigValue("entities_processNumerical",false);
+		config.addConfigValue("language","fr");
+		 
+			
 		return config;
 	}
  

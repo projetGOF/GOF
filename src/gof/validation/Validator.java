@@ -37,6 +37,8 @@ public class Validator {
 			DataType dataType = ficheItems.get(ficheMethodList.get(i).getName());
 			if(dataType!=null){
 				String result = ficheMethodList.get(i).invoke(fiche, (Object[]) null).toString();
+				result = result.replace(System.getProperty("line.separator"), "");
+				result = result.trim();
 				boolean state = result.matches(dataType.getExpression());
 				ValidatorLine validatorLine = new ValidatorLine();
 				validatorLine.setDescription(dataType.getDescription());
