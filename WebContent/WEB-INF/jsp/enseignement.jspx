@@ -74,8 +74,7 @@
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
 				
-				<h1>${enseignement.nom}</h1>
-				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
+				<h2>${enseignement.nom}</h2>
 				
 				<c:choose>
 				<!-- Droits d'édition -->

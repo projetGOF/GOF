@@ -86,7 +86,6 @@
 			<div id="body">
 				
 				<h2><fmt:message key="etat.title"/></h2>
-				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
 				
 				<center>
 				<table id="table">

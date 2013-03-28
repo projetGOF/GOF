@@ -65,20 +65,26 @@ p, div, ul, li
 
 /* 	height: 690px; */
 /* 	margin-top:42px; */
-
-	padding-left: 10px;
+	border-left: 2px solid rgb(19, 121, 198);
+	border-right: 2px solid rgb(19, 121, 198);
+	margin-left: -4px;
+	margin-right: -4px;
 
 	
 }
 
 #footer
 {
-/* 	background-color: white; */
+	background-color: white;
 	float: bottom;
 	text-align: center;
 	padding-top: 20px;
 /* 	border: 4px groove blue; */
 	height: 40px;
+	border-left: 2px solid rgb(19, 121, 198);
+	border-right: 2px solid rgb(19, 121, 198);
+	margin-left: -4px;
+	margin-right: -4px;
 }
 
 center
@@ -166,7 +172,6 @@ p.alerte2 {
 }
 
 #nom {
-	width: 40px;
 	font-size: 17px;
 }
 

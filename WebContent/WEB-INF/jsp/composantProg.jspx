@@ -75,8 +75,7 @@
 				</p>
 				</sec:authorize>
 				
-				<h1>${composantProg.nom}</h1>
-				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
+				<h2>${composantProg.nom}</h2>
 				
 				<c:choose>
 				<!-- Droits d'édition -->

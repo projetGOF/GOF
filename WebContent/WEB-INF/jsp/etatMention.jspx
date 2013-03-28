@@ -22,7 +22,7 @@
 			<link rel="stylesheet" href="${crumcss}" type="text/css" />
 			<spring:url value="/resources/css/table.css" var="datatablescss" /> 	
 			<link rel="stylesheet" href="${datatablescss}" type="text/css" />
-			<spring:url value="/resources/css/home.css" var="etatcss" /> 	
+			<spring:url value="/resources/css/etatmention.css" var="etatcss" /> 	
 			<link rel="stylesheet" href="${etatcss}" type="text/css" />
 			
 			<spring:url value="/resources/js/jquery.min.js" var="jquery"/>
@@ -57,6 +57,8 @@
         	$(document).ready( function () {
         		var oTable = $('#table').dataTable();
 				new AutoFill( oTable );
+				var oTable2 = $('#table2').dataTable();
+				new AutoFill( oTable2 );
 			} );
         	</script>
 				
@@ -86,10 +88,9 @@
 			<div id="body">
 				
 				<h2><fmt:message key="etat.title"/></h2>
-				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
 				
 				<c:if test="${fn:length(specialites) != 0}">
-				<center>
+				<center style="margin-right: 20px;">
 					<table id="table">
 						<thead>
 							<tr>
@@ -121,16 +122,16 @@
 							</tr>
 						</c:forEach>
 					</table>
-					</center>
+				</center>
 				</c:if>
 				
 				<c:if test="${fn:length(programmes) != 0}">
-				<center>
-					<table id="table">
+				<center style="margin-right: 20px;">
+					<table id="table2">
 						<thead>
 							<tr>
 								<th>Code</th>
-								<th>Nom</th>
+								<th id="nom">Nom</th>
 								<th>Détails</th>
 								<th>Publiable</th>
 								<th>Erreurs de contenu</th>
@@ -140,7 +141,7 @@
 						<c:forEach items="${programmes}" var="programme">
 							<tr>
 								<td>${programme.code}</td>
-								<td>${programme.nom}</td>
+								<td id="nom">${programme.nom}</td>
 								<td><a href="programme${programme.code}.htm">Voir</a></td>
 								<c:choose>
 									<c:when test="${programme.publiable == true}"><td id="oui"> Oui</td> </c:when>
@@ -157,7 +158,7 @@
 							</tr>
 						</c:forEach>
 					</table>
-					</center>
+				</center>
 				</c:if>
 				
 				
