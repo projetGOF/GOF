@@ -104,15 +104,15 @@
 							</ul>
 							<div id="naviforma" style="display:none;">
 								<ul>
-									<li><a href="dut.html">Diplômes universitaires de technologie</a></li>
+									<li><a href="domaines-D.U.T.htm">Diplômes universitaires de technologie</a></li>
 									<li><a href="licence.htm">Licences généralistes</a></li>
 									<li><a href="licencePro.htm">Licences professionnelles</a></li>
 									<li><a href="master.htm">Masters</a></li>
-									<li><a href="diplomes-ingenieur.html">Diplômes d'ingénieur</a></li>
-									<li><a href="de-medecine.html">Diplômes d'état en Médecine</a></li>
-									<li><a href="de-pharmacie.html">Diplômes d'état en Pharmacie</a></li>
-									<li><a href="de-odontologie.html">Diplômes d'état en Odontologie</a></li>
-									<li><a href="magisteres.html">Magistères</a></li>
+									<li><a href="domaines-Diplomes-Ingenieur.htm">Diplômes d'ingénieur</a></li>
+									<li><a href="domaines-D.E-medecine.htm">Diplômes d'état en Médecine</a></li>
+									<li><a href="domaines-D.E-pharmacie.htm">Diplômes d'état en Pharmacie</a></li>
+									<li><a href="domaines-D.E-odontologie.htm">Diplômes d'état en Odontologie</a></li>
+									<li><a href="domaines-Magisteres.htm">Magistères</a></li>
 								</ul>
 							</div>
 							<ul>
