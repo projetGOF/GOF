@@ -68,16 +68,15 @@
 				</div><!-- fin <div id="nav-right"> -->	
 			</div><!-- fin <div id="nav"> -->
 			<div id="body">
-				
+				<!--  
 				<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 				<p class="alerte0">
 					Menu de travail :
 					<a href="etat.htm">État de la publication</a>, <a href="responsablesROF.htm">Responsables ROF</a>
 				</p>
 				</sec:authorize>
-				
-				<h1><fmt:message key="licence.title"/></h1>
-				<p><a href="accueil.htm"><fmt:message key="home.navigation"/></a></p>
+				-->
+				<h1><fmt:message key="another.title"/> pour les ${diplome}</h1>
 				
 				<div style="float:right; clear:right; margin-left: 10px;">
 					<div class="pave-droite noprint">

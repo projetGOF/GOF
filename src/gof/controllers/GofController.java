@@ -108,13 +108,13 @@ public class GofController
 		return new ModelAndView("accessDenied");
 	}
 	
-	@RequestMapping("/dut{diplome}.htm")
-	public ModelAndView dut(@PathVariable("diplome") String codeDiplome, Model model)
+	@RequestMapping("/domaines-{diplome}.htm")
+	public ModelAndView dut(@PathVariable("diplome") String diplome, Model model)
 	{
-		model.addAttribute("type", codeDiplome);
-		model.addAttribute("domaines", this.domaineManager.findAllDomaineByTypeMention(TypeMention.DUT));
-		model.addAttribute("arianes", filAriane("dut.htm", "D.U.T"));
-		return new ModelAndView("dut");
+		this.ariane= new Ariane();
+		model.addAttribute("diplome", diplome);
+		model.addAttribute("arianes", filAriane("domaines"+diplome+".htm", diplome));
+		return new ModelAndView("domaines");
 	}
 
 	@RequestMapping("/licence{diplome}.htm")
@@ -552,7 +552,7 @@ public class GofController
 	public ModelAndView etat(Model model)
 	{
 		model.addAttribute("mentions", this.mentionManager.findAllMentions());
-
+		model.addAttribute("arianes", filAriane("etat.htm", "Etat Liste"));
 		return new ModelAndView("etat");
 	}
 	
@@ -566,7 +566,7 @@ public class GofController
 		
 		model.addAttribute("specialites", mention.getSpecialites());
 		model.addAttribute("programmes", mention.getProgrammes());
-		
+		model.addAttribute("arianes", filAriane("etatMention"+mention.getCode()+".htm", "Etat de la mention:"+mention.getNomCourt()));
 		return new ModelAndView("etatMention");
 	}
 

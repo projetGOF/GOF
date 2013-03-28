@@ -9,14 +9,15 @@ public class Ariane {
 	private ArrayList<ArianeItem> fil;
 	
 	public Ariane() {
-		if(this.fil==null) {
-			this.fil = new ArrayList<ArianeItem>();
-			this.fil.add(new ArianeItem("accueil.htm","Home"));
-		}
+		
+		
+		this.fil = new ArrayList<ArianeItem>();
+		this.fil.add(new ArianeItem("accueil.htm","Home"));
+		
 	}
 	
 	public void add(String url, String nom) {
-		if(this.fil==null) {
+		if(this.fil==null||url.equals("accueil.htm")) {
 			this.fil = new ArrayList<ArianeItem>();
 			this.fil.add(new ArianeItem("accueil.htm","Home"));
 		}
