@@ -76,7 +76,7 @@
 				</p>
 				</sec:authorize>
 				-->
-				<h1><fmt:message key="another.title"/> pour les ${diplome}</h1>
+				<h1>${diplome} <fmt:message key="another.title"/> </h1>
 				
 				<div style="float:right; clear:right; margin-left: 10px;">
 					<div class="pave-droite noprint">

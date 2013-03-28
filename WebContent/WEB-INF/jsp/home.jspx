@@ -111,13 +111,13 @@
 						<area alt="Masters Pro et Recherche" coords="202,199,294,230" shape="rect" title="Masters Pro et Recherche" href="master.htm" />
 						<area alt="Master Recherche" coords="202,167,248,198" shape="rect" title="Master Recherche" href="master.htm" />
 						<area alt="Master Pro" coords="248,168,294,198" shape="rect" title="Master Pro" href="master.htm" />
-						<area target="_blank" alt="DUT" coords="306,260,351,325" shape="rect" title="DUT" href="dut.html" />
+						<area target="_blank" alt="DUT" coords="306,260,351,325" shape="rect" title="DUT" href="domaines-D.U.T.htm" />
 						<area alt="Licence Pro" coords="360,229,414,262" shape="rect" title="Lic Pro" href="licencePro.htm" />
-						<area alt="D. d'ingénieur" coords="145,167,192,261" shape="rect" title="Ingénieur" href="diplomes-ingenieur.html" />
-						<area alt="Médecine" coords="538,8,584,325" shape="rect" title="Médecine" href="de-medecine.html" />
-						<area alt="Odontologie" coords="586,40,633,325" shape="rect" title="Odontologie" href="de-odontologie.html" />
-						<area alt="Pharmacie" coords="678,9,725,325" shape="rect" title="Pharmacie" href="de-pharmacie.html" />
-						<area alt="Magistere" coords="483,167,592,262" shape="rect" title="Magistères" href="magisteres.html" />
+						<area alt="D. d'ingénieur" coords="145,167,192,261" shape="rect" title="Ingénieur" href="domaines-Diplomes-Ingenieur.htm" />
+						<area alt="Médecine" coords="538,8,584,325" shape="rect" title="Médecine" href="domaines-D.E-medecine.htm" />
+						<area alt="Odontologie" coords="586,40,633,325" shape="rect" title="Odontologie" href="domaines-D.E-odontologie.htm" />
+						<area alt="Pharmacie" coords="678,9,725,325" shape="rect" title="Pharmacie" href="domaines-D.E-pharmacie.htm" />
+						<area alt="Magistere" coords="483,167,592,262" shape="rect" title="Magistères" href="domaines-Magisteres.htm" />
 					</map>
 				</center>
 				<center>
