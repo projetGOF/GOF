@@ -124,10 +124,10 @@
 								<tr>
 									<td><h3>Nombre de Credits ::</h3></td>
 									<td>
-										<c:set var = "validation_credits" value="${validation['nbCredits']}" />
+									<!-- 	<c:set var = "validation_credits" value="${validation['nbCredits']}" />
 										<c:if test="${!validation_credits.state}">
 											<li>Error: ${validation_credits.description}</li>
-										</c:if>
+										</c:if> -->
 										<form:input id="nbCredits" name="nbCredits" path="nbCredits" size="12" />
 									</td>
 								</tr>

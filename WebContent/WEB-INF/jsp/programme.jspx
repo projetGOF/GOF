@@ -19,35 +19,24 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			      
 			<title>${programme.nom}</title>
-			
+			<spring:url value="/resources/css/home.css" var="homecss" /> 	
+			<link rel="stylesheet" href="${homecss}" type="text/css" />
+					
 			<spring:url value="/resources/css/BreadCrumb.css" var="crumcss" /> 	
 			<link rel="stylesheet" href="${crumcss}" type="text/css" />
-			<spring:url value="/resources/css/table.css" var="datatablescss" /> 	
-			<link rel="stylesheet" href="${datatablescss}" type="text/css" />
-			
-			<spring:url value="/resources/css/mention.css" var="mentioncss" /> 	
-			<link rel="stylesheet" href="${mentioncss}" type="text/css" />
 			
 			<spring:url value="/resources/js/jquery.min.js" var="jquery"/>
 			<spring:url value="/resources/js/jquery.easing.1.3.js" var="jqueryEasing"/>
 			<spring:url value="/resources/js/jquery.jBreadCrumb.1.1.js" var="jBreadCrumb"/>
-			<spring:url value="/resources/js/dataTables/jquery.dataTables.js" var="jqDatatables"/>
-			<spring:url value="/resources/js/dataTables/AutoFill.js" var="jAutofill"/>
+			
+			<script type="text/javascript" src="./resources/js/ckeditor/ckeditor.js"/>
+			<script>CKEDITOR.on( 'instanceCreated', function( event ) {	});</script>
 			
 			<script src="${jquery}" type="text/javascript" >
-			<!-- -->
 			</script>
 			<script src="${jqueryEasing}" type="text/javascript" >
-			<!-- -->
 			</script>
 			<script src="${jBreadCrumb}" type="text/javascript" >
-			<!-- -->
-			</script>
-			<script src="${jqDatatables}" type="text/javascript" >
-			<!-- -->
-			</script>
-			<script src="${jAutofill}" type="text/javascript" >
-			<!-- -->
 			</script>
 			
 			<script type="text/javascript">
@@ -56,16 +45,9 @@
                 jQuery("#breadCrumb2").jBreadCrumb();
             })
         	</script>
-        	<script type="text/javascript">
-        	$(document).ready( function () {
-				var oTable = $('#table').dataTable();
-				new AutoFill( oTable );
-			} );
-        	</script>
 		</head>
 		<body>
 			<div id="header">
-<!-- 				<p>header</p> -->
 			</div>	
 			<div id="nav">
 				<div id="nav-left">
@@ -94,7 +76,8 @@
 				</p>
 				</sec:authorize>
 				
-				<h2>${programme.nom}</h2>
+				<h1>${programme.nom}</h1>
+				<p><a href="accueil.htm"><fmt:message key="home.title"/></a></p>
 				
 				<c:choose>
 				<!-- Droits d'édition -->
@@ -137,10 +120,10 @@
 								<tr>
 									<td><h3>Nombre de Credits ::</h3></td>
 									<td>
-										<c:set var = "validation_credits" value="${validation['nbCredits']}" />
+										<!-- <c:set var = "validation_credits" value="${validation['nbCredits']}" />
 										<c:if test="${!validation_credits.state}">
 											<li>Error: ${validation_credits.description}</li>
-										</c:if>
+										</c:if> -->
 										<form:input id="nbCredits" name="nbCredits" path="nbCredits" size="12" />
 									</td>
 								</tr>
